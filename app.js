@@ -16,19 +16,26 @@ const sources = [
   {id:"assain-prix",title:"Prix de l’assainissement collectif",date:"4 avril 2025",dataset:"assainissement-collectif-prix-associe-a-la-collecte-au-transport-et-au-traitement-des-eaux-usees",file:null,group:"Services publics",color:"#68737d",kind:"unavailable",count:"Service source indisponible",active:false}
 ];
 
-const state = {data:{},layers:{},charts:[],communes:null};
+const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan"};
 const map = L.map("map",{zoomControl:false,preferCanvas:true,minZoom:8,maxZoom:18}).fitBounds(BOUNDS_95);
 L.control.zoom({position:"bottomright"}).addTo(map);
 L.control.scale({imperial:false,position:"bottomright"}).addTo(map);
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Données DDT 95'}).addTo(map);
+const baseLayers={
+  plan:L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,className:"neutral-tiles",attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Données DDT 95'}).addTo(map),
+  ortho:L.tileLayer("https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&FORMAT=image/jpeg",{maxZoom:19,attribution:"Photographies aériennes · IGN"})
+};
 
 function sourceUrl(s){return `https://www.data.gouv.fr/datasets/${s.dataset}`}
 function safe(v){return v===null||v===undefined||v===""?"Non renseigné":String(v)}
 function niceKey(k){return k.replaceAll("_"," ").replace(/\b\w/g,c=>c.toUpperCase())}
+const categoryPalette=["#000091","#e1000f","#009081","#a558a0","#ce614a","#6a6af4","#18753c","#c3992a","#0078f3","#d13c72"];
+function categoryColor(value){const s=String(value||"Non renseigné");let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return categoryPalette[Math.abs(h)%categoryPalette.length]}
+function categoryValue(source,p){if(source.id==="police")return p.POLICE_EAU||p["POLICE EAU"];if(source.id==="syndicats-eau")return p.NOM_SI;if(source.id==="syndicats-assain")return p.DONNEES__1;if(source.id==="syndicats-riviere")return p.Syndic_RIV||p.SI_RIV;return null}
 function layerStyle(source,feature){
   if(source.kind==="quality"){const c=qualityColors[String(feature.properties.etateco)]||qualityColors.U;return {color:c,weight:4,opacity:.9}}
   if(source.kind==="price"){const v=Number(feature.properties.TARIF_AEP);const c=!v?"#b9c0c7":v<2.5?"#d9d4f5":v<3?"#9b8cdc":v<4?"#6554c0":"#3f2c80";return {color:"#fff",weight:.6,fillColor:c,fillOpacity:.68}}
-  if(source.kind==="polygon")return {color:source.color,weight:1.4,fillColor:source.color,fillOpacity:.18};
+  if(source.kind==="polygon"){const c=categoryColor(categoryValue(source,feature.properties));return {color:c,weight:1.5,fillColor:c,fillOpacity:.25}}
+  if(source.id==="police"){const c=categoryColor(categoryValue(source,feature.properties));return {color:c,weight:3,opacity:.9}}
   return {color:source.color,weight:source.id==="cours"?2.2:2,opacity:.84};
 }
 function displayTitle(source,p){
@@ -54,7 +61,14 @@ async function loadSource(source){
 }
 async function setLayer(source,on){
   if(source.kind==="unavailable"){document.getElementById(`layer-${source.id}`).checked=false;openFeature(source,{properties:{État:"La ressource de téléchargement et son service cartographique renvoient actuellement une erreur. La fiche reste référencée pour respecter l’exhaustivité du catalogue."}});return}
-  try{const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}`:"Couche retirée de la carte"}catch(e){document.getElementById("mapStatus").textContent=`Source momentanément indisponible : ${source.title}`;document.getElementById(`layer-${source.id}`).checked=false}
+  try{const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}`:"Couche retirée de la carte";if(on)renderLegend(source)}catch(e){document.getElementById("mapStatus").textContent=`Source momentanément indisponible : ${source.title}`;document.getElementById(`layer-${source.id}`).checked=false}
+}
+function renderLegend(source){const el=document.getElementById("mapLegend");let rows=[];
+  if(source.kind==="quality")rows=Object.entries(qualityLabels).map(([k,v])=>[qualityColors[k],v]);
+  else if(source.kind==="price")rows=[["#d9d4f5","moins de 2,50 €/m³"],["#9b8cdc","2,50 à 3 €/m³"],["#6554c0","3 à 4 €/m³"],["#3f2c80","4 €/m³ et plus"]];
+  else if(["police","syndicats-eau","syndicats-assain","syndicats-riviere"].includes(source.id)){const values=[...new Set((state.data[source.id]?.features||[]).map(f=>categoryValue(source,f.properties)).filter(Boolean))];rows=values.slice(0,7).map(v=>[categoryColor(v),v]);if(values.length>7)rows.push(["#68737d",`+ ${values.length-7} autres catégories`])}
+  else rows=[[source.color,source.title]];
+  el.innerHTML=`<strong>${source.title}</strong>${rows.map(([c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join("")}`;
 }
 function renderLayers(){
   const groups=[...new Set(sources.map(s=>s.group))]; const root=document.getElementById("layerList");
@@ -62,9 +76,9 @@ function renderLayers(){
   sources.forEach(s=>document.getElementById(`layer-${s.id}`).addEventListener("change",e=>setLayer(s,e.target.checked)));
 }
 function renderSources(){document.getElementById("sourceCards").innerHTML=sources.map(s=>`<article class="source-card"><div><h3>${s.title}</h3><p>Producteur : Direction départementale des territoires du Val-d’Oise<br>Dernière mise à jour : ${s.date} · Licence Ouverte 2.0</p><span class="source-status">${s.kind==="unavailable"?"Référencée · service indisponible":"Intégrée à l’observatoire"}</span></div><a href="${sourceUrl(s)}" target="_blank" rel="noopener">Ouvrir ↗</a></article>`).join("")}
-async function loadCommunes(){try{const r=await fetch("https://geo.api.gouv.fr/departements/95/communes?fields=nom,code,centre&format=geojson&geometry=centre");state.communes=await r.json()}catch(e){state.communes={features:[]}}}
+async function loadCommunes(){try{const r=await fetch("https://geo.api.gouv.fr/departements/95/communes?fields=nom,code,centre,contour&format=geojson&geometry=contour");state.communes=await r.json();const holes=[];state.communes.features.forEach(f=>{const g=f.geometry;if(g.type==="Polygon")holes.push(g.coordinates[0]);else if(g.type==="MultiPolygon")g.coordinates.forEach(p=>holes.push(p[0]))});state.mask=L.geoJSON({type:"Feature",properties:{},geometry:{type:"Polygon",coordinates:[[[ -180,-85],[180,-85],[180,85],[-180,85],[-180,-85]],...holes]}},{interactive:false,className:"map-mask",style:{stroke:false,fillColor:"#e7ebf2",fillOpacity:.88,fillRule:"evenodd"}}).addTo(map);state.territory=L.geoJSON(state.communes,{interactive:false,style:{color:"#565b6c",weight:.7,opacity:.68,fillOpacity:0}}).addTo(map);map.fitBounds(state.territory.getBounds(),{padding:[28,28]});map.setMaxBounds(state.territory.getBounds().pad(.45))}catch(e){state.communes={features:[]}}}
 async function search(){const q=document.getElementById("searchInput").value.trim();if(!q)return;const box=document.getElementById("searchResults");let items=[];
-  if(state.communes)items=state.communes.features.filter(f=>f.properties.nom.toLowerCase().includes(q.toLowerCase())).slice(0,5).map(f=>({label:f.properties.nom,coords:[f.geometry.coordinates[1],f.geometry.coordinates[0]]}));
+  if(state.communes)items=state.communes.features.filter(f=>f.properties.nom.toLowerCase().includes(q.toLowerCase())).slice(0,5).map(f=>{const c=L.geoJSON(f).getBounds().getCenter();return {label:f.properties.nom,coords:[c.lat,c.lng]}});
   if(!items.length){try{const r=await fetch(`https://data.geopf.fr/geocodage/search?q=${encodeURIComponent(q+" Val-d'Oise")}&limit=5`);const d=await r.json();items=(d.features||[]).map(f=>({label:f.properties.label,coords:[f.geometry.coordinates[1],f.geometry.coordinates[0]]}))}catch(e){}}
   box.innerHTML=items.length?items.map((x,i)=>`<button data-i="${i}">${x.label}</button>`).join(""):"<button>Aucun résultat dans le Val-d’Oise</button>";box.hidden=false;box.querySelectorAll("button[data-i]").forEach(b=>b.onclick=()=>{const x=items[+b.dataset.i];map.flyTo(x.coords,14);L.popup().setLatLng(x.coords).setContent(`<strong>${x.label}</strong>`).openOn(map);box.hidden=true})
 }
@@ -80,5 +94,5 @@ function makeCharts(){state.charts.forEach(c=>c.destroy());const d=chartData();c
   const good=d.quality[0]||0,total=d.quality.reduce((a,b)=>a+b,0),pct=Math.round(good/total*100);document.getElementById("insightValue").textContent=`${pct} %`;document.getElementById("insightText").textContent=`des tronçons qualifiés sont classés en bon état écologique. ${d.quality[1]||0} tronçons restent en état moyen.`
 }
 async function init(){renderLayers();renderSources();await Promise.all(sources.filter(s=>s.file).map(loadSource));await Promise.all(sources.filter(s=>s.active).map(s=>setLayer(s,true)));await loadCommunes();const d=chartData();const good=(d.quality[0]||0),known=d.quality.slice(0,4).reduce((a,b)=>a+b,0);document.getElementById("kpiGood").textContent=Math.round(good/known*100);document.getElementById("kpiPrice").textContent=(d.prices.reduce((a,b)=>a+b,0)/d.prices.length).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";document.getElementById("mapStatus").textContent="9 couches DDT 95 chargées · données prêtes à explorer"}
-document.getElementById("searchButton").onclick=search;document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")search()});document.getElementById("resetView").onclick=()=>map.fitBounds(BOUNDS_95);document.getElementById("closeDetail").onclick=()=>document.getElementById("detailPanel").classList.remove("open");document.getElementById("clearLayers").onclick=()=>sources.forEach(s=>{const e=document.getElementById(`layer-${s.id}`);if(e.checked){e.checked=false;setLayer(s,false)}});document.getElementById("openSources").onclick=()=>document.getElementById("sourcesDialog").showModal();document.getElementById("openDashboard").onclick=()=>{makeCharts();document.getElementById("dashboardDialog").showModal()};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());document.querySelectorAll(".map-kpis button").forEach(b=>b.onclick=()=>{const s=sources.find(x=>x.id===b.dataset.focus);const e=document.getElementById(`layer-${s.id}`);if(!e.checked){e.checked=true;setLayer(s,true)}});
+document.getElementById("searchButton").onclick=search;document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")search()});document.getElementById("resetView").onclick=()=>state.territory?map.fitBounds(state.territory.getBounds(),{padding:[28,28]}):map.fitBounds(BOUNDS_95);document.getElementById("resetPanel").onclick=()=>document.getElementById("resetView").click();document.getElementById("closeDetail").onclick=()=>document.getElementById("detailPanel").classList.remove("open");document.getElementById("clearLayers").onclick=()=>sources.forEach(s=>{const e=document.getElementById(`layer-${s.id}`);if(e.checked){e.checked=false;setLayer(s,false)}});document.getElementById("openSources").onclick=()=>document.getElementById("sourcesDialog").showModal();document.getElementById("openDashboard").onclick=()=>{makeCharts();document.getElementById("dashboardDialog").showModal()};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());document.querySelectorAll(".map-kpis button").forEach(b=>b.onclick=()=>{const s=sources.find(x=>x.id===b.dataset.focus);const e=document.getElementById(`layer-${s.id}`);if(!e.checked){e.checked=true;setLayer(s,true)}});document.querySelectorAll("[data-basemap]").forEach(b=>b.onclick=()=>{const id=b.dataset.basemap;if(id===state.basemap)return;map.removeLayer(baseLayers[state.basemap]);baseLayers[id].addTo(map);baseLayers[id].bringToBack();state.basemap=id;document.querySelectorAll("[data-basemap]").forEach(x=>x.classList.toggle("active",x===b))});
 init();

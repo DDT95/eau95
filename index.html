@@ -11,26 +11,19 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="https://ddt95.github.io/atlas-territorial-95/" aria-label="Retour à l’Atlas territorial">
-      <span class="republique">RÉPUBLIQUE<br>FRANÇAISE</span>
-      <span class="brand-copy"><strong>Atlas du Val-d’Oise</strong><small>Direction départementale des territoires</small></span>
-    </a>
+    <a class="brand-logo-link" href="https://ddt95.github.io/atlas-territorial-95/" aria-label="Retour à l’Atlas territorial"><img class="brand-logo" src="prefet-val-doise.svg" alt="Préfet du Val-d’Oise"></a>
     <div class="title-block">
-      <span class="eyebrow">OBSERVATOIRE TERRITORIAL</span>
-      <h1>La donnée au fil de l’eau</h1>
+      <span class="eyebrow">EAU ET TERRITOIRES · VAL-D’OISE</span>
+      <h1>Observatoire de l’eau</h1>
+      <p>Milieux · qualité · ressource · services publics</p>
     </div>
-    <nav class="top-actions" aria-label="Actions principales">
-      <button id="openSources" class="ghost-btn">Sources</button>
-      <button id="openDashboard" class="primary-btn">Vue d’ensemble</button>
-    </nav>
+    <div class="livebox"><span class="fresh-dot"></span><div><strong>9 couches locales prêtes</strong><small>DDT 95 · data.gouv.fr</small></div></div>
   </header>
+  <div class="progress"><span></span></div>
 
   <main class="workspace">
     <aside class="sidebar" aria-label="Choix des données">
-      <div class="sidebar-intro">
-        <span class="section-number">95</span>
-        <div><h2>L’eau dans le<br>Val-d’Oise</h2><p>Explorer les milieux, la qualité, les services publics et la ressource.</p></div>
-      </div>
+      <div class="sidebar-intro"><div><span class="eyebrow">EXPLORER LE TERRITOIRE</span><h2>Quelle eau<br>près de chez moi ?</h2><p>Recherchez un lieu, choisissez un thème et cliquez sur la carte pour comprendre la donnée.</p></div></div>
 
       <label class="search-box">
         <span>Rechercher une commune ou une adresse</span>
@@ -38,9 +31,13 @@
       </label>
       <div id="searchResults" class="search-results" hidden></div>
 
+      <div class="quick-actions"><button id="resetPanel">Recentrer</button><button id="openDashboard">Données & évolutions</button></div>
+      <div class="basemap-choice"><strong>Fond de carte</strong><div><button class="active" data-basemap="plan">Plan neutre</button><button data-basemap="ortho">Photo aérienne</button></div></div>
+
       <div class="theme-heading"><span>COUCHES CARTOGRAPHIQUES</span><button id="clearLayers">Tout effacer</button></div>
       <div id="layerList" class="layer-list"></div>
 
+      <button id="openSources" class="sources-inline">Sources, millésimes et licences</button>
       <div class="sidebar-footer">
         <div class="fresh-dot"></div>
         <div><strong>10 jeux DDT 95 recensés</strong><small>Catalogue vérifié le 28 juillet 2026</small></div>
@@ -55,6 +52,7 @@
         <button data-focus="qualite"><strong id="kpiGood">47</strong><span>% en bon / très bon état</span></button>
         <button data-focus="prix"><strong id="kpiPrice">2,73 €</strong><span>prix moyen de l’eau / m³</span></button>
       </div>
+      <div id="mapLegend" class="map-legend"><strong>Lecture de la carte</strong><span>Activez une couche pour afficher sa légende.</span></div>
       <div class="map-note"><span class="pulse"></span><span id="mapStatus">Chargement des données territoriales…</span></div>
       <button id="resetView" class="map-reset" title="Recentrer sur le Val-d’Oise" aria-label="Recentrer sur le Val-d’Oise">⌂</button>
     </section>
