@@ -7,6 +7,7 @@ const sources = [
   {id:"cours",title:"Cours d’eau du Val-d’Oise — arrêté préfectoral",date:"18 février 2021",dataset:"cours-deau-du-val-doise-arrete-prefectoral-ndeg2017-13817-1",file:"cours_eau.geojson",group:"Milieux",color:"#0077b6",kind:"line",count:"1 425 tronçons",active:true},
   {id:"qualite",title:"Qualité de l’eau — état écologique",date:"14 avril 2025",dataset:"qualite-de-leau-etat-ecologique",file:"qualite_ecologique.geojson",group:"Milieux",color:"#20a06b",kind:"quality",count:"178 tronçons",active:true},
   {id:"stations",title:"Stations de mesure de qualité",date:"16 avril 2025",dataset:"stations-de-mesure-de-qualite-de-leau-1",file:"stations.geojson",group:"Mesure",color:"#f49b2f",kind:"point",count:"17 stations",active:true},
+  {id:"potable",title:"Qualité sanitaire de l’eau du robinet",date:"12 derniers mois",api:"https://hubeau.eaufrance.fr/api/v1/qualite_eau_potable/resultats_dis",group:"Qualité sanitaire",color:"#16a34a",kind:"api-commune",count:"communes · contrôles ARS",active:false,producer:"Hub’Eau · ministère chargé de la Santé / ARS"},
   {id:"secheresse",title:"Zones d’alerte sécheresse",date:"28 mai 2024",dataset:"zones-dalerte-secheresse",file:"secheresse.geojson",group:"Ressource",color:"#bb5c28",kind:"polygon",count:"3 bassins",active:false},
   {id:"ruissellement",title:"Axes de ruissellement",date:"21 septembre 2021",dataset:"axes-de-ruissellements",file:"axes-ruissellement.geojson",group:"Risques",color:"#e1000f",kind:"line",count:"2 049 axes",active:false},
   {id:"prix",title:"Prix de l’eau potable",date:"4 avril 2025",dataset:"eau-potable-prix-sur-la-base-dune-consommation-annuelle-de-120m3-1",file:"prix_eau.geojson",group:"Services publics",color:"#6554c0",kind:"price",count:"151 valeurs",active:false},
@@ -25,7 +26,7 @@ const sources = [
   {id:"etiage",title:"Observatoire des étiages (Onde)",date:"observations estivales",api:"https://hubeau.eaufrance.fr/api/v1/ecoulement/stations?code_departement=95&size=200",group:"Ressource",color:"#ce614a",kind:"api-point",count:"7 stations",active:false,producer:"Hub’Eau · OFB / Onde"}
 ];
 
-const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan"};
+const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan",legendId:null,potableAgg:null};
 const map = L.map("map",{zoomControl:false,preferCanvas:true,minZoom:8,maxZoom:18}).fitBounds(BOUNDS_95);
 L.control.zoom({position:"bottomright"}).addTo(map);
 L.control.scale({imperial:false,position:"bottomright"}).addTo(map);
@@ -35,8 +36,10 @@ const baseLayers={
 };
 
 function sourceUrl(s){return `https://www.data.gouv.fr/datasets/${s.dataset}`}
-function externalSourceUrl(s){if(s.dataset)return sourceUrl(s);if(s.url)return s.url;return ({"hydro-live":"https://hubeau.eaufrance.fr/page/api-hydrometrie","river-live":"https://hubeau.eaufrance.fr/page/api-qualite-cours-deau",groundwater:"https://hubeau.eaufrance.fr/page/api-qualite-nappes",fish:"https://hubeau.eaufrance.fr/page/api-poisson",hydrobio:"https://hubeau.eaufrance.fr/page/api-hydrobiologie",etiage:"https://hubeau.eaufrance.fr/page/api-ecoulement"})[s.id]||"https://hubeau.eaufrance.fr/page/apis"}
+function externalSourceUrl(s){if(s.dataset)return sourceUrl(s);if(s.url)return s.url;return ({potable:"https://hubeau.eaufrance.fr/page/api-qualite-eau-potable","hydro-live":"https://hubeau.eaufrance.fr/page/api-hydrometrie","river-live":"https://hubeau.eaufrance.fr/page/api-qualite-cours-deau",groundwater:"https://hubeau.eaufrance.fr/page/api-qualite-nappes",fish:"https://hubeau.eaufrance.fr/page/api-poisson",hydrobio:"https://hubeau.eaufrance.fr/page/api-hydrobiologie",etiage:"https://hubeau.eaufrance.fr/page/api-ecoulement"})[s.id]||"https://hubeau.eaufrance.fr/page/apis"}
 function safe(v){return v===null||v===undefined||v===""?"Non renseigné":String(v)}
+function htmlSafe(v){return safe(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c])}
+function monthsAgo(n){const d=new Date();d.setMonth(d.getMonth()-n);return d.toISOString().slice(0,10)}
 function niceKey(k){return k.replaceAll("_"," ").replace(/\b\w/g,c=>c.toUpperCase())}
 const categoryPalette=["#000091","#e1000f","#009081","#a558a0","#ce614a","#6a6af4","#18753c","#c3992a","#0078f3","#d13c72"];
 function categoryColor(value){const s=String(value||"Non renseigné");let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return categoryPalette[Math.abs(h)%categoryPalette.length]}
@@ -63,8 +66,27 @@ function openFeature(source,feature){
   if(source.id==="hydro-live"&&p.code_station)loadLatestHydro(p.code_station);
 }
 async function loadLatestHydro(code){const box=document.getElementById("liveDetail");box.innerHTML='<p class="subtitle">Recherche de la dernière mesure disponible…</p>';try{const u=`https://hubeau.eaufrance.fr/api/v2/hydrometrie/observations_tr?code_entite=${encodeURIComponent(code)}&grandeur_hydro=H&size=1&fields=code_station,date_obs,resultat_obs,grandeur_hydro`;const r=await fetch(u);const d=await r.json();const o=d.data?.[0];box.innerHTML=o?`<div class="property live-property"><small>DERNIÈRE HAUTEUR DISPONIBLE</small><strong>${(Number(o.resultat_obs)/1000).toLocaleString("fr-FR",{maximumFractionDigits:3})} m</strong><span>${new Date(o.date_obs).toLocaleString("fr-FR")} · mesure brute Hub’Eau</span></div>`:'<p class="subtitle">Aucune hauteur récente disponible pour cette station.</p>'}catch(e){box.innerHTML='<p class="subtitle">La mesure temps réel n’est pas disponible actuellement.</p>'}}
+const potableColors={conforme:"#16a34a",vigilance:"#f59e0b",nonconforme:"#dc2626",nodata:"#94a3b8"};
+function potableStatus(rows){if(!rows.length)return "nodata";if(rows.some(r=>r.conformite_limites_bact_prelevement!=="C"||r.conformite_limites_pc_prelevement!=="C"))return "nonconforme";if(rows.some(r=>r.conformite_references_bact_prelevement!=="C"||r.conformite_references_pc_prelevement!=="C"))return "vigilance";return "conforme"}
+async function loadPotableSource(source){
+  if(!state.communes)await loadCommunes();
+  const fields="code_commune,nom_commune,code_prelevement,date_prelevement,conclusion_conformite_prelevement,conformite_limites_bact_prelevement,conformite_limites_pc_prelevement,conformite_references_bact_prelevement,conformite_references_pc_prelevement,nom_distributeur,nom_moa";
+  const url=`${source.api}?code_departement=95&code_parametre=1340&date_min_prelevement=${monthsAgo(12)}&size=5000&fields=${encodeURIComponent(fields)}`;
+  const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error(`Hub’Eau ${r.status}`);const d=await r.json();
+  const byCommune={};const seen=new Set();(d.data||[]).forEach(x=>{if(!x.code_commune||seen.has(x.code_prelevement))return;seen.add(x.code_prelevement);(byCommune[x.code_commune]??=[]).push(x)});
+  state.potableAgg={};Object.entries(byCommune).forEach(([code,rows])=>{rows.sort((a,b)=>new Date(b.date_prelevement)-new Date(a.date_prelevement));const lim=rows.filter(x=>x.conformite_limites_bact_prelevement==="C"&&x.conformite_limites_pc_prelevement==="C").length;const ref=rows.filter(x=>x.conformite_references_bact_prelevement==="C"&&x.conformite_references_pc_prelevement==="C").length;state.potableAgg[code]={rows,nb:rows.length,status:potableStatus(rows),tauxLimites:Math.round(lim/rows.length*1000)/10,tauxReferences:Math.round(ref/rows.length*1000)/10,dernier:rows[0]}});
+  state.data[source.id]={type:"FeatureCollection",features:state.communes.features.map(f=>({type:"Feature",geometry:f.geometry,properties:{...f.properties,...(state.potableAgg[f.properties.code]||{status:"nodata",nb:0})}}))};
+  state.layers[source.id]=L.geoJSON(state.data[source.id],{style:f=>({color:"#fff",weight:1,fillColor:potableColors[f.properties.status],fillOpacity:.68}),onEachFeature:(f,l)=>{l.bindTooltip(`${f.properties.nom} · ${f.properties.nb||0} prélèvement(s)`,{sticky:true});l.on("click",()=>openPotableDetail(f.properties.code,f.properties.nom,source))}});return state.layers[source.id]
+}
+async function openPotableDetail(code,nom,source){
+  const agg=state.potableAgg?.[code]||{status:"nodata",nb:0};const labels={conforme:"Conforme",vigilance:"Dépassement d’une référence de qualité",nonconforme:"Non-conformité détectée",nodata:"Pas de prélèvement récent"};
+  document.getElementById("detailContent").innerHTML=`<span class="detail-tag">QUALITÉ SANITAIRE · HUB’EAU / ARS</span><h2>${htmlSafe(nom)}</h2><div class="water-status ${agg.status}">${labels[agg.status]}</div><div class="property-grid"><div class="property"><small>PRÉLÈVEMENTS · 12 MOIS</small><strong>${agg.nb}</strong></div><div class="property"><small>CONFORMITÉ LIMITES</small><strong>${agg.tauxLimites??"—"} %</strong></div><div class="property"><small>CONFORMITÉ RÉFÉRENCES</small><strong>${agg.tauxReferences??"—"} %</strong></div><div class="property"><small>DERNIER CONTRÔLE</small><strong>${agg.dernier?.date_prelevement?new Date(agg.dernier.date_prelevement).toLocaleDateString("fr-FR"):"—"}</strong></div></div><div id="liveDetail"><p class="subtitle">Chargement de toutes les mesures du dernier contrôle…</p></div><a class="source-link" target="_blank" rel="noopener" href="${externalSourceUrl(source)}">Consulter l’API officielle ↗</a>`;document.getElementById("detailPanel").classList.add("open");
+  if(!agg.dernier)return document.getElementById("liveDetail").innerHTML='<p class="subtitle">Aucune analyse récente publiée pour cette commune.</p>';
+  try{const fields="code_prelevement,date_prelevement,libelle_parametre,resultat_alphanumerique,resultat_numerique,libelle_unite,limite_qualite_parametre,reference_qualite_parametre,conclusion_conformite_prelevement,nom_distributeur,nom_moa";const u=`${source.api}?code_prelevement=${encodeURIComponent(agg.dernier.code_prelevement)}&size=5000&fields=${encodeURIComponent(fields)}`;const r=await fetch(u,{cache:"no-store"});const d=await r.json();const rows=d.data||[];const intro=rows[0]||agg.dernier;document.getElementById("liveDetail").innerHTML=`<section class="analysis-summary"><strong>${htmlSafe(intro.conclusion_conformite_prelevement||"Conclusion non renseignée")}</strong><span>${rows.length} paramètres publiés · ${htmlSafe(intro.nom_moa||intro.nom_distributeur||"Gestionnaire non renseigné")}</span></section><div class="analysis-list">${rows.map(x=>`<div class="analysis-row"><span>${htmlSafe(x.libelle_parametre)}</span><strong>${htmlSafe(x.resultat_alphanumerique)} ${htmlSafe(x.libelle_unite||"")}</strong>${x.limite_qualite_parametre||x.reference_qualite_parametre?`<small>Seuil : ${htmlSafe(x.limite_qualite_parametre||x.reference_qualite_parametre)}</small>`:""}</div>`).join("")}</div>`}catch(e){document.getElementById("liveDetail").innerHTML='<p class="subtitle">Le détail des analyses est momentanément indisponible.</p>'}
+}
 async function loadSource(source){
   if(!source.file&&!source.api)return null;
+  if(source.kind==="api-commune"&&!state.layers[source.id])return loadPotableSource(source);
   if(!state.data[source.id]){const r=await fetch(source.api||DATA_ROOT+source.file);if(!r.ok)throw new Error(`${source.title}: ${r.status}`);const d=await r.json();state.data[source.id]=source.api?{type:"FeatureCollection",features:(d.data||[]).filter(x=>x.geometry?.coordinates||Number.isFinite(x.longitude)&&Number.isFinite(x.latitude)).map(x=>({type:"Feature",properties:x,geometry:x.geometry?.coordinates?x.geometry:{type:"Point",coordinates:[x.longitude,x.latitude]}}))}:d}
   if(!state.layers[source.id]){
     state.layers[source.id]=L.geoJSON(state.data[source.id],{style:f=>layerStyle(source,f),pointToLayer:(f,ll)=>L.circleMarker(ll,{radius:7,color:"#fff",weight:2,fillColor:source.color,fillOpacity:1}),onEachFeature:(f,l)=>{l.on("click",()=>openFeature(source,f));l.bindTooltip(displayTitle(source,f.properties||{}),{sticky:true})}});
@@ -73,14 +95,16 @@ async function loadSource(source){
 }
 async function setLayer(source,on){
   if(source.kind==="unavailable"){document.getElementById(`layer-${source.id}`).checked=false;openFeature(source,{properties:{État:"La source officielle est référencée, mais aucune géométrie directement exploitable n’est actuellement publiée pour cette carte. Elle reste visible pour garantir la traçabilité du thème."}});return}
-  try{const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}`:"Couche retirée de la carte";if(on)renderLegend(source)}catch(e){document.getElementById("mapStatus").textContent=`Source momentanément indisponible : ${source.title}`;document.getElementById(`layer-${source.id}`).checked=false}
+  try{const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend()}catch(e){document.getElementById("mapStatus").textContent=`Source momentanément indisponible : ${source.title}`;document.getElementById(`layer-${source.id}`).checked=false}
 }
+function refreshLegend(){const active=[...sources].reverse().find(s=>document.getElementById(`layer-${s.id}`)?.checked&&state.layers[s.id]&&map.hasLayer(state.layers[s.id]));if(active)renderLegend(active);else{state.legendId=null;document.getElementById("mapLegend").innerHTML='<strong>Lecture de la carte</strong><span>Activez une couche pour afficher sa légende.</span>'}}
 function renderLegend(source){const el=document.getElementById("mapLegend");let rows=[];
   if(source.kind==="quality")rows=Object.entries(qualityLabels).map(([k,v])=>[qualityColors[k],v]);
+  else if(source.kind==="api-commune")rows=[[potableColors.conforme,"Conforme"],[potableColors.vigilance,"Référence dépassée"],[potableColors.nonconforme,"Non conforme"],[potableColors.nodata,"Sans donnée récente"]];
   else if(source.kind==="price")rows=[["#d9d4f5","moins de 2,50 €/m³"],["#9b8cdc","2,50 à 3 €/m³"],["#6554c0","3 à 4 €/m³"],["#3f2c80","4 €/m³ et plus"]];
   else if(["police","syndicats-eau","syndicats-assain","syndicats-riviere"].includes(source.id)){const values=[...new Set((state.data[source.id]?.features||[]).map(f=>categoryValue(source,f.properties)).filter(Boolean))];rows=values.slice(0,7).map(v=>[categoryColor(v),v]);if(values.length>7)rows.push(["#68737d",`+ ${values.length-7} autres catégories`])}
   else rows=[[source.color,source.title]];
-  el.innerHTML=`<strong>${source.title}</strong>${rows.map(([c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join("")}`;
+  state.legendId=source.id;el.innerHTML=`<strong>${source.title}</strong>${rows.map(([c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join("")}`;
 }
 function renderLayers(){
   const groups=[...new Set(sources.map(s=>s.group))]; const root=document.getElementById("layerList");
