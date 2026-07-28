@@ -1,0 +1,84 @@
+const DATA_ROOT = "data/processed/";
+const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
+const qualityLabels = {"2":"Bon état","3":"État moyen","4":"État médiocre","5":"Mauvais état","U":"Non classé"};
+const qualityColors = {"2":"#20a06b","3":"#f0c541","4":"#ee8b38","5":"#d94a4a","U":"#88959e"};
+
+const sources = [
+  {id:"cours",title:"Cours d’eau du Val-d’Oise — arrêté préfectoral",date:"18 février 2021",dataset:"cours-deau-du-val-doise-arrete-prefectoral-ndeg2017-13817-1",file:"cours_eau.geojson",group:"Milieux",color:"#0077b6",kind:"line",count:"1 425 tronçons",active:true},
+  {id:"qualite",title:"Qualité de l’eau — état écologique",date:"14 avril 2025",dataset:"qualite-de-leau-etat-ecologique",file:"qualite_ecologique.geojson",group:"Milieux",color:"#20a06b",kind:"quality",count:"178 tronçons",active:true},
+  {id:"stations",title:"Stations de mesure de qualité",date:"16 avril 2025",dataset:"stations-de-mesure-de-qualite-de-leau-1",file:"stations.geojson",group:"Mesure",color:"#f49b2f",kind:"point",count:"17 stations",active:true},
+  {id:"secheresse",title:"Zones d’alerte sécheresse",date:"28 mai 2024",dataset:"zones-dalerte-secheresse",file:"secheresse.geojson",group:"Ressource",color:"#bb5c28",kind:"polygon",count:"3 bassins",active:false},
+  {id:"prix",title:"Prix de l’eau potable",date:"4 avril 2025",dataset:"eau-potable-prix-sur-la-base-dune-consommation-annuelle-de-120m3-1",file:"prix_eau.geojson",group:"Services publics",color:"#6554c0",kind:"price",count:"151 valeurs",active:false},
+  {id:"syndicats-eau",title:"Syndicats d’eau potable",date:"1 juillet 2025",dataset:"l-si-eau-potable-s-095-1",file:"syndicats_eau.geojson",group:"Gouvernance",color:"#0063cb",kind:"polygon",count:"23 syndicats",active:false},
+  {id:"syndicats-assain",title:"Syndicats d’assainissement",date:"4 février 2025",dataset:"syndicats-dassainissement-val-doise",file:"syndicats_assainissement.geojson",group:"Gouvernance",color:"#8146a1",kind:"polygon",count:"194 territoires",active:false},
+  {id:"syndicats-riviere",title:"Syndicats de rivière",date:"22 février 2025",dataset:"l-si-riviere-s-095",file:"syndicats_riviere.geojson",group:"Gouvernance",color:"#00a7b5",kind:"polygon",count:"183 communes",active:false},
+  {id:"police",title:"Compétence police de l’eau",date:"1 avril 2025",dataset:"la-competence-police-de-leau",file:"police_eau.geojson",group:"Réglementation",color:"#d13c72",kind:"line",count:"1 549 tronçons",active:false},
+  {id:"assain-prix",title:"Prix de l’assainissement collectif",date:"4 avril 2025",dataset:"assainissement-collectif-prix-associe-a-la-collecte-au-transport-et-au-traitement-des-eaux-usees",file:null,group:"Services publics",color:"#68737d",kind:"unavailable",count:"Service source indisponible",active:false}
+];
+
+const state = {data:{},layers:{},charts:[],communes:null};
+const map = L.map("map",{zoomControl:false,preferCanvas:true,minZoom:8,maxZoom:18}).fitBounds(BOUNDS_95);
+L.control.zoom({position:"bottomright"}).addTo(map);
+L.control.scale({imperial:false,position:"bottomright"}).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Données DDT 95'}).addTo(map);
+
+function sourceUrl(s){return `https://www.data.gouv.fr/datasets/${s.dataset}`}
+function safe(v){return v===null||v===undefined||v===""?"Non renseigné":String(v)}
+function niceKey(k){return k.replaceAll("_"," ").replace(/\b\w/g,c=>c.toUpperCase())}
+function layerStyle(source,feature){
+  if(source.kind==="quality"){const c=qualityColors[String(feature.properties.etateco)]||qualityColors.U;return {color:c,weight:4,opacity:.9}}
+  if(source.kind==="price"){const v=Number(feature.properties.TARIF_AEP);const c=!v?"#b9c0c7":v<2.5?"#d9d4f5":v<3?"#9b8cdc":v<4?"#6554c0":"#3f2c80";return {color:"#fff",weight:.6,fillColor:c,fillOpacity:.68}}
+  if(source.kind==="polygon")return {color:source.color,weight:1.4,fillColor:source.color,fillOpacity:.18};
+  return {color:source.color,weight:source.id==="cours"?2.2:2,opacity:.84};
+}
+function displayTitle(source,p){
+  return p.LbStationM||p.NOM_SI||p.DONNEES__1||p.LbZAS||p.name||p.NOM||p.NomCoursdE||p["POLICE EAU"]||source.title;
+}
+function relevantProps(source,p){
+  const preferred={stations:["CdStationM","LbStationM","NomCoursdE","LbCommune","pH","Temp","Conducti","DatePrelev"],cours:["NOM","ETAT","ZNT","BCAE","ORIGINE1"],qualite:["name","etateco","annee","longueur","statut"],prix:["NOM","INSEE_COM","TARIF_AEP","POPULATION"],secheresse:["LbZAS","TypeZAS","MnZAS"],"syndicats-eau":["NOM","NOM_SI","SIREN_SI","INSEE_COM"],"syndicats-assain":["NOM","DONNEES__1","DONNEES_SI","INSEE_COM"],"syndicats-riviere":["NOM","Syndic_RIV","SI_RIV","NB_Syndic"],police:["NOM","POLICE_EAU","NOM_2","ID_COURSDE"]};
+  return (preferred[source.id]||Object.keys(p).slice(0,8)).filter(k=>p[k]!==null&&p[k]!=="").map(k=>[k,p[k]]);
+}
+function openFeature(source,feature){
+  const p=feature.properties||{}; const title=displayTitle(source,p);
+  const cards=relevantProps(source,p).map(([k,v])=>`<div class="property"><small>${niceKey(k)}</small><strong>${k==="etateco"?(qualityLabels[String(v)]||v):safe(v)}${k==="TARIF_AEP"?" €/m³":""}</strong></div>`).join("");
+  document.getElementById("detailContent").innerHTML=`<span class="detail-tag">${source.group} · DDT 95</span><h2>${safe(title)}</h2><p class="subtitle">${source.title} · mise à jour ${source.date}</p><div class="property-grid">${cards}</div><a class="source-link" target="_blank" rel="noopener" href="${sourceUrl(source)}">Consulter la source data.gouv.fr ↗</a>`;
+  document.getElementById("detailPanel").classList.add("open");
+}
+async function loadSource(source){
+  if(!source.file)return null;
+  if(!state.data[source.id]){const r=await fetch(DATA_ROOT+source.file);if(!r.ok)throw new Error(`${source.title}: ${r.status}`);state.data[source.id]=await r.json()}
+  if(!state.layers[source.id]){
+    state.layers[source.id]=L.geoJSON(state.data[source.id],{style:f=>layerStyle(source,f),pointToLayer:(f,ll)=>L.circleMarker(ll,{radius:7,color:"#fff",weight:2,fillColor:source.color,fillOpacity:1}),onEachFeature:(f,l)=>{l.on("click",()=>openFeature(source,f));l.bindTooltip(displayTitle(source,f.properties||{}),{sticky:true})}});
+  }
+  return state.layers[source.id];
+}
+async function setLayer(source,on){
+  if(source.kind==="unavailable"){document.getElementById(`layer-${source.id}`).checked=false;openFeature(source,{properties:{État:"La ressource de téléchargement et son service cartographique renvoient actuellement une erreur. La fiche reste référencée pour respecter l’exhaustivité du catalogue."}});return}
+  try{const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}`:"Couche retirée de la carte"}catch(e){document.getElementById("mapStatus").textContent=`Source momentanément indisponible : ${source.title}`;document.getElementById(`layer-${source.id}`).checked=false}
+}
+function renderLayers(){
+  const groups=[...new Set(sources.map(s=>s.group))]; const root=document.getElementById("layerList");
+  root.innerHTML=groups.map(g=>`<section class="layer-group"><div class="group-title">${g}</div>${sources.filter(s=>s.group===g).map(s=>`<label class="layer-row"><input id="layer-${s.id}" type="checkbox" ${s.active?"checked":""} ${s.kind==="unavailable"?"aria-describedby='unavailable'":""}><span class="layer-label"><strong>${s.title}</strong><small>${s.count} · ${s.date}</small></span><span class="legend-swatch ${s.kind==="point"?"point":""}" style="background:${s.color}"></span></label>`).join("")}</section>`).join("");
+  sources.forEach(s=>document.getElementById(`layer-${s.id}`).addEventListener("change",e=>setLayer(s,e.target.checked)));
+}
+function renderSources(){document.getElementById("sourceCards").innerHTML=sources.map(s=>`<article class="source-card"><div><h3>${s.title}</h3><p>Producteur : Direction départementale des territoires du Val-d’Oise<br>Dernière mise à jour : ${s.date} · Licence Ouverte 2.0</p><span class="source-status">${s.kind==="unavailable"?"Référencée · service indisponible":"Intégrée à l’observatoire"}</span></div><a href="${sourceUrl(s)}" target="_blank" rel="noopener">Ouvrir ↗</a></article>`).join("")}
+async function loadCommunes(){try{const r=await fetch("https://geo.api.gouv.fr/departements/95/communes?fields=nom,code,centre&format=geojson&geometry=centre");state.communes=await r.json()}catch(e){state.communes={features:[]}}}
+async function search(){const q=document.getElementById("searchInput").value.trim();if(!q)return;const box=document.getElementById("searchResults");let items=[];
+  if(state.communes)items=state.communes.features.filter(f=>f.properties.nom.toLowerCase().includes(q.toLowerCase())).slice(0,5).map(f=>({label:f.properties.nom,coords:[f.geometry.coordinates[1],f.geometry.coordinates[0]]}));
+  if(!items.length){try{const r=await fetch(`https://data.geopf.fr/geocodage/search?q=${encodeURIComponent(q+" Val-d'Oise")}&limit=5`);const d=await r.json();items=(d.features||[]).map(f=>({label:f.properties.label,coords:[f.geometry.coordinates[1],f.geometry.coordinates[0]]}))}catch(e){}}
+  box.innerHTML=items.length?items.map((x,i)=>`<button data-i="${i}">${x.label}</button>`).join(""):"<button>Aucun résultat dans le Val-d’Oise</button>";box.hidden=false;box.querySelectorAll("button[data-i]").forEach(b=>b.onclick=()=>{const x=items[+b.dataset.i];map.flyTo(x.coords,14);L.popup().setLatLng(x.coords).setContent(`<strong>${x.label}</strong>`).openOn(map);box.hidden=true})
+}
+function chartData(){
+  const q=state.data.qualite?.features||[];const quality=Object.keys(qualityLabels).map(k=>q.filter(f=>String(f.properties.etateco)===k).length);
+  const prices=(state.data.prix?.features||[]).map(f=>Number(f.properties.TARIF_AEP)).filter(Boolean);const bins=[0,0,0,0];prices.forEach(v=>bins[v<2.5?0:v<3?1:v<4?2:3]++);
+  const station=state.data.stations?.features||[];const basins={};station.forEach(f=>{const k=f.properties.NomEuBassi||"Non renseigné";basins[k]=(basins[k]||0)+1});return {quality,prices,bins,basins};
+}
+function makeCharts(){state.charts.forEach(c=>c.destroy());const d=chartData();const common={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:"#edf1f3"}}}};
+  state.charts.push(new Chart(document.getElementById("qualityChart"),{type:"bar",data:{labels:Object.values(qualityLabels),datasets:[{data:d.quality,backgroundColor:Object.values(qualityColors),borderWidth:0}]},options:{...common,indexAxis:"y"}}));
+  state.charts.push(new Chart(document.getElementById("priceChart"),{type:"bar",data:{labels:["< 2,50 €","2,50–3 €","3–4 €","≥ 4 €"],datasets:[{data:d.bins,backgroundColor:"#6554c0",borderRadius:3}]},options:common}));
+  state.charts.push(new Chart(document.getElementById("basinChart"),{type:"doughnut",data:{labels:Object.keys(d.basins),datasets:[{data:Object.values(d.basins),backgroundColor:["#0063cb","#00a7b5","#f49b2f","#8146a1"]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{boxWidth:10,font:{size:9}}}}}}));
+  const good=d.quality[0]||0,total=d.quality.reduce((a,b)=>a+b,0),pct=Math.round(good/total*100);document.getElementById("insightValue").textContent=`${pct} %`;document.getElementById("insightText").textContent=`des tronçons qualifiés sont classés en bon état écologique. ${d.quality[1]||0} tronçons restent en état moyen.`
+}
+async function init(){renderLayers();renderSources();await Promise.all(sources.filter(s=>s.file).map(loadSource));await Promise.all(sources.filter(s=>s.active).map(s=>setLayer(s,true)));await loadCommunes();const d=chartData();const good=(d.quality[0]||0),known=d.quality.slice(0,4).reduce((a,b)=>a+b,0);document.getElementById("kpiGood").textContent=Math.round(good/known*100);document.getElementById("kpiPrice").textContent=(d.prices.reduce((a,b)=>a+b,0)/d.prices.length).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";document.getElementById("mapStatus").textContent="9 couches DDT 95 chargées · données prêtes à explorer"}
+document.getElementById("searchButton").onclick=search;document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")search()});document.getElementById("resetView").onclick=()=>map.fitBounds(BOUNDS_95);document.getElementById("closeDetail").onclick=()=>document.getElementById("detailPanel").classList.remove("open");document.getElementById("clearLayers").onclick=()=>sources.forEach(s=>{const e=document.getElementById(`layer-${s.id}`);if(e.checked){e.checked=false;setLayer(s,false)}});document.getElementById("openSources").onclick=()=>document.getElementById("sourcesDialog").showModal();document.getElementById("openDashboard").onclick=()=>{makeCharts();document.getElementById("dashboardDialog").showModal()};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());document.querySelectorAll(".map-kpis button").forEach(b=>b.onclick=()=>{const s=sources.find(x=>x.id===b.dataset.focus);const e=document.getElementById(`layer-${s.id}`);if(!e.checked){e.checked=true;setLayer(s,true)}});
+init();

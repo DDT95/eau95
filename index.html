@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Observatoire cartographique de l’eau dans le Val-d’Oise — DDT 95">
+  <title>Observatoire de l’eau · Val-d’Oise · DDT 95</title>
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="https://ddt95.github.io/atlas-territorial-95/" aria-label="Retour à l’Atlas territorial">
+      <span class="republique">RÉPUBLIQUE<br>FRANÇAISE</span>
+      <span class="brand-copy"><strong>Atlas du Val-d’Oise</strong><small>Direction départementale des territoires</small></span>
+    </a>
+    <div class="title-block">
+      <span class="eyebrow">OBSERVATOIRE TERRITORIAL</span>
+      <h1>La donnée au fil de l’eau</h1>
+    </div>
+    <nav class="top-actions" aria-label="Actions principales">
+      <button id="openSources" class="ghost-btn">Sources</button>
+      <button id="openDashboard" class="primary-btn">Vue d’ensemble</button>
+    </nav>
+  </header>
+
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Choix des données">
+      <div class="sidebar-intro">
+        <span class="section-number">95</span>
+        <div><h2>L’eau dans le<br>Val-d’Oise</h2><p>Explorer les milieux, la qualité, les services publics et la ressource.</p></div>
+      </div>
+
+      <label class="search-box">
+        <span>Rechercher une commune ou une adresse</span>
+        <div><input id="searchInput" type="search" placeholder="Ex. Pontoise" autocomplete="off"><button id="searchButton" aria-label="Rechercher">→</button></div>
+      </label>
+      <div id="searchResults" class="search-results" hidden></div>
+
+      <div class="theme-heading"><span>COUCHES CARTOGRAPHIQUES</span><button id="clearLayers">Tout effacer</button></div>
+      <div id="layerList" class="layer-list"></div>
+
+      <div class="sidebar-footer">
+        <div class="fresh-dot"></div>
+        <div><strong>10 jeux DDT 95 recensés</strong><small>Catalogue vérifié le 28 juillet 2026</small></div>
+      </div>
+    </aside>
+
+    <section class="map-shell" aria-label="Carte interactive">
+      <div id="map"></div>
+      <div class="map-kpis" aria-label="Chiffres clés">
+        <button data-focus="stations"><strong id="kpiStations">17</strong><span>stations de qualité</span></button>
+        <button data-focus="cours"><strong id="kpiCours">1 425</strong><span>tronçons recensés</span></button>
+        <button data-focus="qualite"><strong id="kpiGood">47</strong><span>% en bon / très bon état</span></button>
+        <button data-focus="prix"><strong id="kpiPrice">2,73 €</strong><span>prix moyen de l’eau / m³</span></button>
+      </div>
+      <div class="map-note"><span class="pulse"></span><span id="mapStatus">Chargement des données territoriales…</span></div>
+      <button id="resetView" class="map-reset" title="Recentrer sur le Val-d’Oise" aria-label="Recentrer sur le Val-d’Oise">⌂</button>
+    </section>
+
+    <aside id="detailPanel" class="detail-panel" aria-live="polite">
+      <button id="closeDetail" class="close-btn" aria-label="Fermer le panneau">×</button>
+      <div id="detailContent"></div>
+    </aside>
+  </main>
+
+  <dialog id="dashboardDialog" class="dialog dashboard-dialog">
+    <button class="dialog-close" data-close="dashboardDialog" aria-label="Fermer">×</button>
+    <div class="dialog-header"><span class="eyebrow">PORTRAIT DÉPARTEMENTAL</span><h2>Comprendre l’eau en un regard</h2><p>Les graphiques sont calculés directement à partir des couches DDT 95 affichées dans l’observatoire.</p></div>
+    <div class="dashboard-grid">
+      <article class="chart-card wide"><div><span class="chart-kicker">ÉTAT ÉCOLOGIQUE</span><h3>Répartition des cours d’eau</h3><p>178 tronçons qualifiés · classes DCE</p></div><canvas id="qualityChart"></canvas></article>
+      <article class="chart-card"><div><span class="chart-kicker">SERVICE PUBLIC</span><h3>Prix de l’eau potable</h3><p>Distribution communale · €/m³</p></div><canvas id="priceChart"></canvas></article>
+      <article class="chart-card"><div><span class="chart-kicker">MESURE</span><h3>Stations par bassin</h3><p>Réseau de suivi physico-chimique</p></div><canvas id="basinChart"></canvas></article>
+      <article class="insight-card"><span>À RETENIR</span><strong id="insightValue">—</strong><p id="insightText">Analyse en cours.</p></article>
+    </div>
+  </dialog>
+
+  <dialog id="sourcesDialog" class="dialog sources-dialog">
+    <button class="dialog-close" data-close="sourcesDialog" aria-label="Fermer">×</button>
+    <div class="dialog-header"><span class="eyebrow">TRAÇABILITÉ</span><h2>Sources et millésimes</h2><p>Le travail publié par la DDT 95 constitue le socle de l’outil. Chaque couche renvoie vers sa fiche data.gouv.fr.</p></div>
+    <div id="sourceCards" class="source-cards"></div>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
