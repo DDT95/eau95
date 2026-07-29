@@ -7,7 +7,7 @@
   <title>Observatoire de l’eau · Val-d’Oise · DDT 95</title>
   <link rel="preconnect" href="https://tile.openstreetmap.org">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=20260729b">
+  <link rel="stylesheet" href="styles.css?v=20260729g">
 </head>
 <body>
   <header class="topbar">
@@ -17,12 +17,13 @@
       <h1>Observatoire de l’eau</h1>
       <p>Milieux · qualité · ressource · services publics</p>
     </div>
-    <div class="livebox"><span class="fresh-dot"></span><div><strong>10 couches locales prêtes</strong><small>DDT 95 · data.gouv.fr</small></div></div>
+    <button id="mobileLayers" class="mobile-layers" aria-controls="layerSidebar" aria-expanded="false">Données</button>
+    <div class="livebox"><span class="fresh-dot"></span><div><strong>17 couches cartographiques prêtes</strong><small>DDT 95 · Hub’Eau · Sandre</small></div></div>
   </header>
   <div class="progress"><span></span></div>
 
   <main class="workspace">
-    <aside class="sidebar" aria-label="Choix des données">
+    <aside id="layerSidebar" class="sidebar" aria-label="Choix des données">
       <div class="sidebar-intro"><div><span class="eyebrow">EXPLORER LE TERRITOIRE</span><h2>Quelle eau<br>près de chez moi ?</h2><p>Recherchez un lieu, choisissez un thème et cliquez sur la carte pour comprendre la donnée.</p></div></div>
 
       <label class="search-box">
@@ -76,6 +77,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-  <script src="app.js?v=20260729b"></script>
+  <script src="app.js?v=20260729g"></script>
 </body>
 </html>

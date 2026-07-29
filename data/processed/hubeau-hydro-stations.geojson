@@ -1,0 +1,289 @@
+{
+  "type": "FeatureCollection",
+  "name": "Stations hydrométriques du Val-d’Oise",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.402655311572162,
+          49.151382686634385
+        ]
+      },
+      "properties": {
+        "gid": 822,
+        "CdStationHydro": "H224000101",
+        "CdStationHydroAncienRef": "H7833010",
+        "LbStationHydro": "La Thève à Asnières-sur-Oise [Partielle] - Baillon",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1975-01-31T23:00:00Z",
+        "DtFermetureStationHydro": "1984-12-31T23:00:00Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 656419.0,
+        "CoordYStationHydro": 6894788.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "HydroPortail/Hydro 2",
+        "code_station": "H224000101",
+        "libelle_station": "La Thève à Asnières-sur-Oise [Partielle] - Baillon",
+        "date_ouverture_station": "1975-01-31T23:00:00Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": null,
+        "snapshot_date_hauteur": null,
+        "snapshot_debit_m3s": null,
+        "snapshot_date_debit": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.401078633685687,
+          49.149046192001371
+        ]
+      },
+      "properties": {
+        "gid": 823,
+        "CdStationHydro": "H224000201",
+        "CdStationHydroAncienRef": "H7833020",
+        "LbStationHydro": "[Le ru de Baillon] à Asnières-sur-Oise",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1975-01-31T23:00:00Z",
+        "DtFermetureStationHydro": "1984-12-31T23:00:00Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 656302.0,
+        "CoordYStationHydro": 6894529.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "HydroPortail/Hydro 2",
+        "code_station": "H224000201",
+        "libelle_station": "[Le ru de Baillon] à Asnières-sur-Oise",
+        "date_ouverture_station": "1975-01-31T23:00:00Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": null,
+        "snapshot_date_hauteur": null,
+        "snapshot_debit_m3s": null,
+        "snapshot_date_debit": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.444365853681931,
+          49.114251456157213
+        ]
+      },
+      "properties": {
+        "gid": 824,
+        "CdStationHydro": "H224000401",
+        "CdStationHydroAncienRef": "H7833530",
+        "LbStationHydro": "L'Ysieux à Luzarches - Brassay",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1975-12-31T23:00:00Z",
+        "DtFermetureStationHydro": "1984-12-31T23:00:00Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 659433.0,
+        "CoordYStationHydro": 6890636.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "HydroPortail/Hydro 2",
+        "code_station": "H224000401",
+        "libelle_station": "L'Ysieux à Luzarches - Brassay",
+        "date_ouverture_station": "1975-12-31T23:00:00Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": null,
+        "snapshot_date_hauteur": null,
+        "snapshot_debit_m3s": null,
+        "snapshot_date_debit": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.415803309305295,
+          49.1328717531227
+        ]
+      },
+      "properties": {
+        "gid": 825,
+        "CdStationHydro": "H224000501",
+        "CdStationHydroAncienRef": "H7833540",
+        "LbStationHydro": "L'Ysieux à Luzarches - Bertinval",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "2001-06-10T22:00:00Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 657363.0,
+        "CoordYStationHydro": 6892722.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "Vigicrues/HydroPortail/Hydro 2",
+        "code_station": "H224000501",
+        "libelle_station": "L'Ysieux à Luzarches - Bertinval",
+        "date_ouverture_station": "2001-06-10T22:00:00Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": 0.36,
+        "snapshot_date_hauteur": "2026-07-29T11:00:00+00:00",
+        "snapshot_debit_m3s": 0.1,
+        "snapshot_date_debit": "2026-07-29T11:00:00+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.400182259151971,
+          49.136499236407019
+        ]
+      },
+      "properties": {
+        "gid": 826,
+        "CdStationHydro": "H224000502",
+        "CdStationHydroAncienRef": "H7833520",
+        "LbStationHydro": "L'Ysieux à Viarmes - Moulin de Giez",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1968-05-31T23:00:00Z",
+        "DtFermetureStationHydro": "2004-11-08T11:00:00Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 656226.0,
+        "CoordYStationHydro": 6893134.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "HydroPortail/Hydro 2",
+        "code_station": "H224000502",
+        "libelle_station": "L'Ysieux à Viarmes - Moulin de Giez",
+        "date_ouverture_station": "1968-05-31T23:00:00Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": null,
+        "snapshot_date_hauteur": null,
+        "snapshot_debit_m3s": null,
+        "snapshot_date_debit": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.213238429305634,
+          49.120748334933303
+        ]
+      },
+      "properties": {
+        "gid": 827,
+        "CdStationHydro": "H226000101",
+        "CdStationHydroAncienRef": "H7841020",
+        "LbStationHydro": "L'Oise à l'Isle-Adam - Barrage (amont)",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1903-12-31T23:50:39Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 642566.0,
+        "CoordYStationHydro": 6891502.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "Vigicrues/HydroPortail/Hydro 2",
+        "code_station": "H226000101",
+        "libelle_station": "L'Oise à l'Isle-Adam - Barrage (amont)",
+        "date_ouverture_station": "1903-12-31T23:50:39Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": 3.3,
+        "snapshot_date_hauteur": "2026-07-29T11:00:00+00:00",
+        "snapshot_debit_m3s": null,
+        "snapshot_date_debit": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.171138167884493,
+          49.126085283955369
+        ]
+      },
+      "properties": {
+        "gid": 828,
+        "CdStationHydro": "H226000201",
+        "CdStationHydroAncienRef": "H7853010",
+        "LbStationHydro": "Le Sausseron à Nesles-la-Vallée",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1968-11-30T23:00:00Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 639499.0,
+        "CoordYStationHydro": 6892127.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "Vigicrues/HydroPortail/Hydro 2",
+        "code_station": "H226000201",
+        "libelle_station": "Le Sausseron à Nesles-la-Vallée",
+        "date_ouverture_station": "1968-11-30T23:00:00Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": 0.1,
+        "snapshot_date_hauteur": "2026-07-29T11:00:00+00:00",
+        "snapshot_debit_m3s": 0.3,
+        "snapshot_date_debit": "2026-07-29T11:00:00+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.095860209087179,
+          49.043258440751856
+        ]
+      },
+      "properties": {
+        "gid": 829,
+        "CdStationHydro": "H227000102",
+        "CdStationHydroAncienRef": "H7861020",
+        "LbStationHydro": "L'Oise à Pontoise - Barrage (aval)",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1875-12-31T23:50:39Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 633899.0,
+        "CoordYStationHydro": 6882976.0,
+        "NomIntervenant": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "LbAffichageStationHydro": "Vigicrues/HydroPortail/Hydro 2",
+        "code_station": "H227000102",
+        "libelle_station": "L'Oise à Pontoise - Barrage (aval)",
+        "date_ouverture_station": "1875-12-31T23:50:39Z",
+        "producteur": "DRIEAT Ile-de-France - UH Ile-de-Fr",
+        "snapshot_hauteur_m": 0,
+        "snapshot_date_hauteur": "2026-07-29T11:00:00+00:00",
+        "snapshot_debit_m3s": null,
+        "snapshot_date_debit": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.689564529840314,
+          49.150901859338596
+        ]
+      },
+      "properties": {
+        "gid": 885,
+        "CdStationHydro": "H317061010",
+        "CdStationHydroAncienRef": "H8043310",
+        "LbStationHydro": "L'Aubette à Ambleville",
+        "TypStationHydro": "STD",
+        "DtMiseServiceStationHydro": "1971-08-31T23:00:00Z",
+        "ProjCoordStationHydro": "26",
+        "CoordXStationHydro": 604396.0,
+        "CoordYStationHydro": 6895363.0,
+        "NomIntervenant": "DREAL Normandie - UH Est",
+        "LbAffichageStationHydro": "Vigicrues/HydroPortail/Hydro 2",
+        "code_station": "H317061010",
+        "libelle_station": "L'Aubette à Ambleville",
+        "date_ouverture_station": "1971-08-31T23:00:00Z",
+        "producteur": "DREAL Normandie - UH Est",
+        "snapshot_hauteur_m": 0.38,
+        "snapshot_date_hauteur": "2026-07-29T06:00:00+00:00",
+        "snapshot_debit_m3s": 0.4,
+        "snapshot_date_debit": "2026-07-29T06:00:00+00:00"
+      }
+    }
+  ]
+}
