@@ -157,8 +157,8 @@ async function openPotableDetail(code,nom,source){
 }
 function parameterExceeded(row,conclusion=""){
   const label=String(row.libelle_parametre||"").toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g,"");const note=String(conclusion).toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-  if(label.length>5&&note.includes(label))return true;
-  const threshold=String(row.limite_qualite_parametre||row.reference_qualite_parametre||"").replace(",",".");const result=Number(row.resultat_numerique);if(!Number.isFinite(result)||String(row.resultat_alphanumerique||"").trim().startsWith("<"))return false;
+  const censored=String(row.resultat_alphanumerique||"").trim().startsWith("<");if(label.length>5&&note.includes(label)&&!censored)return true;
+  const threshold=String(row.limite_qualite_parametre||row.reference_qualite_parametre||"").replace(",",".");const result=Number(row.resultat_numerique);if(!Number.isFinite(result)||censored)return false;
   const max=threshold.match(/<=?\s*([0-9.]+)/),min=threshold.match(/>=?\s*([0-9.]+)/);return Boolean(max&&result>Number(max[1])||min&&result<Number(min[1]));
 }
 async function loadSource(source){
