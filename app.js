@@ -2,6 +2,7 @@ const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
 const qualityLabels = {"2":"Bon état","3":"État moyen","4":"État médiocre","5":"Mauvais état","U":"Non classé"};
 const qualityColors = {"2":"#20a06b","3":"#f0c541","4":"#ee8b38","5":"#d94a4a","U":"#88959e"};
+const groundwaterColors={FRHG001:"#0077b6",FRHG002:"#00a896",FRHG102:"#e07a2f",FRHG104:"#7b5cc7",FRHG107:"#c23b73",FRHG201:"#65752b",FRHG218:"#8a5a44"};
 
 const sources = [
   {id:"cours",title:"Cours d’eau du Val-d’Oise — arrêté préfectoral",date:"18 février 2021",dataset:"cours-deau-du-val-doise-arrete-prefectoral-ndeg2017-13817-1",file:"cours_eau.geojson",group:"Milieux",color:"#0063cb",kind:"line",count:"1 425 tronçons",active:true},
@@ -76,7 +77,7 @@ function categoryColor(value,sourceId="global"){const s=String(value||"Non rense
 function categoryValue(source,p){if(source.id==="police")return p.POLICE_EAU||p["POLICE EAU"];if(source.id==="secheresse")return p.LbZAS||p.MnZAS;if(source.id==="syndicats-eau")return p.NOM_SI;if(source.id==="syndicats-assain")return p.DONNEES__1;if(source.id==="syndicats-riviere")return p.Syndic_RIV||p.SI_RIV;return null}
 function layerStyle(source,feature){
   if(source.kind==="quality"){const c=qualityColors[String(feature.properties.etateco)]||qualityColors.U;return {color:c,weight:4,opacity:.9}}
-  if(source.kind==="groundwater-body"){const colors={1:"#008fa8",2:"#4656c8",3:"#8236a4",4:"#bd286f"};const c=colors[feature.properties.horizon]||source.color;return {color:c,weight:2,fillColor:c,fillOpacity:.38}}
+  if(source.kind==="groundwater-body"){const c=groundwaterColors[feature.properties.code]||source.color;return {color:c,weight:2,fillColor:c,fillOpacity:.42}}
   if(source.kind==="price"){const v=Number(feature.properties.TARIF_AEP);const c=!v?"#b9c0c7":v<2.5?"#d9d4f5":v<3?"#9b8cdc":v<4?"#6554c0":"#3f2c80";return {color:"#fff",weight:.6,fillColor:c,fillOpacity:.68}}
   if(source.kind==="polygon"){const c=categoryColor(categoryValue(source,feature.properties),source.id);return {color:c,weight:1.5,fillColor:c,fillOpacity:.25}}
   if(source.id==="police"){const c=categoryColor(categoryValue(source,feature.properties),source.id);return {color:c,weight:3,opacity:.9}}
@@ -140,7 +141,7 @@ async function loadRiverProfile(riverName,feature,clickedLatLng,token){const box
 const potableColors={conforme:"#16a34a",vigilance:"#f59e0b",nonconforme:"#dc2626",nodata:"#94a3b8"};
 function swatchBackground(source){
   if(source.kind==="quality")return `linear-gradient(90deg,${qualityColors["2"]} 0 25%,${qualityColors["3"]} 25% 50%,${qualityColors["4"]} 50% 75%,${qualityColors["5"]} 75%)`;
-  if(source.kind==="groundwater-body")return "linear-gradient(90deg,#008fa8 0 25%,#4656c8 25% 50%,#8236a4 50% 75%,#bd286f 75%)";
+  if(source.kind==="groundwater-body")return `linear-gradient(90deg,${Object.values(groundwaterColors).map((c,i,a)=>`${c} ${i*100/a.length}% ${(i+1)*100/a.length}%`).join(",")})`;
   if(source.kind==="price")return "linear-gradient(90deg,#d9d4f5 0 25%,#9b8cdc 25% 50%,#6554c0 50% 75%,#3f2c80 75%)";
   if(source.kind==="api-commune")return `linear-gradient(90deg,${potableColors.conforme} 0 33%,${potableColors.vigilance} 33% 66%,${potableColors.nonconforme} 66%)`;
   if(["police","syndicats-eau","syndicats-assain","syndicats-riviere","secheresse"].includes(source.id))return `linear-gradient(90deg,${categoryPalette.slice(0,6).map((c,i)=>`${c} ${i*100/6}% ${(i+1)*100/6}%`).join(",")})`;
@@ -189,7 +190,7 @@ async function setLayer(source,on){
 function refreshLegend(){const active=[...sources].reverse().find(s=>document.getElementById(`layer-${s.id}`)?.checked&&state.layers[s.id]&&map.hasLayer(state.layers[s.id]));if(active)renderLegend(active);else{state.legendId=null;document.getElementById("mapLegend").innerHTML='<strong>Lecture de la carte</strong><span>Activez une couche pour afficher sa légende.</span>'}}
 function renderLegend(source){const el=document.getElementById("mapLegend");let rows=[];
   if(source.kind==="quality")rows=Object.entries(qualityLabels).map(([k,v])=>[qualityColors[k],v]);
-  else if(source.kind==="groundwater-body"){const labels={1:"Horizon 1 · nappes les plus proches de la surface",2:"Horizon 2 · nappes sous-jacentes",3:"Horizon 3 · nappes profondes",4:"Horizon 4 · nappes les plus profondes"},colors={1:"#008fa8",2:"#4656c8",3:"#8236a4",4:"#bd286f"};rows=[[colors[state.groundwaterHorizon],labels[state.groundwaterHorizon]]];}
+  else if(source.kind==="groundwater-body"){const features=(state.data[source.id]?.features||[]).filter(f=>Number(f.properties.horizon)===state.groundwaterHorizon),seen=new Set();rows=features.filter(f=>!seen.has(f.properties.code)&&seen.add(f.properties.code)).map(f=>[groundwaterColors[f.properties.code]||source.color,f.properties.nom]);}
   else if(source.kind==="api-commune")rows=[[potableColors.conforme,"Conforme"],[potableColors.vigilance,"Référence dépassée"],[potableColors.nonconforme,"Non conforme"],[potableColors.nodata,"Sans donnée récente"]];
   else if(source.kind==="price")rows=[["#d9d4f5","moins de 2,50 €/m³"],["#9b8cdc","2,50 à 3 €/m³"],["#6554c0","3 à 4 €/m³"],["#3f2c80","4 €/m³ et plus"]];
   else if(["police","secheresse","syndicats-eau","syndicats-assain","syndicats-riviere"].includes(source.id)){const values=[...new Set((state.data[source.id]?.features||[]).map(f=>categoryValue(source,f.properties)).filter(Boolean))];rows=values.slice(0,7).map(v=>[categoryColor(v,source.id),v]);if(values.length>7)rows.push(["#68737d",`+ ${values.length-7} autres catégories`])}
