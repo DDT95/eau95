@@ -1,3 +1,5 @@
+const BUILD_VERSION="20260729m";
+fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
 const qualityLabels = {"2":"Bon état","3":"État moyen","4":"État médiocre","5":"Mauvais état","U":"Non classé"};
@@ -187,7 +189,17 @@ async function setLayer(source,on){
   control.disabled=true;if(on)document.getElementById("mapStatus").textContent=`Chargement : ${source.title}…`;if(on&&source.kind==="groundwater-body")["cours","qualite","stations"].forEach(id=>{const c=document.getElementById(`layer-${id}`),layer=state.layers[id];if(c?.checked){c.checked=false;if(layer)map.removeLayer(layer)}});
   try{const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend()}catch(e){if(state.layers[source.id])map.removeLayer(state.layers[source.id]);control.checked=false;refreshLegend();document.getElementById("mapStatus").textContent=`Impossible d’afficher cette couche : ${source.title}. Réessayez dans un instant.`;console.error(e)}finally{control.disabled=false}
 }
-function refreshLegend(){const active=[...sources].reverse().find(s=>document.getElementById(`layer-${s.id}`)?.checked&&state.layers[s.id]&&map.hasLayer(state.layers[s.id]));if(active)renderLegend(active);else{state.legendId=null;document.getElementById("mapLegend").innerHTML='<strong>Lecture de la carte</strong><span>Activez une couche pour afficher sa légende.</span>'}}
+function legendControls(currentId=""){
+  const usable=sources.filter(s=>s.kind!=="unavailable"),groups=[...new Set(usable.map(s=>s.group))];
+  return `<div class="legend-controls"><label for="legendLayerSelect">Choisir une couche</label><div><select id="legendLayerSelect"><option value="">— Sélectionner —</option>${groups.map(g=>`<optgroup label="${g}">${usable.filter(s=>s.group===g).map(s=>`<option value="${s.id}" ${s.id===currentId?"selected":""}>${s.title}</option>`).join("")}</optgroup>`).join("")}</select><button id="legendLayerHide" type="button" ${currentId?"":"disabled"}>Masquer</button></div></div>`;
+}
+function bindLegendControls(){
+  const select=document.getElementById("legendLayerSelect"),hide=document.getElementById("legendLayerHide");if(!select)return;
+  select.onchange=async()=>{const source=sources.find(s=>s.id===select.value);if(!source)return;const control=document.getElementById(`layer-${source.id}`);if(!control.checked){control.checked=true;await setLayer(source,true)}else renderLegend(source)};
+  if(hide)hide.onclick=()=>{const source=sources.find(s=>s.id===state.legendId),control=source&&document.getElementById(`layer-${source.id}`);if(source&&control){control.checked=false;setLayer(source,false)}};
+  document.querySelectorAll("#mapLegend [data-legend-horizon]").forEach(b=>b.onclick=()=>setGroundwaterHorizon(b.dataset.legendHorizon));
+}
+function refreshLegend(){const active=[...sources].reverse().find(s=>document.getElementById(`layer-${s.id}`)?.checked&&state.layers[s.id]&&map.hasLayer(state.layers[s.id]));if(active)renderLegend(active);else{state.legendId=null;const el=document.getElementById("mapLegend");el.innerHTML=`${legendControls()}<div class="legend-empty"><strong>Lecture de la carte</strong><span>Sélectionnez une couche pour afficher sa légende.</span></div>`;bindLegendControls()}}
 function renderLegend(source){const el=document.getElementById("mapLegend");let rows=[];
   if(source.kind==="quality")rows=Object.entries(qualityLabels).map(([k,v])=>[qualityColors[k],v]);
   else if(source.kind==="groundwater-body"){const features=(state.data[source.id]?.features||[]).filter(f=>Number(f.properties.horizon)===state.groundwaterHorizon),seen=new Set();rows=features.filter(f=>!seen.has(f.properties.code)&&seen.add(f.properties.code)).map(f=>[groundwaterColors[f.properties.code]||source.color,f.properties.nom]);}
@@ -195,7 +207,8 @@ function renderLegend(source){const el=document.getElementById("mapLegend");let 
   else if(source.kind==="price")rows=[["#d9d4f5","moins de 2,50 €/m³"],["#9b8cdc","2,50 à 3 €/m³"],["#6554c0","3 à 4 €/m³"],["#3f2c80","4 €/m³ et plus"]];
   else if(["police","secheresse","syndicats-eau","syndicats-assain","syndicats-riviere"].includes(source.id)){const values=[...new Set((state.data[source.id]?.features||[]).map(f=>categoryValue(source,f.properties)).filter(Boolean))];rows=values.slice(0,7).map(v=>[categoryColor(v,source.id),v]);if(values.length>7)rows.push(["#68737d",`+ ${values.length-7} autres catégories`])}
   else rows=[[source.color,source.title]];
-  state.legendId=source.id;el.innerHTML=`<strong>${source.title}</strong>${rows.map(([c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join("")}`;
+  const horizons=source.kind==="groundwater-body"?`<div class="legend-horizons"><b>Profondeur</b>${[1,2,3,4].map(h=>`<button type="button" data-legend-horizon="${h}" class="${h===state.groundwaterHorizon?"active":""}" aria-pressed="${h===state.groundwaterHorizon}">H${h}</button>`).join("")}</div>`:"";
+  state.legendId=source.id;el.innerHTML=`${legendControls(source.id)}<div class="legend-content"><strong>${source.title}</strong>${horizons}${rows.map(([c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join("")}</div>`;bindLegendControls();
 }
 function renderLayers(){
   const groups=[...new Set(sources.map(s=>s.group))]; const root=document.getElementById("layerList");
