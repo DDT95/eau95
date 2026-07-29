@@ -1,0 +1,292 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "F7050001",
+        "libelle_station": "Le Crould à GOUSSAINVILLE",
+        "uri_station": "http://id.eaufrance.fr/SiteHydro/F7050001",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_commune": "95280",
+        "libelle_commune": "GOUSSAINVILLE",
+        "code_region": "11",
+        "libelle_region": "Ile-de-France",
+        "code_bassin": "03",
+        "libelle_bassin": "Seine-Normandie",
+        "coordonnee_x_station": 661938.4,
+        "coordonnee_y_station": 6880817.0,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "code_epsg_station": "2154",
+        "code_cours_eau": "F70-0410",
+        "libelle_cours_eau": "Le Crould",
+        "uri_cours_eau": "http://id.eaufrance.fr/CoursEau_Carthage2017/F70-0410",
+        "etat_station": "Active",
+        "date_maj_station": "2012-05-15",
+        "latitude": 49.026120311,
+        "longitude": 2.479566927
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.4795669273874004,
+          49.02612031092956
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "H2240007",
+        "libelle_station": "Le ru Popelin à LUZARCHES",
+        "uri_station": "http://id.eaufrance.fr/SiteHydro/H2240007",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_commune": "95352",
+        "libelle_commune": "LUZARCHES",
+        "code_region": "11",
+        "libelle_region": "Ile-de-France",
+        "code_bassin": "03",
+        "libelle_bassin": "Seine-Normandie",
+        "coordonnee_x_station": 658422.6,
+        "coordonnee_y_station": 6889758.0,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "code_epsg_station": "2154",
+        "code_cours_eau": "H2246300",
+        "libelle_cours_eau": "Le ru Popelin",
+        "uri_cours_eau": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2246300",
+        "etat_station": "Active",
+        "date_maj_station": "2012-05-15",
+        "latitude": 49.106292788,
+        "longitude": 2.430613893
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.4306138930304266,
+          49.10629278756317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "H2260003",
+        "libelle_station": "Le Sausseron à BERVILLE",
+        "uri_station": "http://id.eaufrance.fr/SiteHydro/H2260003",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_commune": "95059",
+        "libelle_commune": "BERVILLE",
+        "code_region": "11",
+        "libelle_region": "Ile-de-France",
+        "code_bassin": "03",
+        "libelle_bassin": "Seine-Normandie",
+        "coordonnee_x_station": 632840.3,
+        "coordonnee_y_station": 6899759.5,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "code_epsg_station": "2154",
+        "code_cours_eau": "H2269000",
+        "libelle_cours_eau": "Le Sausseron",
+        "uri_cours_eau": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2269000",
+        "etat_station": "Active",
+        "date_maj_station": "2012-05-15",
+        "latitude": 49.194038551,
+        "longitude": 2.07870208
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.0787020800093505,
+          49.19403855056995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "H2260004",
+        "libelle_station": "Le ru de la Vallee des Pres à THEUVILLE",
+        "uri_station": "http://id.eaufrance.fr/SiteHydro/H2260004",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_commune": "95611",
+        "libelle_commune": "THEUVILLE",
+        "code_region": "11",
+        "libelle_region": "Ile-de-France",
+        "code_bassin": "03",
+        "libelle_bassin": "Seine-Normandie",
+        "coordonnee_x_station": 632882.8861784168,
+        "coordonnee_y_station": 6894711.34141001,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "code_epsg_station": "2154",
+        "code_cours_eau": "H2269200",
+        "libelle_cours_eau": "Le ru de la Vallee des Pres",
+        "uri_cours_eau": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2269200",
+        "etat_station": "Active",
+        "date_maj_station": "2012-05-15",
+        "latitude": 49.148660537,
+        "longitude": 2.080092954
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.0800929544510507,
+          49.148660536910704
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "H2270002",
+        "libelle_station": "Ruisseau du Montubois à FREPILLON",
+        "uri_station": "http://id.eaufrance.fr/SiteHydro/H2270002",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_commune": "95256",
+        "libelle_commune": "FREPILLON",
+        "code_region": "11",
+        "libelle_region": "Ile-de-France",
+        "code_bassin": "03",
+        "libelle_bassin": "Seine-Normandie",
+        "coordonnee_x_station": 642897.7,
+        "coordonnee_y_station": 6884052.0,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "code_epsg_station": "2154",
+        "code_cours_eau": "H2272000",
+        "libelle_cours_eau": "Ruisseau du Montubois",
+        "uri_cours_eau": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2272000",
+        "etat_station": "Active",
+        "date_maj_station": "2012-05-15",
+        "latitude": 49.053796327,
+        "longitude": 2.218791565
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.218791565410032,
+          49.05379632741971
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "H2280002",
+        "libelle_station": "Le ru de Tourne-Cul à US",
+        "uri_station": "http://id.eaufrance.fr/SiteHydro/H2280002",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_commune": "95625",
+        "libelle_commune": "US",
+        "code_region": "11",
+        "libelle_region": "Ile-de-France",
+        "code_bassin": "03",
+        "libelle_bassin": "Seine-Normandie",
+        "coordonnee_x_station": 624478.3,
+        "coordonnee_y_station": 6888804.5,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "code_epsg_station": "2154",
+        "code_cours_eau": "H2286600",
+        "libelle_cours_eau": "Le ru de Tourne-Cul",
+        "uri_cours_eau": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2286600",
+        "etat_station": "Active",
+        "date_maj_station": "2012-05-15",
+        "latitude": 49.09462149,
+        "longitude": 1.965972274
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.9659722738067755,
+          49.094621489623314
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "H3010002",
+        "libelle_station": "L'Aubette à VIGNY",
+        "uri_station": "http://id.eaufrance.fr/SiteHydro/H3010002",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_commune": "95658",
+        "libelle_commune": "VIGNY",
+        "code_region": "11",
+        "libelle_region": "Ile-de-France",
+        "code_bassin": "03",
+        "libelle_bassin": "Seine-Normandie",
+        "coordonnee_x_station": 620490.1,
+        "coordonnee_y_station": 6887317.0,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "code_epsg_station": "2154",
+        "code_cours_eau": "H3010600",
+        "libelle_cours_eau": "L'Aubette",
+        "uri_cours_eau": "http://id.eaufrance.fr/CoursEau_Carthage2017/H3010600",
+        "etat_station": "Active",
+        "date_maj_station": "2012-05-15",
+        "latitude": 49.080766297,
+        "longitude": 1.911654092
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.911654091891151,
+          49.080766297015096
+        ]
+      }
+    }
+  ]
+}

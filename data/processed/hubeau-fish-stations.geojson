@@ -1,0 +1,3808 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03177771",
+        "libelle_station": "L'AUBETTE A AMBLEVILLE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03177771",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 604482.0,
+        "coordonnee_y_station": 6895393.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "23573",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 604481.98,
+        "coordonnee_y_point_prelevement": 6895392.19,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H3170600",
+        "libelle_entite_hydrographique": "L'Aubette",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H3170600",
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95011",
+        "libelle_commune": "AMBLEVILLE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 100.61,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950009",
+        "longitude": 1.6907362004541413,
+        "latitude": 49.151177084256695
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.6907362004541413,
+          49.151177084256695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03177710",
+        "libelle_station": "L'AUBETTE A HODENT 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03177710",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 610124.0,
+        "coordonnee_y_station": 6895101.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "23555",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 610124.29,
+        "coordonnee_y_point_prelevement": 6895100.2,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H3170600",
+        "libelle_entite_hydrographique": "L'Aubette",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H3170600",
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95309",
+        "libelle_commune": "HODENT",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 1.0,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950017",
+        "longitude": 1.7681247345508118,
+        "latitude": 49.14936845202061
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.7681247345508118,
+          49.14936845202061
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03167094",
+        "libelle_station": "LE SAUSSERON A VALMONDOIS 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03167094",
+        "statut_station": true,
+        "date_modification_station": "2009-01-29T00:00:00Z",
+        "coordonnee_x_station": 641934.0,
+        "coordonnee_y_station": 6888493.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "22852",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 641933.52,
+        "coordonnee_y_point_prelevement": 6888492.49,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95480",
+        "libelle_commune": "PARMAIN",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 1.72,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950033",
+        "longitude": 2.204990019816791,
+        "latitude": 49.093633960736625
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.204990019816791,
+          49.093633960736625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03167024",
+        "libelle_station": "LE SAUSSERON A NESLES-LA-VALLEE 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03167024",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 640087.0,
+        "coordonnee_y_station": 6891148.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "22848",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 640086.87,
+        "coordonnee_y_point_prelevement": 6891147.45,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95446",
+        "libelle_commune": "NESLES-LA-VALLEE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 1.49,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950021",
+        "longitude": 2.179330854920027,
+        "latitude": 49.11733387429509
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.179330854920027,
+          49.11733387429509
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03167000",
+        "libelle_station": "LE SAUSSERON A NESLES-LA-VALLEE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03167000",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 639528.0,
+        "coordonnee_y_station": 6892124.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "22843",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0000000076",
+          "0300000036",
+          "0300000131",
+          "0300000133",
+          "0300000178",
+          "0300000184",
+          "0300000207",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de surveillance des nitrates dans les eaux superficielles françaises",
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Contrôle de surveillance des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Contrôles opérationnels des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Réseau local de contrôle opérationnel des eaux superficielles de la direction Ile de France",
+          "Réseau local de contrôle de surveillance des eaux superficielles de la direction d'Ile de France",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNESUQNO3",
+          "RNB-RCA",
+          "FRHSUSR",
+          "FRHSUOR",
+          "RLCOESUILEDF",
+          "RLCSESUILEDF",
+          "RGESUDRIF",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0000000076",
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000131",
+          "http://id.eaufrance.fr/dc/0300000133",
+          "http://id.eaufrance.fr/dc/0300000178",
+          "http://id.eaufrance.fr/dc/0300000184",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude",
+          "RCS – Réseau de Contrôle de Surveillance",
+          "RHP – Réseau Hydrobiologique Piscicole"
+        ],
+        "coordonnee_x_point_prelevement": 639105.24,
+        "coordonnee_y_point_prelevement": 6892910.66,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H2269000",
+        "libelle_entite_hydrographique": "Le Sausseron",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2269000",
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": "HR228B",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR228B",
+        "code_commune": "95446",
+        "libelle_commune": "NESLES-LA-VALLEE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": 0,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": 4.0,
+        "distance_source": 16.0,
+        "altitude": 38,
+        "pente": 1.6,
+        "surface_bassin_versant_amont": 86.0,
+        "temperature_janvier": 4.0,
+        "temperature_juillet": 19.3,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": "Le Sausseron à Nesles-la-Vallee",
+        "code_point_prelevement_wama": "03950037",
+        "longitude": 2.1656306275643584,
+        "latitude": 49.13309341094079
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.1656306275643584,
+          49.13309341094079
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03166831",
+        "libelle_station": "LE SAUSSERON A VALLANGOUJARD 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03166831",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 635527.0,
+        "coordonnee_y_station": 6893661.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "22829",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 635526.6,
+        "coordonnee_y_point_prelevement": 6893661.26,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95627",
+        "libelle_commune": "VALLANGOUJARD",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 3.37,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950020",
+        "longitude": 2.1164856353594548,
+        "latitude": 49.13949154322043
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.1164856353594548,
+          49.13949154322043
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03166680",
+        "libelle_station": "LE RAVIN DE THEUVILLE A VALLANGOUJARD 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03166680",
+        "statut_station": true,
+        "date_modification_station": "2015-02-02T00:00:00Z",
+        "coordonnee_x_station": 634549.0,
+        "coordonnee_y_station": 6893995.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "22821",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000207",
+          "0300000215",
+          "0300000284"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France",
+          "Réseau d'acquisition tournant du bassin Seine Normandie"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RGESUDRIF",
+          "RRGBIOILEDF",
+          "RACQTSN"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000215",
+          "http://id.eaufrance.fr/dc/0300000284"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 634199.77,
+        "coordonnee_y_point_prelevement": 6894067.16,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H2269200",
+        "libelle_entite_hydrographique": "Ravin de Theuville",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2269200",
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": "HR228B-H2269200",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR228B-H2269200",
+        "code_commune": "95627",
+        "libelle_commune": "VALLANGOUJARD",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 3.37,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950019",
+        "longitude": 2.098241401995111,
+        "latitude": 49.14300581882957
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.098241401995111,
+          49.14300581882957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03166650",
+        "libelle_station": "LE RAVIN DE THEUVILLE A EPIAIS-RHUS 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03166650",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 633110.0,
+        "coordonnee_y_station": 6894291.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "22811",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000207",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RGESUDRIF",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "DCE – Référence"
+        ],
+        "coordonnee_x_point_prelevement": 633109.27,
+        "coordonnee_y_point_prelevement": 6894291.18,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H2269200",
+        "libelle_entite_hydrographique": "Ravin de Theuville",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2269200",
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95213",
+        "libelle_commune": "EPIAIS-RHUS",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 3.37,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950117",
+        "longitude": 2.0832623460780906,
+        "latitude": 49.14490690132666
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.0832623460780906,
+          49.14490690132666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03166600",
+        "libelle_station": "LE SAUSSERON A ARRONVILLE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03166600",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 635121.0,
+        "coordonnee_y_station": 6897956.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "22804",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 635054.83,
+        "coordonnee_y_point_prelevement": 6898186.61,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95023",
+        "libelle_commune": "ARRONVILLE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 1.64,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950035",
+        "longitude": 2.109321791699147,
+        "latitude": 49.180127036971214
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.109321791699147,
+          49.180127036971214
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03141323",
+        "libelle_station": "L'OISE A NEUVILLE-SUR-OISE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03141323",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 630762.0,
+        "coordonnee_y_station": 6879919.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21154",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 630762.1,
+        "coordonnee_y_point_prelevement": 6879919.26,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95323",
+        "libelle_commune": "JOUY-LE-MOUTIER",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 7.26,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950024",
+        "longitude": 2.0534583897499203,
+        "latitude": 49.01544429788722
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.0534583897499203,
+          49.01544429788722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03141117",
+        "libelle_station": "L'OISE A CERGY 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03141117",
+        "statut_station": true,
+        "date_modification_station": "2009-01-29T00:00:00Z",
+        "coordonnee_x_station": 630493.0,
+        "coordonnee_y_station": 6882786.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21152",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 630492.3,
+        "coordonnee_y_point_prelevement": 6882785.83,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95127",
+        "libelle_commune": "CERGY",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 7.26,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950072",
+        "longitude": 2.0492985442325815,
+        "latitude": 49.04118884966648
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.0492985442325815,
+          49.04118884966648
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03140450",
+        "libelle_station": "LA VIOSNE A OSNY 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03140450",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 629689.0,
+        "coordonnee_y_station": 6885771.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21134",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 629763.14,
+        "coordonnee_y_point_prelevement": 6885697.24,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95476",
+        "libelle_commune": "OSNY",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 180.37,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950012",
+        "longitude": 2.03884164034466,
+        "latitude": 49.06728565825654
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.03884164034466,
+          49.06728565825654
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03140424",
+        "libelle_station": "LA VIOSNE A MONTGEROULT 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03140424",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 626530.0,
+        "coordonnee_y_station": 6887640.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21131",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 626530.31,
+        "coordonnee_y_point_prelevement": 6887640.21,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95422",
+        "libelle_commune": "MONTGEROULT",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 0.97,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950005",
+        "longitude": 1.994267924778014,
+        "latitude": 49.084392240973585
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.994267924778014,
+          49.084392240973585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03140402",
+        "libelle_station": "LA VIOSNE A US 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03140402",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 624864.0,
+        "coordonnee_y_station": 6889528.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21129",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 624864.11,
+        "coordonnee_y_point_prelevement": 6889528.07,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95625",
+        "libelle_commune": "US",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 137.38,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950014",
+        "longitude": 1.9711250265643323,
+        "latitude": 49.10117198788971
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.9711250265643323,
+          49.10117198788971
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03140400",
+        "libelle_station": "LA VIOSNE A ABLEIGES 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03140400",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 625887.0,
+        "coordonnee_y_station": 6887993.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21124",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0000000076",
+          "0300000036",
+          "0300000131",
+          "0300000133",
+          "0300000178",
+          "0300000184",
+          "0300000207",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de surveillance des nitrates dans les eaux superficielles françaises",
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Contrôle de surveillance des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Contrôles opérationnels des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Réseau local de contrôle opérationnel des eaux superficielles de la direction Ile de France",
+          "Réseau local de contrôle de surveillance des eaux superficielles de la direction d'Ile de France",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNESUQNO3",
+          "RNB-RCA",
+          "FRHSUSR",
+          "FRHSUOR",
+          "RLCOESUILEDF",
+          "RLCSESUILEDF",
+          "RGESUDRIF",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0000000076",
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000131",
+          "http://id.eaufrance.fr/dc/0300000133",
+          "http://id.eaufrance.fr/dc/0300000178",
+          "http://id.eaufrance.fr/dc/0300000184",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "RCS – Réseau de Contrôle de Surveillance",
+          "RHP – Réseau Hydrobiologique Piscicole"
+        ],
+        "coordonnee_x_point_prelevement": 626601.46,
+        "coordonnee_y_point_prelevement": 6887543.67,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H2280600",
+        "libelle_entite_hydrographique": "La Viosne",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2280600",
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": "HR229",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR229",
+        "code_commune": "95422",
+        "libelle_commune": "MONTGEROULT",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": 0,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": 7.0,
+        "distance_source": 18.0,
+        "altitude": 44,
+        "pente": 0.8,
+        "surface_bassin_versant_amont": 150.0,
+        "temperature_janvier": 4.0,
+        "temperature_juillet": 19.2,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": "La Viosne à Ableiges",
+        "code_point_prelevement_wama": "03950041",
+        "longitude": 1.9952586120578626,
+        "latitude": 49.08353243571117
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.9952586120578626,
+          49.08353243571117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03140383",
+        "libelle_station": "LA VIOSNE A SANTEUIL 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03140383",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 623481.0,
+        "coordonnee_y_station": 6891600.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21119",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 623481.28,
+        "coordonnee_y_point_prelevement": 6891600.45,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95625",
+        "libelle_commune": "US",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 137.38,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950011",
+        "longitude": 1.9518147335179885,
+        "latitude": 49.119639754513194
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.9518147335179885,
+          49.119639754513194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03140332",
+        "libelle_station": "LA VIOSNE A CHARS 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03140332",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 622451.0,
+        "coordonnee_y_station": 6894555.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21110",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude",
+          "Suivi de restauration"
+        ],
+        "coordonnee_x_point_prelevement": 622450.62,
+        "coordonnee_y_point_prelevement": 6894554.38,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95142",
+        "libelle_commune": "CHARS",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": 8.15,
+        "altitude": 57,
+        "pente": 1.8,
+        "surface_bassin_versant_amont": 70.4,
+        "temperature_janvier": 3.9,
+        "temperature_juillet": 19.1,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950032",
+        "longitude": 1.9371533961969623,
+        "latitude": 49.1460718959753
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.9371533961969623,
+          49.1460718959753
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03139019",
+        "libelle_station": "L'OISE A AUVERS-SUR-OISE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03139019",
+        "statut_station": true,
+        "date_modification_station": "2009-02-05T00:00:00Z",
+        "coordonnee_x_station": 637440.0,
+        "coordonnee_y_station": 6885571.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21092",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 637439.61,
+        "coordonnee_y_point_prelevement": 6885570.92,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95394",
+        "libelle_commune": "MERY-SUR-OISE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 16453.0,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950027",
+        "longitude": 2.1439005218117546,
+        "latitude": 49.066944166070776
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.1439005218117546,
+          49.066944166070776
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03138800",
+        "libelle_station": "L'OISE A MERIEL 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03138800",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 641855.0,
+        "coordonnee_y_station": 6887463.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21085",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0000000076",
+          "0300000036",
+          "0300000131",
+          "0300000133",
+          "0300000178",
+          "0300000184",
+          "0300000207",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de surveillance des nitrates dans les eaux superficielles françaises",
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Contrôle de surveillance des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Contrôles opérationnels des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Réseau local de contrôle opérationnel des eaux superficielles de la direction Ile de France",
+          "Réseau local de contrôle de surveillance des eaux superficielles de la direction d'Ile de France",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNESUQNO3",
+          "RNB-RCA",
+          "FRHSUSR",
+          "FRHSUOR",
+          "RLCOESUILEDF",
+          "RLCSESUILEDF",
+          "RGESUDRIF",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0000000076",
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000131",
+          "http://id.eaufrance.fr/dc/0300000133",
+          "http://id.eaufrance.fr/dc/0300000178",
+          "http://id.eaufrance.fr/dc/0300000184",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "RCS – Réseau de Contrôle de Surveillance"
+        ],
+        "coordonnee_x_point_prelevement": 641855.47,
+        "coordonnee_y_point_prelevement": 6887462.7,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H---0100",
+        "libelle_entite_hydrographique": "L'Oise",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H---0100",
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": "HR228A",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR228A",
+        "code_commune": "95120",
+        "libelle_commune": "BUTRY-SUR-OISE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": "Accessibilité facile",
+        "largeur_lit_mineur": null,
+        "distance_source": 317.0,
+        "altitude": 24,
+        "pente": 0.2,
+        "surface_bassin_versant_amont": 16652.0,
+        "temperature_janvier": 4.2,
+        "temperature_juillet": 19.5,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950118",
+        "longitude": 2.204063594908392,
+        "latitude": 49.08436826196012
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.204063594908392,
+          49.08436826196012
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03138550",
+        "libelle_station": "LE RU DE PRESLES A MOURS 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03138550",
+        "statut_station": true,
+        "date_modification_station": "2013-04-15T00:00:00Z",
+        "coordonnee_x_station": 646574.0,
+        "coordonnee_y_station": 6893022.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21073",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000133",
+          "0300000207",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Contrôles opérationnels des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "FRHSUOR",
+          "RGESUDRIF",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000133",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 646573.87,
+        "coordonnee_y_point_prelevement": 6893021.89,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H2261000",
+        "libelle_entite_hydrographique": "Ru de Presles",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2261000",
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": "HR228A-H2261000",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR228A-H2261000",
+        "code_commune": "95436",
+        "libelle_commune": "MOURS",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 3.23,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950042",
+        "longitude": 2.267944089853652,
+        "latitude": 49.13475944457373
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.267944089853652,
+          49.13475944457373
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03138535",
+        "libelle_station": "LE RU DE PRESLES A PRESLES 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03138535",
+        "statut_station": true,
+        "date_modification_station": "2009-01-29T00:00:00Z",
+        "coordonnee_x_station": 649448.0,
+        "coordonnee_y_station": 6889246.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21067",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 649448.49,
+        "coordonnee_y_point_prelevement": 6889245.93,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95504",
+        "libelle_commune": "PRESLES",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 31.39,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950043",
+        "longitude": 2.30778420490753,
+        "latitude": 49.101044276404124
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.30778420490753,
+          49.101044276404124
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03138530",
+        "libelle_station": "LE RU DE PRESLES A MOURS 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03138530",
+        "statut_station": true,
+        "date_modification_station": "2009-01-29T00:00:00Z",
+        "coordonnee_x_station": 647112.0,
+        "coordonnee_y_station": 6892203.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21065",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 647111.68,
+        "coordonnee_y_point_prelevement": 6892202.84,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95436",
+        "libelle_commune": "MOURS",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 31.39,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950074",
+        "longitude": 2.2754158390906514,
+        "latitude": 49.12744037804158
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.2754158390906514,
+          49.12744037804158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03138524",
+        "libelle_station": "L'OISE A CHAMPAGNE-SUR-OISE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03138524",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 646274.0,
+        "coordonnee_y_station": 6893177.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21063",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 646274.34,
+        "coordonnee_y_point_prelevement": 6893176.31,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95487",
+        "libelle_commune": "PERSAN",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 3.23,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950010",
+        "longitude": 2.2638203785958053,
+        "latitude": 49.13612271321625
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.2638203785958053,
+          49.13612271321625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03138000",
+        "libelle_station": "L'OISE A BEAUMONT-SUR-OISE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03138000",
+        "statut_station": true,
+        "date_modification_station": "2011-10-10T00:00:00Z",
+        "coordonnee_x_station": 647848.0,
+        "coordonnee_y_station": 6894199.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21035",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0000000076",
+          "0300000036",
+          "0300000131",
+          "0300000133",
+          "0300000181",
+          "0300000187",
+          "0300000207",
+          "0300000210",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de surveillance des nitrates dans les eaux superficielles françaises",
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Contrôle de surveillance des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Contrôles opérationnels des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Réseau local de contrôle opérationnel des eaux superficielles de la direction Vallée d'Oise",
+          "Réseau local de contrôle de surveillance des eaux superficielles de la direction Vallée d'Oise",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion des eaux superficiellesde la DVO",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNESUQNO3",
+          "RNB-RCA",
+          "FRHSUSR",
+          "FRHSUOR",
+          "RLCOESUVOISE",
+          "RLCSESUVOISE",
+          "RGESUDRIF",
+          "RGESUDVO",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0000000076",
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000131",
+          "http://id.eaufrance.fr/dc/0300000133",
+          "http://id.eaufrance.fr/dc/0300000181",
+          "http://id.eaufrance.fr/dc/0300000187",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000210",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "RCS – Réseau de Contrôle de Surveillance",
+          "RHP – Réseau Hydrobiologique Piscicole"
+        ],
+        "coordonnee_x_point_prelevement": 652002.27,
+        "coordonnee_y_point_prelevement": 6894274.56,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H---0100",
+        "libelle_entite_hydrographique": "L'Oise",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H---0100",
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": "HR216A",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR216A",
+        "code_commune": "95116",
+        "libelle_commune": "BRUYERES-SUR-OISE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": "Accessibilité facile",
+        "largeur_lit_mineur": null,
+        "distance_source": 300.0,
+        "altitude": 24,
+        "pente": 0.3,
+        "surface_bassin_versant_amont": 16156.0,
+        "temperature_janvier": 4.1,
+        "temperature_juillet": 19.5,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950040",
+        "longitude": 2.342178527273902,
+        "latitude": 49.14645103390127
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.342178527273902,
+          49.14645103390127
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03137851",
+        "libelle_station": "LA THEVE A ASNIERES-SUR-OISE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03137851",
+        "statut_station": true,
+        "date_modification_station": "2023-03-22T00:00:00Z",
+        "coordonnee_x_station": 656080.0,
+        "coordonnee_y_station": 6894675.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21029",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "RHP – Réseau Hydrobiologique Piscicole"
+        ],
+        "coordonnee_x_point_prelevement": 656080.3,
+        "coordonnee_y_point_prelevement": 6894675.06,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95026",
+        "libelle_commune": "ASNIERES-SUR-OISE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 200.03,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950039",
+        "longitude": 2.398024887067487,
+        "latitude": 49.150344180622625
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.398024887067487,
+          49.150344180622625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03137830",
+        "libelle_station": "L'YSIEUX A ASNIERES-SUR-OISE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03137830",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 655185.0,
+        "coordonnee_y_station": 6894175.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21023",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000133",
+          "0300000178",
+          "0300000207",
+          "0300000210",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Contrôles opérationnels des cours d'eau du bassin Seine et cours d'eau côtiers normands",
+          "Réseau local de contrôle opérationnel des eaux superficielles de la direction Ile de France",
+          "Réseau de gestion des eaux superficielles de la DRIF",
+          "Réseau de gestion des eaux superficiellesde la DVO",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "FRHSUOR",
+          "RLCOESUILEDF",
+          "RGESUDRIF",
+          "RGESUDVO",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000133",
+          "http://id.eaufrance.fr/dc/0300000178",
+          "http://id.eaufrance.fr/dc/0300000207",
+          "http://id.eaufrance.fr/dc/0300000210",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 655259.27,
+        "coordonnee_y_point_prelevement": 6894140.27,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": "H2246000",
+        "libelle_entite_hydrographique": "L'Ysieux",
+        "uri_entite_hydrographique": "http://id.eaufrance.fr/CoursEau_Carthage2017/H2246000",
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": "HR227-H2246000",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR227-H2246000",
+        "code_commune": "95026",
+        "libelle_commune": "ASNIERES-SUR-OISE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 200.03,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950002",
+        "longitude": 2.3868289980051083,
+        "latitude": 49.1454793739333
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.3868289980051083,
+          49.1454793739333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03137790",
+        "libelle_station": "L'YSIEUX A LUZARCHES 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03137790",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 659500.0,
+        "coordonnee_y_station": 6890574.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "21015",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 659258.08,
+        "coordonnee_y_point_prelevement": 6890704.65,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95352",
+        "libelle_commune": "LUZARCHES",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 48.55,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950015",
+        "longitude": 2.4419634610670307,
+        "latitude": 49.11485758416997
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.4419634610670307,
+          49.11485758416997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03137744",
+        "libelle_station": "L'YSIEUX A BELLEFONTAINE 2 ",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03137744",
+        "statut_station": true,
+        "date_modification_station": "2024-09-13T00:00:00Z",
+        "coordonnee_x_station": 661321.0,
+        "coordonnee_y_station": 6888514.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "10293004",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000207"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion des eaux superficielles de la DRIF"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RGESUDRIF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000207"
+        ],
+        "objectifs_operation": [
+          "Suivi de restauration"
+        ],
+        "coordonnee_x_point_prelevement": 661321.0,
+        "coordonnee_y_point_prelevement": 6888514.0,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": "HR227-H2246000",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR227-H2246000",
+        "code_commune": "95055",
+        "libelle_commune": "BELLEFONTAINE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": null,
+        "libelle_regime_hydrologique": null,
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": 16.25,
+        "altitude": 62,
+        "pente": 5.5,
+        "surface_bassin_versant_amont": 127.7,
+        "temperature_janvier": 3.9,
+        "temperature_juillet": 19.7,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": null,
+        "longitude": 2.47041935853276,
+        "latitude": 49.09528941632796
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.47041935853276,
+          49.09528941632796
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03127623",
+        "libelle_station": "LA SEINE A VETHEUIL 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03127623",
+        "statut_station": true,
+        "date_modification_station": "2009-01-29T00:00:00Z",
+        "coordonnee_x_station": 604776.0,
+        "coordonnee_y_station": 6885933.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "20375",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 604775.68,
+        "coordonnee_y_point_prelevement": 6885933.25,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95651",
+        "libelle_commune": "VETHEUIL",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 62479.3,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950028",
+        "longitude": 1.6969006554714596,
+        "latitude": 49.066186351763065
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.6969006554714596,
+          49.066186351763065
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03127611",
+        "libelle_station": "LE RU DE LA VALLÉE DU ROI A VETHEUIL 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03127611",
+        "statut_station": true,
+        "date_modification_station": "2023-07-20T00:00:00Z",
+        "coordonnee_x_station": 605716.0,
+        "coordonnee_y_station": 6885756.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "43969200",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Suivi de restauration"
+        ],
+        "coordonnee_x_point_prelevement": 605763.0,
+        "coordonnee_y_point_prelevement": 6885770.0,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": "HR230B-H3085000",
+        "uri_masse_eau": "https://id.eaufrance.fr/MasseDEauRiviere_VEDL2019/HR230B-H3085000",
+        "code_commune": "95651",
+        "libelle_commune": "VETHEUIL",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": 2.6,
+        "altitude": 37,
+        "pente": 16.3,
+        "surface_bassin_versant_amont": 15.2,
+        "temperature_janvier": 4.2,
+        "temperature_juillet": 19.3,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": null,
+        "longitude": 1.7104457240130175,
+        "latitude": 49.0648644290178
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.7104457240130175,
+          49.0648644290178
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03126045",
+        "libelle_station": "L'AUBETTE A CONDECOURT 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03126045",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 623019.0,
+        "coordonnee_y_station": 6883208.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "20248",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 623037.74,
+        "coordonnee_y_point_prelevement": 6883273.02,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95170",
+        "libelle_commune": "CONDECOURT",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 0.97,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950044",
+        "longitude": 1.947260399939283,
+        "latitude": 49.04471883321457
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.947260399939283,
+          49.04471883321457
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03126043",
+        "libelle_station": "L'AUBETTE A LONGUESSE 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03126043",
+        "statut_station": true,
+        "date_modification_station": "2006-06-29T00:00:00Z",
+        "coordonnee_x_station": 622501.0,
+        "coordonnee_y_station": 6884275.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "20245",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 622646.68,
+        "coordonnee_y_point_prelevement": 6884192.76,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95535",
+        "libelle_commune": "SAGY",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 0.97,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950008",
+        "longitude": 1.941743268905468,
+        "latitude": 49.05294102738713
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.941743268905468,
+          49.05294102738713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03126038",
+        "libelle_station": "L'AUBETTE A VIGNY 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03126038",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 621133.0,
+        "coordonnee_y_station": 6885974.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "20240",
+        "code_point_prelevement": "001",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "3",
+        "libelle_support": "Eau",
+        "uri_support": "http://id.eaufrance.fr/sup/3",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 621133.49,
+        "coordonnee_y_point_prelevement": 6885974.39,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95658",
+        "libelle_commune": "VIGNY",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 1.22,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": null,
+        "longitude": 1.9207110094487532,
+        "latitude": 49.0687749255828
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.9207110094487532,
+          49.0687749255828
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03126033",
+        "libelle_station": "L'AUBETTE A VIGNY 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03126033",
+        "statut_station": true,
+        "date_modification_station": "2010-03-08T00:00:00Z",
+        "coordonnee_x_station": 620500.0,
+        "coordonnee_y_station": 6887277.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "20239",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000036",
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de suivi qualitatif des eaux superficielles dans le bassin Seine Normandie (RNB)",
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RNB-RCA",
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000036",
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 620368.15,
+        "coordonnee_y_point_prelevement": 6887431.95,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95610",
+        "libelle_commune": "THEMERICOURT",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 1.22,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950045",
+        "longitude": 1.9099633107182907,
+        "latitude": 49.081784626338866
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.9099633107182907,
+          49.081784626338866
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03084814",
+        "libelle_station": "LA SEINE A HERBLAY 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03084814",
+        "statut_station": true,
+        "date_modification_station": "2009-01-22T00:00:00Z",
+        "coordonnee_x_station": 638392.0,
+        "coordonnee_y_station": 6876544.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "17567",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 638392.29,
+        "coordonnee_y_point_prelevement": 6876543.25,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95306",
+        "libelle_commune": "HERBLAY-SUR-SEINE",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 44474.6,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950023",
+        "longitude": 2.1582532254554008,
+        "latitude": 48.985866021500044
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.1582532254554008,
+          48.985866021500044
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03083250",
+        "libelle_station": "LA SEINE A ARGENTEUIL 2",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03083250",
+        "statut_station": true,
+        "date_modification_station": "2006-03-27T00:00:00Z",
+        "coordonnee_x_station": 645435.0,
+        "coordonnee_y_station": 6871391.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "17526",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 645221.8,
+        "coordonnee_y_point_prelevement": 6871248.05,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": null,
+        "libelle_unite_hydrographique": null,
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95018",
+        "libelle_commune": "ARGENTEUIL",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": null,
+        "pente": null,
+        "surface_bassin_versant_amont": 44299.4,
+        "temperature_janvier": null,
+        "temperature_juillet": null,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03950022",
+        "longitude": 2.252244060640292,
+        "latitude": 48.9388703157139
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.252244060640292,
+          48.9388703157139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": "03083222",
+        "libelle_station": "LA SEINE A ARGENTEUIL 1",
+        "uri_station": "http://id.eaufrance.fr/StationMesureEauxSurface/03083222",
+        "statut_station": true,
+        "date_modification_station": "2009-02-02T00:00:00Z",
+        "coordonnee_x_station": 647310.0,
+        "coordonnee_y_station": 6872419.0,
+        "code_epsg_projection_station": 2154,
+        "code_projection_station": "26",
+        "libelle_projection_station": "RGF93 / Lambert 93",
+        "localisation_precise_station": "Non renseignée",
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "17522",
+        "code_point_prelevement": "005",
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "1900-01-01T00:00:00Z",
+        "code_support": "4",
+        "libelle_support": "Poissons",
+        "uri_support": "http://id.eaufrance.fr/sup/4",
+        "codes_dispositifs_collecte": [
+          "0300000215"
+        ],
+        "libelles_dispositifs_collecte": [
+          "Réseau de gestion hydrobiologique de la DIREN Ile de France"
+        ],
+        "mnemoniques_dispositifs_collecte": [
+          "RRGBIOILEDF"
+        ],
+        "uris_dispositifs_collecte": [
+          "http://id.eaufrance.fr/dc/0300000215"
+        ],
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 647310.39,
+        "coordonnee_y_point_prelevement": 6872418.81,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95018",
+        "libelle_commune": "ARGENTEUIL",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": null,
+        "localisation_precise_point_prelevement": "Non renseigné",
+        "distance_mer": null,
+        "distance_maree": null,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": null,
+        "distance_source": null,
+        "altitude": 25,
+        "pente": 0.5,
+        "surface_bassin_versant_amont": null,
+        "temperature_janvier": 4.6,
+        "temperature_juillet": 20.2,
+        "eligibilite_ipr_iprplus": true,
+        "libelle_point_prelevement_wama": null,
+        "code_point_prelevement_wama": "03750019",
+        "longitude": 2.2806073859755687,
+        "latitude": 48.94957238914465
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          2.2806073859755687,
+          48.94957238914465
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "code_station": null,
+        "libelle_station": null,
+        "uri_station": null,
+        "statut_station": null,
+        "date_modification_station": null,
+        "coordonnee_x_station": null,
+        "coordonnee_y_station": null,
+        "code_epsg_projection_station": null,
+        "code_projection_station": null,
+        "libelle_projection_station": null,
+        "localisation_precise_station": null,
+        "pk_aval": null,
+        "code_point_prelevement_aspe": "91294",
+        "code_point_prelevement": null,
+        "statut_point_prelevement": true,
+        "date_modification_point_prelevement_aspe": "2012-05-22T00:00:00Z",
+        "code_support": null,
+        "libelle_support": null,
+        "uri_support": null,
+        "codes_dispositifs_collecte": null,
+        "libelles_dispositifs_collecte": null,
+        "mnemoniques_dispositifs_collecte": null,
+        "uris_dispositifs_collecte": null,
+        "objectifs_operation": [
+          "Étude"
+        ],
+        "coordonnee_x_point_prelevement": 608387.44833636,
+        "coordonnee_y_point_prelevement": 6894548.49111576,
+        "code_epsg_projection_point_prelevement": 2154,
+        "code_projection_point_prelevement": "26",
+        "libelle_projection_point_prelevement": "RGF93 / Lambert 93",
+        "code_entite_hydrographique": null,
+        "libelle_entite_hydrographique": null,
+        "uri_entite_hydrographique": null,
+        "code_unite_hydrographique": "H2",
+        "libelle_unite_hydrographique": "BASSIN SEINE",
+        "code_masse_eau": null,
+        "uri_masse_eau": null,
+        "code_commune": "95309",
+        "libelle_commune": "HODENT",
+        "code_departement": "95",
+        "libelle_departement": "Val-d'Oise",
+        "code_region": "11",
+        "libelle_region": "ILE-DE-FRANCE",
+        "lieu_dit_point_prelevement": "PONT D'HENNENCOURT",
+        "localisation_precise_point_prelevement": "75 M AVAL PONT D86",
+        "distance_mer": null,
+        "distance_maree": 0,
+        "code_bassin": "03",
+        "libelle_bassin": "SEINE-NORMANDIE",
+        "formation_geologique": "Calcaire",
+        "code_occupation_sol": null,
+        "libelle_occupation_sol": null,
+        "zone_huet": null,
+        "code_regime_hydrologique": "reg_pm",
+        "libelle_regime_hydrologique": "Océanique irrégulier ou influence méditerranéenne",
+        "accessibilite": null,
+        "largeur_lit_mineur": 2.5,
+        "distance_source": 3.0,
+        "altitude": 95,
+        "pente": 6.6,
+        "surface_bassin_versant_amont": 10.0,
+        "temperature_janvier": 3.9,
+        "temperature_juillet": 18.9,
+        "eligibilite_ipr_iprplus": null,
+        "libelle_point_prelevement_wama": "Le Genainville à Hodent",
+        "code_point_prelevement_wama": "03950073",
+        "longitude": 1.7444430381266418,
+        "latitude": 49.144162851645106
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          1.7444430381266418,
+          49.144162851645106
+        ]
+      }
+    }
+  ]
+}
