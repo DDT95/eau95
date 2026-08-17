@@ -1,0 +1,144 @@
+(function () {
+  const opener = window.opener;
+  const app = opener && opener.eauApp;
+  if (!app) {
+    document.body.innerHTML =
+      '<p style="padding:40px;font:16px Marianne,Arial,sans-serif">' +
+      "Cette page s’ouvre depuis le bouton “Imprimer la carte” de la carte de l’eau." +
+      "</p>";
+    return;
+  }
+  const { sources, state, map: liveMap, DATA_ROOT, layerStyle, legendRows } = app;
+
+  const activeSources = sources.filter((s) => {
+    const control = opener.document.getElementById(`layer-${s.id}`);
+    return control && control.checked && state.layers[s.id] && liveMap.hasLayer(state.layers[s.id]);
+  });
+
+  document.getElementById("printTitle").textContent = activeSources.length
+    ? activeSources.map((s) => s.title).join(" · ")
+    : "L’eau dans le Val-d’Oise";
+
+  const today = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+  document.getElementById("printSources").innerHTML = `
+    <span class="src-line">Sources : DDT 95 · Hub’Eau · Sandre</span>
+    <span class="src-line">Auteur : DDT 95 - BVAT PG</span>
+    <span class="src-line">Date : ${today}</span>
+  `;
+
+  document.getElementById("printLegend").innerHTML = activeSources.length
+    ? activeSources
+        .map((s) => {
+          const rows = legendRows(s);
+          return `<div class="legend-block"><strong>${s.title}</strong>${rows
+            .map(([c, l]) => `<span><i style="background:${c}"></i>${l}</span>`)
+            .join("")}</div>`;
+        })
+        .join("")
+    : '<div class="legend-empty">Aucune couche sélectionnée</div>';
+
+  const map = L.map("printMapCanvas", { zoomControl: false, attributionControl: false, preferCanvas: true });
+  // Mêmes panes que la carte en direct : le masque et le contour doivent
+  // rester au-dessus des couches de données pour cacher tout ce qui dépasse
+  // du Val-d’Oise (les jeux de données hydro dépassent souvent le département).
+  map.createPane("maskPane");
+  map.getPane("maskPane").style.zIndex = 420;
+  map.getPane("maskPane").style.pointerEvents = "none";
+  map.createPane("boundaryPane");
+  map.getPane("boundaryPane").style.zIndex = 430;
+  map.getPane("boundaryPane").style.pointerEvents = "none";
+
+  // Pas de fond de carte raster à l’impression : uniquement la forme
+  // normée du département sur fond blanc, comme les cartes imprimées DDT 95.
+  activeSources.forEach((s) => {
+    const data = state.data[s.id];
+    if (!data) return;
+    L.geoJSON(data, {
+      style: (f) => layerStyle(s, f),
+      pointToLayer: (f, ll) => L.circleMarker(ll, { radius: 6, color: "#fff", weight: 2, fillColor: s.color, fillOpacity: 1 }),
+    }).addTo(map);
+  });
+
+  let territoryLayer = null;
+  if (state.communes && state.communes.features) {
+    const holes = [];
+    state.communes.features.forEach((f) => {
+      const g = f.geometry;
+      if (g.type === "Polygon") holes.push(g.coordinates[0]);
+      else if (g.type === "MultiPolygon") g.coordinates.forEach((p) => holes.push(p[0]));
+    });
+    L.geoJSON(
+      {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+              [-180, -85],
+              [180, -85],
+              [180, 85],
+              [-180, 85],
+              [-180, -85],
+            ],
+            ...holes,
+          ],
+        },
+      },
+      { pane: "maskPane", interactive: false, style: { stroke: false, fillColor: "#ffffff", fillOpacity: 1, fillRule: "evenodd" } }
+    ).addTo(map);
+    territoryLayer = L.geoJSON(state.communes, {
+      pane: "boundaryPane",
+      interactive: false,
+      style: { color: "#2d3240", weight: 1, opacity: 0.9, fillOpacity: 0 },
+    }).addTo(map);
+  }
+
+  // Le zoom de la carte en direct est calibré pour sa petite fenêtre ; sur le
+  // grand canevas A3, il faut recadrer sur la forme du département pour
+  // qu’elle remplisse la page, pas réutiliser le même niveau de zoom.
+  map.invalidateSize();
+  if (territoryLayer) map.fitBounds(territoryLayer.getBounds(), { padding: [18, 18] });
+  else map.setView(liveMap.getCenter(), liveMap.getZoom());
+
+  function niceScaleNumber(n) {
+    const pow10 = Math.pow(10, String(Math.floor(n)).length - 1);
+    const d = n / pow10;
+    return pow10 * (d >= 10 ? 10 : d >= 5 ? 5 : d >= 3 ? 3 : d >= 2 ? 2 : 1);
+  }
+
+  function renderScaleBar() {
+    const targetPx = 160;
+    const size = map.getSize();
+    const y = size.y / 2;
+    const maxMeters = map.distance(map.containerPointToLatLng([0, y]), map.containerPointToLatLng([targetPx, y]));
+    const meters = niceScaleNumber(maxMeters);
+    const fullPx = targetPx * (meters / maxMeters);
+    const segments = 4;
+    const segPx = fullPx / segments;
+    const unit = meters >= 1000 ? meters / 1000 : meters;
+    const unitLabel = meters >= 1000 ? "km" : "m";
+    const bars = Array.from({ length: segments })
+      .map((_, i) => `<div class="scale-seg ${i % 2 === 0 ? "on" : "off"}" style="width:${segPx}px"></div>`)
+      .join("");
+    const ticks = Array.from({ length: segments + 1 })
+      .map((_, i) => `<span style="left:${i * segPx}px">${((unit / segments) * i).toLocaleString("fr-FR", { maximumFractionDigits: 1 })}</span>`)
+      .join("");
+    document.getElementById("printScale").innerHTML = `
+      <div class="scale-frame" style="width:${fullPx}px">
+        <div class="scale-bar-row">${bars}</div>
+        <div class="scale-ticks" style="width:${fullPx}px">${ticks}<span class="scale-unit" style="left:${fullPx}px">${unitLabel}</span></div>
+      </div>
+    `;
+  }
+
+  function finalizeMap() {
+    map.invalidateSize();
+    if (territoryLayer) map.fitBounds(territoryLayer.getBounds(), { padding: [18, 18] });
+    renderScaleBar();
+  }
+
+  map.whenReady(() => setTimeout(finalizeMap, 500));
+
+  document.getElementById("printNow").onclick = () => window.print();
+})();
