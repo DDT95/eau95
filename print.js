@@ -61,11 +61,43 @@
   map.getPane("boundaryPane").style.pointerEvents = "none";
 
   // Même fond de carte que la page interactive (plan neutre IGN/OSM grisé).
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    crossOrigin: "anonymous",
-    className: "neutral-tiles",
-  }).addTo(map);
+  // html2canvas ne capture pas les filtres CSS (grayscale/saturate) : le
+  // même effet est donc appliqué pixel par pixel sur chaque tuile, pour
+  // qu’il soit bien présent dans l’image capturée puis dans le PDF.
+  const NeutralTileLayer = L.TileLayer.extend({
+    createTile(coords, done) {
+      const tile = document.createElement("canvas");
+      const size = this.getTileSize();
+      tile.width = size.x;
+      tile.height = size.y;
+      const ctx = tile.getContext("2d");
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, size.x, size.y);
+        const data = ctx.getImageData(0, 0, size.x, size.y);
+        const d = data.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const r = d[i], g = d[i + 1], b = d[i + 2];
+          const gray1 = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+          let r2 = r + (gray1 - r) * 0.85, g2 = g + (gray1 - g) * 0.85, b2 = b + (gray1 - b) * 0.85;
+          const gray2 = 0.2126 * r2 + 0.7152 * g2 + 0.0722 * b2;
+          r2 = gray2 + (r2 - gray2) * 0.35;
+          g2 = gray2 + (g2 - gray2) * 0.35;
+          b2 = gray2 + (b2 - gray2) * 0.35;
+          d[i] = Math.min(255, r2 * 1.06);
+          d[i + 1] = Math.min(255, g2 * 1.06);
+          d[i + 2] = Math.min(255, b2 * 1.06);
+        }
+        ctx.putImageData(data, 0, 0);
+        done(null, tile);
+      };
+      img.onerror = (e) => done(e, tile);
+      img.src = this.getTileUrl(coords);
+      return tile;
+    },
+  });
+  new NeutralTileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
 
   activeSources.forEach((s) => {
     const data = state.data[s.id];

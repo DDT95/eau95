@@ -44,11 +44,13 @@ html,body{margin:0;background:#8b93a1;font-family:Marianne,Arial,sans-serif}
 
 /* Bas de page : sources / échelle / référence, en texte simple sous la carte,
    comme sur les fiches de l’atlas ZAC de référence (pas d’encadré). */
-.print-footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6mm;padding-top:2mm;border-top:.25mm solid #ccc}
+.print-footer{position:relative;display:flex;align-items:center;justify-content:space-between;padding-top:2mm;border-top:.25mm solid #ccc}
 .print-sources{font-size:7pt;line-height:1.45;color:#333}
 .print-sources .src-line{display:block;white-space:nowrap}
 
-.print-scale{display:flex;justify-content:center}
+/* Centrée sur la largeur réelle de la page, indépendamment de la largeur
+   des blocs sources/référence de part et d’autre. */
+.print-scale{position:absolute;left:50%;top:2mm;transform:translateX(-50%);display:flex;justify-content:center}
 .scale-frame{position:relative;padding-bottom:9px}
 .scale-bar-row{display:flex;align-items:center;height:3mm;border:.35mm solid #111}
 .scale-seg{height:100%}
