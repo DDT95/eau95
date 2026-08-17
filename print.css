@@ -2,8 +2,15 @@
 @font-face{font-family:Marianne;src:url(fonts/Marianne-Bold.woff2);font-weight:700}
 *{box-sizing:border-box}
 html,body{margin:0;background:#8b93a1;font-family:Marianne,Arial,sans-serif}
+.neutral-tiles{filter:grayscale(.85) saturate(.35) brightness(1.06)}
 
 .print-trigger{position:fixed;top:14px;right:14px;z-index:20;border:0;border-radius:8px;background:#000091;color:#fff;font-weight:700;font-size:13px;padding:10px 16px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+
+.pdf-status{
+  position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;
+  background:rgba(15,20,35,.92);color:#fff;font-size:15px;font-weight:700;letter-spacing:.02em;
+}
+.pdf-status.done{display:none}
 
 .print-page{
   width:420mm;height:297mm;margin:12mm auto;background:#fff;
@@ -12,11 +19,11 @@ html,body{margin:0;background:#8b93a1;font-family:Marianne,Arial,sans-serif}
   padding:6mm 8mm 4mm;
 }
 
-/* En-tête calqué sur le gabarit officiel DDT 95 : logo, titre gras, sous-titre
-   italique, filet plein cadre sous l’ensemble. */
-.print-header{display:flex;align-items:flex-end;gap:5mm;padding-bottom:2.5mm;border-bottom:.5mm solid #111}
-.print-logo{width:15mm;height:auto;display:block;flex:none}
-.print-header-text{min-width:0}
+/* En-tête calqué sur le gabarit officiel DDT 95 : logo (sans filet dessous),
+   titre gras + sous-titre italique dont le filet s’étend jusqu’au bord droit. */
+.print-header{display:flex;align-items:flex-end;gap:5mm}
+.print-logo{width:24mm;height:auto;display:block;flex:none}
+.print-header-text{min-width:0;flex:1;padding-bottom:2.5mm;border-bottom:.5mm solid #111}
 .print-header h1{margin:0;font-size:13pt;font-weight:700;color:#111;line-height:1.2}
 .print-header p{margin:.8mm 0 0;font-size:9pt;font-style:italic;color:#444}
 
@@ -52,7 +59,7 @@ html,body{margin:0;background:#8b93a1;font-family:Marianne,Arial,sans-serif}
 .scale-ticks span{position:absolute;top:1px;transform:translateX(-50%);white-space:nowrap}
 .scale-ticks .scale-unit{font-weight:700;transform:translateX(4px)}
 
-.print-reference{font-size:7pt;color:#333;text-align:right}
+.print-reference{font-size:7pt;color:#333;text-align:right;align-self:stretch;border-left:.3mm solid #111;padding-left:4mm;display:flex;align-items:center;justify-content:flex-end}
 
 @media print{
   @page{size:A3 landscape;margin:0}

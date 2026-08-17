@@ -37,7 +37,19 @@
         .join("")
     : '<div class="legend-empty">Aucune couche sélectionnée</div>';
 
-  const map = L.map("printMapCanvas", { zoomControl: false, attributionControl: false, preferCanvas: true });
+  const map = L.map("printMapCanvas", {
+    zoomControl: false,
+    attributionControl: false,
+    preferCanvas: true,
+    // Carte figée pour l’impression : ni zoom ni déplacement.
+    dragging: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    touchZoom: false,
+    tap: false,
+  });
   // Mêmes panes que la carte en direct : le masque et le contour doivent
   // rester au-dessus des couches de données pour cacher tout ce qui dépasse
   // du Val-d’Oise (les jeux de données hydro dépassent souvent le département).
@@ -48,8 +60,13 @@
   map.getPane("boundaryPane").style.zIndex = 430;
   map.getPane("boundaryPane").style.pointerEvents = "none";
 
-  // Pas de fond de carte raster à l’impression : uniquement la forme
-  // normée du département sur fond blanc, comme les cartes imprimées DDT 95.
+  // Même fond de carte que la page interactive (plan neutre IGN/OSM grisé).
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    crossOrigin: "anonymous",
+    className: "neutral-tiles",
+  }).addTo(map);
+
   activeSources.forEach((s) => {
     const data = state.data[s.id];
     if (!data) return;
@@ -132,13 +149,31 @@
     `;
   }
 
+  const statusEl = document.getElementById("pdfStatus");
+
+  async function buildPdf() {
+    const node = document.getElementById("printPage");
+    const canvas = await html2canvas(node, { scale: 2.5, useCORS: true, backgroundColor: "#ffffff" });
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a3" });
+    doc.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, 420, 297, undefined, "FAST");
+    const blobUrl = URL.createObjectURL(doc.output("blob"));
+    window.location.replace(blobUrl);
+  }
+
   function finalizeMap() {
     map.invalidateSize();
     if (territoryLayer) map.fitBounds(territoryLayer.getBounds(), { padding: [18, 18] });
     renderScaleBar();
+    // Laisse les tuiles du fond de carte finir de se charger avant la
+    // capture, sinon le PDF peut figer des cases grises inachevées.
+    setTimeout(() => {
+      buildPdf().catch((err) => {
+        console.error(err);
+        statusEl.textContent = "La génération du PDF a échoué. Réessayez depuis la carte.";
+      });
+    }, 700);
   }
 
-  map.whenReady(() => setTimeout(finalizeMap, 500));
-
-  document.getElementById("printNow").onclick = () => window.print();
+  map.whenReady(() => setTimeout(finalizeMap, 600));
 })();

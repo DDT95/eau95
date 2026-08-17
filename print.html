@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="print.css">
 </head>
 <body>
-  <button id="printNow" class="no-print print-trigger" type="button">Imprimer</button>
+  <div class="pdf-status" id="pdfStatus">Préparation du PDF…</div>
   <div class="print-page" id="printPage">
     <header class="print-header">
       <img class="print-logo" src="prefet-val-doise.svg" alt="Préfet du Val-d’Oise">
@@ -28,6 +28,8 @@
     </footer>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="print.js"></script>
 </body>
 </html>
