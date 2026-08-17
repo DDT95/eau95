@@ -82,6 +82,7 @@ function layerStyle(source,feature){
   if(source.kind==="groundwater-body"){const c=groundwaterColors[feature.properties.code]||source.color;return {color:c,weight:2,fillColor:c,fillOpacity:.42}}
   if(source.kind==="price"){const v=Number(feature.properties.TARIF_AEP);const c=!v?"#b9c0c7":v<2.5?"#d9d4f5":v<3?"#9b8cdc":v<4?"#6554c0":"#3f2c80";return {color:"#fff",weight:.6,fillColor:c,fillOpacity:.68}}
   if(source.kind==="polygon"){const c=categoryColor(categoryValue(source,feature.properties),source.id);return {color:c,weight:1.5,fillColor:c,fillOpacity:.25}}
+  if(source.kind==="api-commune"){return {color:"#fff",weight:1,fillColor:potableColors[feature.properties.status],fillOpacity:.68}}
   if(source.id==="police"){const c=categoryColor(categoryValue(source,feature.properties),source.id);return {color:c,weight:3,opacity:.9}}
   return {color:source.color,weight:source.id==="cours"?2.2:2,opacity:.84};
 }
@@ -161,7 +162,7 @@ async function loadPotableSource(source){
   const byCommune={};const seen=new Set();(d.data||[]).forEach(x=>{if(!x.code_commune||seen.has(x.code_prelevement))return;seen.add(x.code_prelevement);(byCommune[x.code_commune]??=[]).push(x)});
   state.potableAgg={};Object.entries(byCommune).forEach(([code,rows])=>{rows.sort((a,b)=>new Date(b.date_prelevement)-new Date(a.date_prelevement));const incidents=rows.filter(x=>hasPotableCode(x,potableLimitFields,"N")||hasPotableCode(x,potableReferenceFields,"N")||hasPotableCode(x,potableLimitFields,"D"));state.potableAgg[code]={rows,incidents,nb:rows.length,status:potableStatus(rows),tauxLimites:potableRate(rows,potableLimitFields),tauxReferences:potableRate(rows,potableReferenceFields),dernier:rows[0]}});
   state.data[source.id]={type:"FeatureCollection",features:state.communes.features.map(f=>({type:"Feature",geometry:f.geometry,properties:{...f.properties,...(state.potableAgg[f.properties.code]||{status:"nodata",nb:0})}}))};
-  state.layers[source.id]=L.geoJSON(state.data[source.id],{style:f=>({color:"#fff",weight:1,fillColor:potableColors[f.properties.status],fillOpacity:.68}),onEachFeature:(f,l)=>{l.bindTooltip(`${f.properties.nom} · ${f.properties.nb||0} prélèvement(s)`,{sticky:true});l.on("click",()=>openPotableAnalysisDetail(f.properties.code,f.properties.nom,source))}});return state.layers[source.id]
+  state.layers[source.id]=L.geoJSON(state.data[source.id],{style:f=>layerStyle(source,f),onEachFeature:(f,l)=>{l.bindTooltip(`${f.properties.nom} · ${f.properties.nb||0} prélèvement(s)`,{sticky:true});l.on("click",()=>openPotableAnalysisDetail(f.properties.code,f.properties.nom,source))}});return state.layers[source.id]
 }
 async function openPotableDetail(code,nom,source){
   const agg=state.potableAgg?.[code]||{status:"nodata",nb:0};const labels={conforme:"Conforme",vigilance:"Dépassement d’une référence de qualité",nonconforme:"Non-conformité détectée",nodata:"Pas de prélèvement récent"};
