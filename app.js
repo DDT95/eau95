@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902g";
+const BUILD_VERSION="20260902h";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -405,8 +405,35 @@ function makeCharts(){state.charts.forEach(c=>c.destroy());const d=chartData(),f
   state.charts.push(new Chart(document.getElementById("historyChart"),{type:"line",data:{labels:d.decades,datasets:[{label:"Qualité des rivières",data:d.riverHistory,borderColor:"#009081",backgroundColor:"#00908122",fill:true,tension:.25},{label:"Hydrobiologie",data:d.hydrobioHistory,borderColor:"#c43c7a",backgroundColor:"#c43c7a22",fill:true,tension:.25}]},options:{...common,plugins:{legend:{display:true,position:"bottom",labels:{boxWidth:12,font}},tooltip}}}));
   const good=d.quality[0]||0,total=d.quality.reduce((a,b)=>a+b,0),pct=Math.round(good/(total||1)*100),goodKm=d.qualityKm[0]||0,totalKm=d.qualityKm.reduce((a,b)=>a+b,0);document.getElementById("insightValue").textContent=`${pct} %`;document.getElementById("insightText").textContent=`des tronçons évalués sont en bon état, soit ${goodKm.toLocaleString("fr-FR")} km sur ${totalKm.toLocaleString("fr-FR")} km recensés. ${d.quality[1]||0} tronçons sont en état moyen.`
 }
+async function exportDetailToPdf(){
+  const btn=document.getElementById("exportDetailPdf"),content=document.getElementById("detailContent");
+  if(!document.getElementById("detailPanel").classList.contains("open")||!content.innerHTML.trim())return;
+  const label=btn.textContent;btn.disabled=true;btn.textContent="…";
+  try{
+    // Laisse le temps aux contenus chargés en direct (analyses, historiques…) de s’afficher avant la capture.
+    await new Promise(r=>setTimeout(r,300));
+    const canvas=await html2canvas(content,{scale:2,useCORS:true,backgroundColor:"#ffffff"});
+    const {jsPDF}=window.jspdf;
+    const pageWidthMm=210,pageHeightMm=297,marginMm=10;
+    const imgWidthMm=pageWidthMm-marginMm*2,imgHeightMm=canvas.height*imgWidthMm/canvas.width,usableHeightMm=pageHeightMm-marginMm*2;
+    const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
+    const imgData=canvas.toDataURL("image/jpeg",.92);
+    let heightLeft=imgHeightMm,position=marginMm;
+    doc.addImage(imgData,"JPEG",marginMm,position,imgWidthMm,imgHeightMm,undefined,"FAST");
+    heightLeft-=usableHeightMm;
+    while(heightLeft>0){
+      doc.addPage();
+      position=marginMm-(imgHeightMm-heightLeft);
+      doc.addImage(imgData,"JPEG",marginMm,position,imgWidthMm,imgHeightMm,undefined,"FAST");
+      heightLeft-=usableHeightMm;
+    }
+    const title=content.querySelector("h2")?.textContent||"fiche";
+    doc.save(`${slugifyFilename(title)}.pdf`);
+  }catch(e){document.getElementById("mapStatus").textContent="Export PDF impossible pour cette fiche.";console.error(e)}
+  finally{btn.disabled=false;btn.textContent=label}
+}
 async function init(){renderLayers();renderSources();const layerList=document.getElementById("layerList");layerList.scrollTop=0;await loadCommunes();await Promise.allSettled(sources.filter(s=>s.file).map(loadSource));await Promise.allSettled(sources.filter(s=>s.active).map(s=>setLayer(s,true)));layerList.scrollTop=0;requestAnimationFrame(()=>{layerList.scrollTop=0});document.getElementById("mapStatus").textContent="19 couches cartographiques prêtes · 3 sources documentaires référencées"}
-document.getElementById("searchButton").onclick=search;document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")search()});document.getElementById("resetView").onclick=()=>state.territory?map.fitBounds(state.territory.getBounds(),{padding:[10,10]}):map.fitBounds(BOUNDS_95,{padding:[8,8]});document.getElementById("resetPanel").onclick=()=>document.getElementById("resetView").click();document.getElementById("closeDetail").onclick=()=>document.getElementById("detailPanel").classList.remove("open");document.getElementById("clearLayers").onclick=()=>sources.forEach(s=>{const e=document.getElementById(`layer-${s.id}`);if(e.checked){e.checked=false;setLayer(s,false)}});document.getElementById("openSources").onclick=()=>document.getElementById("sourcesDialog").showModal();document.getElementById("openDashboard").onclick=async()=>{const button=document.getElementById("openDashboard"),label=button.textContent;button.disabled=true;button.textContent="Préparation…";await Promise.allSettled(["hydro-live","river-live","fish","hydrobio","groundwater","piezometers"].map(id=>loadSource(sources.find(s=>s.id===id))));makeCharts();document.getElementById("dashboardDialog").showModal();button.disabled=false;button.textContent=label};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());document.querySelectorAll(".map-kpis button").forEach(b=>b.onclick=()=>{const s=sources.find(x=>x.id===b.dataset.focus);const e=document.getElementById(`layer-${s.id}`);if(!e.checked){e.checked=true;setLayer(s,true)}});document.querySelectorAll("[data-basemap]").forEach(b=>b.onclick=()=>{const id=b.dataset.basemap;if(id===state.basemap)return;map.removeLayer(baseLayers[state.basemap]);baseLayers[id].addTo(map);baseLayers[id].bringToBack();state.basemap=id;document.querySelectorAll("[data-basemap]").forEach(x=>x.classList.toggle("active",x===b))});
+document.getElementById("searchButton").onclick=search;document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")search()});document.getElementById("resetView").onclick=()=>state.territory?map.fitBounds(state.territory.getBounds(),{padding:[10,10]}):map.fitBounds(BOUNDS_95,{padding:[8,8]});document.getElementById("resetPanel").onclick=()=>document.getElementById("resetView").click();document.getElementById("closeDetail").onclick=()=>document.getElementById("detailPanel").classList.remove("open");document.getElementById("exportDetailPdf").onclick=exportDetailToPdf;document.getElementById("clearLayers").onclick=()=>sources.forEach(s=>{const e=document.getElementById(`layer-${s.id}`);if(e.checked){e.checked=false;setLayer(s,false)}});document.getElementById("openSources").onclick=()=>document.getElementById("sourcesDialog").showModal();document.getElementById("openDashboard").onclick=async()=>{const button=document.getElementById("openDashboard"),label=button.textContent;button.disabled=true;button.textContent="Préparation…";await Promise.allSettled(["hydro-live","river-live","fish","hydrobio","groundwater","piezometers"].map(id=>loadSource(sources.find(s=>s.id===id))));makeCharts();document.getElementById("dashboardDialog").showModal();button.disabled=false;button.textContent=label};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());document.querySelectorAll(".map-kpis button").forEach(b=>b.onclick=()=>{const s=sources.find(x=>x.id===b.dataset.focus);const e=document.getElementById(`layer-${s.id}`);if(!e.checked){e.checked=true;setLayer(s,true)}});document.querySelectorAll("[data-basemap]").forEach(b=>b.onclick=()=>{const id=b.dataset.basemap;if(id===state.basemap)return;map.removeLayer(baseLayers[state.basemap]);baseLayers[id].addTo(map);baseLayers[id].bringToBack();state.basemap=id;document.querySelectorAll("[data-basemap]").forEach(x=>x.classList.toggle("active",x===b))});
 const mobileLayers=document.getElementById("mobileLayers"),layerSidebar=document.getElementById("layerSidebar");mobileLayers.onclick=()=>{const open=layerSidebar.classList.toggle("open");mobileLayers.setAttribute("aria-expanded",String(open));mobileLayers.textContent=open?"Fermer":"Données"};
 init();
 
