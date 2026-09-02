@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902b";
+const BUILD_VERSION="20260902c";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -59,11 +59,12 @@ const themeGuide={
   etiage:{short:"Présence ou absence d’écoulement en période sèche",what:"Le réseau Onde suit visuellement les petits cours d’eau en été, notamment là où il n’existe pas de station de débit automatique.",read:"L’observation distingue l’écoulement visible, l’écoulement faible, la rupture d’écoulement et l’assec. Elle aide à repérer la tension sur la ressource et les milieux aquatiques."}
 };
 
-const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan",legendId:null,potableAgg:null,groundwaterAgg:null,groundwaterBodyAgg:null,groundwaterColorMode:"nitrate",detailToken:0,groundwaterHorizon:1};
+const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan",legendId:null,potableAgg:null,groundwaterAgg:null,groundwaterBodyAgg:null,groundwaterExtended:undefined,groundwaterContextLayer:null,groundwaterColorMode:"nitrate",detailToken:0,groundwaterHorizon:1};
 const nitrateOrder=["bon","moyen","mediocre","mauvais"];
 function worseStatus(a,b){if(!a||a==="nodata")return b||"nodata";if(!b||b==="nodata")return a;return nitrateOrder.indexOf(a)>=nitrateOrder.indexOf(b)?a:b}
 const map = L.map("map",{zoomControl:false,preferCanvas:true,minZoom:6,maxZoom:19,zoomSnap:.25,zoomDelta:.5}).fitBounds(BOUNDS_95,{padding:[8,8]});
 map.createPane("maskPane");map.getPane("maskPane").style.zIndex=420;map.getPane("maskPane").style.pointerEvents="none";
+map.createPane("groundwaterContextPane");map.getPane("groundwaterContextPane").style.zIndex=425;map.getPane("groundwaterContextPane").style.pointerEvents="none";
 map.createPane("boundaryPane");map.getPane("boundaryPane").style.zIndex=430;map.getPane("boundaryPane").style.pointerEvents="none";
 L.control.zoom({position:"bottomright"}).addTo(map);
 L.control.scale({imperial:false,position:"bottomright"}).addTo(map);
@@ -227,6 +228,37 @@ async function loadGroundwaterBodyQuality(){
   });
   state.groundwaterBodyAgg=agg;return agg;
 }
+// Le jeu local (groundwater-bodies.geojson) est pré-découpé aux contours du
+// Val-d'Oise. Pour montrer l'emprise réelle des nappes au-delà du
+// département, on va chercher en direct le référentiel national Sandre
+// (rapportage 2022) sur une emprise élargie. Cet appel n'a jamais pu être
+// vérifié en conditions réelles depuis l'environnement de développement
+// (accès réseau vers sandre.eaufrance.fr bloqué) : à confirmer une fois en
+// ligne. En cas d'échec, la couche de contexte est simplement absente et
+// l'affichage retombe sur le comportement précédent (rien au-delà de la
+// frontière), sans casser le reste de la carte.
+const GROUNDWATER_CODE_KEYS=["CdMasseDEauSout","CdEuMasseDEauSout","CdMasseDEau","code_mdo","code"];
+function normalizeGroundwaterCode(props){for(const k of GROUNDWATER_CODE_KEYS)if(props[k])return String(props[k]);return null}
+async function loadGroundwaterExtent(){
+  if(state.groundwaterExtended!==undefined)return state.groundwaterExtended;
+  try{
+    const bbox="0.6,48.2,3.4,49.6"; // large marge autour du Val-d'Oise (lon,lat,lon,lat)
+    const url=`https://services.sandre.eaufrance.fr/geo/MasseDEau_VRAP2022?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=sa:MasseDEauSouterraine_VRAP2022_FXX&OUTPUTFORMAT=application/json&SRSNAME=EPSG:4326&BBOX=${bbox},EPSG:4326`;
+    const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error(`Sandre ${r.status}`);
+    const d=await r.json();
+    (d.features||[]).forEach(f=>{const c=normalizeGroundwaterCode(f.properties||{});if(c)f.properties.code=c});
+    state.groundwaterExtended=d.features?.length?d:null;
+  }catch(e){state.groundwaterExtended=null;console.error("Extension nationale des masses d'eau indisponible :",e)}
+  return state.groundwaterExtended;
+}
+function contextLayerStyle(source,feature){const st=layerStyle(source,feature);return {...st,weight:.5,fillOpacity:Math.min(st.fillOpacity??.4,.22)}}
+async function refreshGroundwaterContext(){
+  const source=sources.find(s=>s.id==="groundwater-bodies"),control=document.getElementById("layer-groundwater-bodies");
+  if(state.groundwaterContextLayer){map.removeLayer(state.groundwaterContextLayer);state.groundwaterContextLayer=null}
+  if(!control?.checked)return;
+  const data=await loadGroundwaterExtent();if(!data)return;
+  state.groundwaterContextLayer=L.geoJSON(data,{pane:"groundwaterContextPane",interactive:false,style:f=>contextLayerStyle(source,f)}).addTo(map);
+}
 async function loadSource(source){
   if(!source.file&&!source.api)return null;
   if(source.kind==="api-commune"&&!state.layers[source.id])return loadPotableSource(source);
@@ -251,12 +283,13 @@ async function setGroundwaterColorMode(mode){
   state.layers[source.id]=makeGeoLayer(source,data);
   if(wasVisible)state.layers[source.id].addTo(map);
   if(control?.checked)renderLegend(source);
+  refreshGroundwaterContext();
 }
 async function setLayer(source,on){
   const control=document.getElementById(`layer-${source.id}`);
   if(source.kind==="unavailable"){control.checked=false;openFeature(source,{properties:{État:"La source officielle est référencée, mais aucune géométrie directement exploitable n’est actuellement publiée pour cette carte. Elle reste visible pour garantir la traçabilité du thème."}});return}
   control.disabled=true;if(on)document.getElementById("mapStatus").textContent=`Chargement : ${source.title}…`;if(on&&source.kind==="groundwater-body")["cours","qualite","stations"].forEach(id=>{const c=document.getElementById(`layer-${id}`),layer=state.layers[id];if(c?.checked){c.checked=false;if(layer)map.removeLayer(layer)}});
-  try{if(on&&source.kind==="groundwater-body"&&state.groundwaterColorMode==="nitrate"&&!state.groundwaterBodyAgg){await loadGroundwaterBodyQuality();delete state.layers[source.id]}const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);const nitrateNote=on&&(source.kind==="api-point-quality"||source.kind==="groundwater-body")&&state.groundwaterColorMode!=="identity"?` · ${Object.keys(state.groundwaterAgg||{}).length} point(s) avec mesure nitrates récente`:"";document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}${nitrateNote}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend()}catch(e){if(state.layers[source.id])map.removeLayer(state.layers[source.id]);control.checked=false;refreshLegend();document.getElementById("mapStatus").textContent=`Impossible d’afficher cette couche : ${source.title}. Réessayez dans un instant.`;console.error(e)}finally{control.disabled=false}
+  try{if(on&&source.kind==="groundwater-body"&&state.groundwaterColorMode==="nitrate"&&!state.groundwaterBodyAgg){await loadGroundwaterBodyQuality();delete state.layers[source.id]}const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);const nitrateNote=on&&(source.kind==="api-point-quality"||source.kind==="groundwater-body")&&state.groundwaterColorMode!=="identity"?` · ${Object.keys(state.groundwaterAgg||{}).length} point(s) avec mesure nitrates récente`:"";document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}${nitrateNote}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend();if(source.kind==="groundwater-body")refreshGroundwaterContext()}catch(e){if(state.layers[source.id])map.removeLayer(state.layers[source.id]);control.checked=false;refreshLegend();document.getElementById("mapStatus").textContent=`Impossible d’afficher cette couche : ${source.title}. Réessayez dans un instant.`;console.error(e)}finally{control.disabled=false}
 }
 function legendControls(currentId=""){
   const usable=sources.filter(s=>s.kind!=="unavailable"),groups=[...new Set(usable.map(s=>s.group))];
@@ -329,5 +362,5 @@ init();
 // Lecture seule pour la fenêtre d'impression (print.html) : aucune donnée
 // ni fonction n'est dupliquée, la fenêtre d'impression lit cet état via
 // window.opener.eauApp une fois ouverte depuis cette page.
-window.eauApp={sources,state,map,DATA_ROOT,layerStyle,swatchBackground,legendRows,qualityLabels,qualityColors,groundwaterColors,potableColors};
+window.eauApp={sources,state,map,DATA_ROOT,layerStyle,contextLayerStyle,swatchBackground,legendRows,qualityLabels,qualityColors,groundwaterColors,potableColors};
 document.getElementById("printMap").onclick=()=>window.open("print.html","_blank");
