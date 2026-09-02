@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902f";
+const BUILD_VERSION="20260902g";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -293,6 +293,7 @@ async function ensureGroundwaterModeData(mode){
   if(mode==="official"&&state.groundwaterOfficialAgg===undefined)await loadGroundwaterOfficialState();
   if(mode==="nitrate"&&!state.groundwaterBodyAgg)await loadGroundwaterBodyQuality();
 }
+function slugifyFilename(title){return title.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"couche"}
 async function downloadLayerGeoJSON(sourceId){
   const source=sources.find(s=>s.id===sourceId);if(!source||source.kind==="unavailable")return;
   const btn=document.querySelector(`[data-download="${sourceId}"]`);
@@ -307,7 +308,7 @@ async function downloadLayerGeoJSON(sourceId){
     }
     const blob=new Blob([JSON.stringify(data)],{type:"application/geo+json"});
     const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");a.href=url;a.download=`${sourceId}.geojson`;document.body.appendChild(a);a.click();a.remove();
+    const a=document.createElement("a");a.href=url;a.download=`${slugifyFilename(source.title)}.geojson`;document.body.appendChild(a);a.click();a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),4000);
     document.getElementById("mapStatus").textContent=`${source.title} téléchargé en GeoJSON (${data.features.length} entité(s)).`;
   }catch(e){document.getElementById("mapStatus").textContent=`Téléchargement impossible : ${source.title}.`;console.error(e)}
