@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902a";
+const BUILD_VERSION="20260902b";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -202,14 +202,20 @@ function parameterExceeded(row,conclusion=""){
   const max=threshold.match(/<=?\s*([0-9.]+)/),min=threshold.match(/>=?\s*([0-9.]+)/);return Boolean(max&&result>Number(max[1])||min&&result<Number(min[1]));
 }
 async function loadGroundwaterQuality(source){
-  const fields="bss_id,date_debut_prelevement,resultat";
+  const fields="bss_id,code_bss,date_debut_prelevement,resultat,code_param,nom_param";
   const url=`https://hubeau.eaufrance.fr/api/v1/qualite_nappes/analyses?num_departement=95&code_param=1340&date_debut_prelevement=${monthsAgo(36)}&size=20000&fields=${encodeURIComponent(fields)}`;
   try{
     const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error(`Hub’Eau ${r.status}`);const d=await r.json();
-    const byStation={};(d.data||[]).forEach(x=>{if(!x.bss_id||!Number.isFinite(Number(x.resultat)))return;(byStation[x.bss_id]??=[]).push(x)});
+    // Filtrage défensif côté client : certaines API Hub'Eau ignorent un
+    // paramètre de requête non supporté sans erreur (ex. num_departement
+    // sur cet endpoint) plutôt que de renvoyer une erreur explicite ; sans
+    // ce filtre, une ligne d'un tout autre paramètre pourrait être prise
+    // pour la dernière mesure de nitrates d'une station.
+    const rows=(d.data||[]).filter(x=>String(x.code_param)==="1340");
+    const byStation={};rows.forEach(x=>{const id=x.bss_id||x.code_bss;if(!id||!Number.isFinite(Number(x.resultat)))return;(byStation[id]??=[]).push(x)});
     state.groundwaterAgg={};Object.entries(byStation).forEach(([id,rows])=>{rows.sort((a,b)=>new Date(b.date_debut_prelevement)-new Date(a.date_debut_prelevement));const last=rows[0];state.groundwaterAgg[id]={resultat:Number(last.resultat),date:last.date_debut_prelevement,status:nitrateClass(Number(last.resultat))}});
   }catch(e){state.groundwaterAgg=state.groundwaterAgg||{};console.error(e)}
-  (state.data[source.id]?.features||[]).forEach(f=>{const agg=state.groundwaterAgg[f.properties.bss_id];f.properties.nitrate_status=agg?agg.status:"nodata";f.properties.nitrate_resultat=agg?agg.resultat:null;f.properties.nitrate_date=agg?agg.date:null});
+  (state.data[source.id]?.features||[]).forEach(f=>{const agg=state.groundwaterAgg[f.properties.bss_id]||state.groundwaterAgg[f.properties.code_bss];f.properties.nitrate_status=agg?agg.status:"nodata";f.properties.nitrate_resultat=agg?agg.resultat:null;f.properties.nitrate_date=agg?agg.date:null});
 }
 async function loadGroundwaterBodyQuality(){
   if(state.groundwaterBodyAgg)return state.groundwaterBodyAgg;
@@ -250,7 +256,7 @@ async function setLayer(source,on){
   const control=document.getElementById(`layer-${source.id}`);
   if(source.kind==="unavailable"){control.checked=false;openFeature(source,{properties:{État:"La source officielle est référencée, mais aucune géométrie directement exploitable n’est actuellement publiée pour cette carte. Elle reste visible pour garantir la traçabilité du thème."}});return}
   control.disabled=true;if(on)document.getElementById("mapStatus").textContent=`Chargement : ${source.title}…`;if(on&&source.kind==="groundwater-body")["cours","qualite","stations"].forEach(id=>{const c=document.getElementById(`layer-${id}`),layer=state.layers[id];if(c?.checked){c.checked=false;if(layer)map.removeLayer(layer)}});
-  try{if(on&&source.kind==="groundwater-body"&&state.groundwaterColorMode==="nitrate"&&!state.groundwaterBodyAgg){await loadGroundwaterBodyQuality();delete state.layers[source.id]}const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend()}catch(e){if(state.layers[source.id])map.removeLayer(state.layers[source.id]);control.checked=false;refreshLegend();document.getElementById("mapStatus").textContent=`Impossible d’afficher cette couche : ${source.title}. Réessayez dans un instant.`;console.error(e)}finally{control.disabled=false}
+  try{if(on&&source.kind==="groundwater-body"&&state.groundwaterColorMode==="nitrate"&&!state.groundwaterBodyAgg){await loadGroundwaterBodyQuality();delete state.layers[source.id]}const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);const nitrateNote=on&&(source.kind==="api-point-quality"||source.kind==="groundwater-body")&&state.groundwaterColorMode!=="identity"?` · ${Object.keys(state.groundwaterAgg||{}).length} point(s) avec mesure nitrates récente`:"";document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}${nitrateNote}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend()}catch(e){if(state.layers[source.id])map.removeLayer(state.layers[source.id]);control.checked=false;refreshLegend();document.getElementById("mapStatus").textContent=`Impossible d’afficher cette couche : ${source.title}. Réessayez dans un instant.`;console.error(e)}finally{control.disabled=false}
 }
 function legendControls(currentId=""){
   const usable=sources.filter(s=>s.kind!=="unavailable"),groups=[...new Set(usable.map(s=>s.group))];
