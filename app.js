@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902d";
+const BUILD_VERSION="20260902e";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -59,7 +59,7 @@ const themeGuide={
   etiage:{short:"Présence ou absence d’écoulement en période sèche",what:"Le réseau Onde suit visuellement les petits cours d’eau en été, notamment là où il n’existe pas de station de débit automatique.",read:"L’observation distingue l’écoulement visible, l’écoulement faible, la rupture d’écoulement et l’assec. Elle aide à repérer la tension sur la ressource et les milieux aquatiques."}
 };
 
-const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan",legendId:null,potableAgg:null,groundwaterAgg:null,groundwaterBodyAgg:null,groundwaterOfficialAgg:undefined,groundwaterExtended:undefined,groundwaterContextLayer:null,groundwaterColorMode:"official",detailToken:0,groundwaterHorizon:1};
+const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan",legendId:null,potableAgg:null,groundwaterAgg:null,groundwaterBodyAgg:null,groundwaterOfficialAgg:undefined,groundwaterExtended:undefined,groundwaterContextLayer:null,groundwaterColorMode:"nitrate",detailToken:0,groundwaterHorizon:1};
 const nitrateOrder=["bon","moyen","mediocre","mauvais"];
 function worseStatus(a,b){if(!a||a==="nodata")return b||"nodata";if(!b||b==="nodata")return a;return nitrateOrder.indexOf(a)>=nitrateOrder.indexOf(b)?a:b}
 const map = L.map("map",{zoomControl:false,preferCanvas:true,minZoom:6,maxZoom:19,zoomSnap:.25,zoomDelta:.5}).fitBounds(BOUNDS_95,{padding:[8,8]});
@@ -249,7 +249,7 @@ const GROUNDWATER_STATE_WFS_BASE=`https://ogc.geo-ide.developpement-durable.gouv
 const officialStateLabels={bon:"Bon état chimique (DCE, SDAGE 2022-2027)",mauvais:"Mauvais état chimique (DCE, SDAGE 2022-2027)",nodata:"Non renseigné"};
 function officialStateLabel(status,kind){const base={bon:"Bon",mauvais:"Mauvais",nodata:"Non renseigné"}[status]||"Non renseigné";return status==="nodata"?base:`${base} état ${kind} (DCE, SDAGE 2022-2027)`}
 const officialStateColors={bon:"#20a06b",mauvais:"#d94a4a",nodata:"#94a3b8"};
-const GROUNDWATER_MODES=[["official","État chimique DCE"],["nitrate","Nitrates (indicatif)"],["identity","Identité"]];
+const GROUNDWATER_MODES=[["nitrate","Nitrates (indicatif)"],["official","État chimique DCE"],["identity","Identité"]];
 function detectOfficialStatus(props,keyword){
   for(const k of Object.keys(props)){
     if(!k.toLowerCase().includes(keyword))continue;
@@ -297,8 +297,13 @@ function normalizeGroundwaterCode(props){for(const k of GROUNDWATER_CODE_KEYS)if
 async function loadGroundwaterExtent(){
   if(state.groundwaterExtended!==undefined)return state.groundwaterExtended;
   try{
+    // WFS 2.0 + EPSG:4326 impose l'ordre lat,lon dans BBOX (piège classique
+    // qui provoquait un 400 Bad Request avec l'ordre lon,lat utilisé avant).
+    // CRS84 lève l'ambiguïté en fixant explicitement l'ordre lon,lat, le
+    // même ordre que GeoJSON/Leaflet attendent en sortie.
     const bbox="0.6,48.2,3.4,49.6"; // large marge autour du Val-d'Oise (lon,lat,lon,lat)
-    const url=`https://services.sandre.eaufrance.fr/geo/MasseDEau_VRAP2022?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=sa:MasseDEauSouterraine_VRAP2022_FXX&OUTPUTFORMAT=application/json&SRSNAME=EPSG:4326&BBOX=${bbox},EPSG:4326`;
+    const crs="urn:ogc:def:crs:OGC:1.3:CRS84";
+    const url=`https://services.sandre.eaufrance.fr/geo/MasseDEau_VRAP2022?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=sa:MasseDEauSouterraine_VRAP2022_FXX&OUTPUTFORMAT=application/json&SRSNAME=${crs}&BBOX=${bbox},${crs}`;
     const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error(`Sandre ${r.status}`);
     const d=await r.json();
     (d.features||[]).forEach(f=>{const c=normalizeGroundwaterCode(f.properties||{});if(c)f.properties.code=c});
