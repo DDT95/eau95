@@ -8,7 +8,7 @@
       "</p>";
     return;
   }
-  const { sources, state, map: liveMap, DATA_ROOT, layerStyle, legendRows } = app;
+  const { sources, state, map: liveMap, DATA_ROOT, layerStyle, contextLayerStyle, legendRows } = app;
 
   const activeSources = sources.filter((s) => {
     const control = opener.document.getElementById(`layer-${s.id}`);
@@ -56,6 +56,9 @@
   map.createPane("maskPane");
   map.getPane("maskPane").style.zIndex = 420;
   map.getPane("maskPane").style.pointerEvents = "none";
+  map.createPane("groundwaterContextPane");
+  map.getPane("groundwaterContextPane").style.zIndex = 425;
+  map.getPane("groundwaterContextPane").style.pointerEvents = "none";
   map.createPane("boundaryPane");
   map.getPane("boundaryPane").style.zIndex = 430;
   map.getPane("boundaryPane").style.pointerEvents = "none";
@@ -110,6 +113,18 @@
       },
     }).addTo(map);
   });
+
+  // Emprise nationale des masses d'eau souterraines au-delà du Val-d'Oise,
+  // affichée à faible opacité si elle a pu être récupérée côté carte
+  // interactive (voir refreshGroundwaterContext dans app.js).
+  const groundwaterBodySource = activeSources.find((s) => s.kind === "groundwater-body");
+  if (groundwaterBodySource && state.groundwaterExtended) {
+    L.geoJSON(state.groundwaterExtended, {
+      pane: "groundwaterContextPane",
+      interactive: false,
+      style: (f) => contextLayerStyle(groundwaterBodySource, f),
+    }).addTo(map);
+  }
 
   let territoryLayer = null;
   if (state.communes && state.communes.features) {
