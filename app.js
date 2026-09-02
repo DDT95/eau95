@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902c";
+const BUILD_VERSION="20260902d";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -51,7 +51,7 @@ const themeGuide={
   "assain-prix":{short:"Tarif de collecte et traitement des eaux usées",what:"Ce jeu décrit le prix du service d’assainissement collectif pour l’usager.",read:"Il complète le prix de l’eau potable. La ressource cartographique est conservée au catalogue même lorsque son téléchargement est indisponible."},
   "hydro-live":{short:"Hauteur et débit mesurés dans les rivières",what:"Les stations hydrométriques suivent en continu le niveau et, selon la station, le débit des cours d’eau.",read:"La fiche affiche la dernière hauteur brute disponible et son heure. Une hausse ou baisse doit être interprétée par rapport aux caractéristiques propres de la station."},
   "river-live":{short:"Analyses physico-chimiques des cours d’eau",what:"Ces stations centralisent les prélèvements de qualité des rivières : nutriments, oxygène, matières, micropolluants et autres paramètres publiés dans Naïades.",read:"La station localise le suivi. Les résultats varient selon les campagnes, les paramètres recherchés et les dates d’analyse."},
-  "groundwater-bodies":{short:"Les aquifères présents sous le territoire, colorés par état",what:"Ces polygones représentent les masses d’eau souterraines utilisées pour l’évaluation de la Directive-cadre sur l’eau.",read:"Par défaut, chaque masse est colorée selon la pire classe de nitrates parmi ses stations de suivi (grille indicative, cf. couche « Qualité chimique des nappes »). Le bouton « Identité » permet d’afficher à la place une couleur par aquifère, utile pour distinguer les nappes superposées. L’horizon 1 est le niveau le plus proche de la surface ; les horizons 2 à 4 représentent des masses progressivement plus profondes."},
+  "groundwater-bodies":{short:"Les aquifères présents sous le territoire, colorés par état",what:"Ces polygones représentent les masses d’eau souterraines utilisées pour l’évaluation de la Directive-cadre sur l’eau.",read:"Par défaut, chaque masse est colorée selon l’état chimique officiel DCE (SDAGE 2022-2027, DRIEAT Île-de-France) — vert : bon état, rouge : mauvais état. Le bouton « Nitrates (indicatif) » propose une classification alternative basée sur la pire classe de nitrates parmi les stations de suivi (grille indicative, cf. couche « Qualité chimique des nappes »), et « Identité » affiche une couleur par aquifère pour distinguer les nappes superposées. L’horizon 1 est le niveau le plus proche de la surface ; les horizons 2 à 4 représentent des masses progressivement plus profondes. Au-delà du Val-d’Oise, l’emprise nationale des masses d’eau apparaît en transparence quand elle est disponible."},
   piezometers:{short:"Profondeur et cote du niveau de la nappe",what:"Un piézomètre est un forage d’observation qui mesure la hauteur de l’eau souterraine en un point précis.",read:"La fiche affiche la dernière cote en mètres NGF, la profondeur publiée, l’évolution récente et la nappe suivie. Six stations ont publié une mesure depuis 2025 dans le Val-d’Oise."},
   groundwater:{short:"Analyses chimiques des nappes souterraines",what:"Ces points de suivi renseignent la qualité des eaux souterraines : nitrates, pesticides, minéraux et autres substances analysées.",read:"La couleur classe chaque point selon sa dernière teneur en nitrates publiée sur 36 mois (grille indicative : bon ≤ 25 mg/L, moyen 25-40, médiocre 40-50, mauvais > 50 mg/L). Ce n’est pas l’état chimique DCE officiel, qui combine plusieurs substances ; la fiche complète au clic détaille tous les paramètres analysés. La présence d’un point ne signifie pas qu’il alimente le réseau potable."},
   fish:{short:"Espèces et peuplements observés par pêche scientifique",what:"Les stations piscicoles correspondent à des opérations de pêche électrique menées par l’OFB et ses partenaires.",read:"Les observations permettent de connaître les espèces présentes, les effectifs et les tailles, puis d’évaluer l’état des peuplements dans le temps."},
@@ -59,7 +59,7 @@ const themeGuide={
   etiage:{short:"Présence ou absence d’écoulement en période sèche",what:"Le réseau Onde suit visuellement les petits cours d’eau en été, notamment là où il n’existe pas de station de débit automatique.",read:"L’observation distingue l’écoulement visible, l’écoulement faible, la rupture d’écoulement et l’assec. Elle aide à repérer la tension sur la ressource et les milieux aquatiques."}
 };
 
-const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan",legendId:null,potableAgg:null,groundwaterAgg:null,groundwaterBodyAgg:null,groundwaterExtended:undefined,groundwaterContextLayer:null,groundwaterColorMode:"nitrate",detailToken:0,groundwaterHorizon:1};
+const state = {data:{},layers:{},charts:[],communes:null,territory:null,mask:null,basemap:"plan",legendId:null,potableAgg:null,groundwaterAgg:null,groundwaterBodyAgg:null,groundwaterOfficialAgg:undefined,groundwaterExtended:undefined,groundwaterContextLayer:null,groundwaterColorMode:"official",detailToken:0,groundwaterHorizon:1};
 const nitrateOrder=["bon","moyen","mediocre","mauvais"];
 function worseStatus(a,b){if(!a||a==="nodata")return b||"nodata";if(!b||b==="nodata")return a;return nitrateOrder.indexOf(a)>=nitrateOrder.indexOf(b)?a:b}
 const map = L.map("map",{zoomControl:false,preferCanvas:true,minZoom:6,maxZoom:19,zoomSnap:.25,zoomDelta:.5}).fitBounds(BOUNDS_95,{padding:[8,8]});
@@ -86,6 +86,7 @@ function categoryValue(source,p){if(source.id==="police")return p.POLICE_EAU||p[
 function layerStyle(source,feature){
   if(source.kind==="quality"){const c=qualityColors[String(feature.properties.etateco)]||qualityColors.U;return {color:c,weight:4,opacity:.9}}
   if(source.kind==="groundwater-body"){
+    if(state.groundwaterColorMode==="official"){const st=state.groundwaterOfficialAgg?.[feature.properties.code]?.chimique||"nodata";const c=officialStateColors[st]||officialStateColors.nodata;return {color:"#fff",weight:2,fillColor:c,fillOpacity:.62}}
     if(state.groundwaterColorMode==="nitrate"){const st=state.groundwaterBodyAgg?.[feature.properties.code]||"nodata";const c=nitrateColors[st]||nitrateColors.nodata;return {color:"#fff",weight:2,fillColor:c,fillOpacity:.62}}
     const c=groundwaterColors[feature.properties.code]||source.color;return {color:c,weight:2,fillColor:c,fillOpacity:.42}
   }
@@ -106,7 +107,7 @@ function relevantProps(source,p){
 function openFeature(source,feature,clickedLatLng){
   const detailToken=++state.detailToken;
   const p=feature.properties||{}; const title=displayTitle(source,p);
-  const bodyStateCard=source.kind==="groundwater-body"?`<div class="property"><small>État (nitrates)</small><strong>${nitrateLabels[state.groundwaterBodyAgg?.[p.code]||"nodata"]}</strong></div>`:"";
+  const bodyStateCard=source.kind==="groundwater-body"?`<div class="property"><small>État chimique DCE officiel</small><strong>${officialStateLabel(state.groundwaterOfficialAgg?.[p.code]?.chimique||"nodata","chimique")}</strong></div><div class="property"><small>État quantitatif DCE officiel</small><strong>${officialStateLabel(state.groundwaterOfficialAgg?.[p.code]?.quantitatif||"nodata","quantitatif")}</strong></div><div class="property"><small>État (nitrates, indicatif)</small><strong>${nitrateLabels[state.groundwaterBodyAgg?.[p.code]||"nodata"]}</strong></div>`:"";
   const cards=bodyStateCard+relevantProps(source,p).map(([k,v])=>`<div class="property"><small>${niceKey(k)}</small><strong>${k==="etateco"?(qualityLabels[String(v)]||v):k==="nitrate_status"?(nitrateLabels[String(v)]||v):safe(v)}${k==="TARIF_AEP"?" €/m³":""}${k==="nitrate_resultat"?" mg/L (NO₃)":""}</strong></div>`).join("");
   const guide=themeGuide[source.id];document.getElementById("detailContent").innerHTML=`<span class="detail-tag">${source.group} · ${source.producer||"DDT 95"}</span><h2>${safe(title)}</h2><p class="subtitle">${source.title} · ${source.date}</p>${guide?`<section class="theme-explainer"><strong>Ce que montre cette donnée</strong><p>${guide.what}</p><small>${guide.read}</small></section>`:""}<div id="liveDetail"></div><div class="property-grid">${cards}</div><a class="source-link" target="_blank" rel="noopener" href="${externalSourceUrl(source)}">Consulter la source officielle ↗</a>`;
   document.getElementById("detailPanel").classList.add("open");
@@ -155,7 +156,11 @@ async function loadRiverProfile(riverName,feature,clickedLatLng,token){const box
 const potableColors={conforme:"#16a34a",vigilance:"#f59e0b",nonconforme:"#dc2626",nodata:"#94a3b8"};
 function swatchBackground(source){
   if(source.kind==="quality")return `linear-gradient(90deg,${qualityColors["2"]} 0 25%,${qualityColors["3"]} 25% 50%,${qualityColors["4"]} 50% 75%,${qualityColors["5"]} 75%)`;
-  if(source.kind==="groundwater-body")return state.groundwaterColorMode==="nitrate"?`linear-gradient(90deg,${nitrateColors.bon} 0 25%,${nitrateColors.moyen} 25% 50%,${nitrateColors.mediocre} 50% 75%,${nitrateColors.mauvais} 75%)`:`linear-gradient(90deg,${Object.values(groundwaterColors).map((c,i,a)=>`${c} ${i*100/a.length}% ${(i+1)*100/a.length}%`).join(",")})`;
+  if(source.kind==="groundwater-body"){
+    if(state.groundwaterColorMode==="official")return `linear-gradient(90deg,${officialStateColors.bon} 0 50%,${officialStateColors.mauvais} 50%)`;
+    if(state.groundwaterColorMode==="nitrate")return `linear-gradient(90deg,${nitrateColors.bon} 0 25%,${nitrateColors.moyen} 25% 50%,${nitrateColors.mediocre} 50% 75%,${nitrateColors.mauvais} 75%)`;
+    return `linear-gradient(90deg,${Object.values(groundwaterColors).map((c,i,a)=>`${c} ${i*100/a.length}% ${(i+1)*100/a.length}%`).join(",")})`;
+  }
   if(source.kind==="price")return "linear-gradient(90deg,#d9d4f5 0 25%,#9b8cdc 25% 50%,#6554c0 50% 75%,#3f2c80 75%)";
   if(source.kind==="api-commune")return `linear-gradient(90deg,${potableColors.conforme} 0 33%,${potableColors.vigilance} 33% 66%,${potableColors.nonconforme} 66%)`;
   if(source.kind==="api-point-quality")return `linear-gradient(90deg,${nitrateColors.bon} 0 25%,${nitrateColors.moyen} 25% 50%,${nitrateColors.mediocre} 50% 75%,${nitrateColors.mauvais} 75%)`;
@@ -228,6 +233,56 @@ async function loadGroundwaterBodyQuality(){
   });
   state.groundwaterBodyAgg=agg;return agg;
 }
+// État chimique/quantitatif DCE officiel (SDAGE 2022-2027), publié par la
+// DRIEAT Île-de-France sur data.gouv.fr : "Etat et objectif des masses
+// d'eau souterraine affleurante dans le bassin Seine-Normandie"
+// (https://www.data.gouv.fr/datasets/etat-et-objectif-des-masses-deau-souterraine-affleurante-dans-le-bassin-seine-normandie/).
+// Le nom exact de la couche WFS n'est pas documenté sur data.gouv.fr (seul
+// le GetCapabilities est référencé) : on l'y découvre dynamiquement plutôt
+// que de le deviner. Les noms des champs état chimique/quantitatif ne sont
+// pas non plus documentés : on les détecte par mot-clé sur les noms de
+// propriétés retournées. Cet appel n'a pas pu être vérifié en conditions
+// réelles depuis l'environnement de développement (accès réseau vers
+// *.developpement-durable.gouv.fr bloqué) : à confirmer une fois en ligne.
+const GROUNDWATER_STATE_WFS_MAP="/opt/data/stack/mapfiles/1.4/org_3954051/0cd00834-9d1b-4468-867d-1638078d7f08.internet.map";
+const GROUNDWATER_STATE_WFS_BASE=`https://ogc.geo-ide.developpement-durable.gouv.fr/wxs?map=${GROUNDWATER_STATE_WFS_MAP}`;
+const officialStateLabels={bon:"Bon état chimique (DCE, SDAGE 2022-2027)",mauvais:"Mauvais état chimique (DCE, SDAGE 2022-2027)",nodata:"Non renseigné"};
+function officialStateLabel(status,kind){const base={bon:"Bon",mauvais:"Mauvais",nodata:"Non renseigné"}[status]||"Non renseigné";return status==="nodata"?base:`${base} état ${kind} (DCE, SDAGE 2022-2027)`}
+const officialStateColors={bon:"#20a06b",mauvais:"#d94a4a",nodata:"#94a3b8"};
+const GROUNDWATER_MODES=[["official","État chimique DCE"],["nitrate","Nitrates (indicatif)"],["identity","Identité"]];
+function detectOfficialStatus(props,keyword){
+  for(const k of Object.keys(props)){
+    if(!k.toLowerCase().includes(keyword))continue;
+    const v=props[k];if(v===null||v===undefined||v==="")continue;
+    const s=String(v).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    if(s==="1"||s.includes("bon"))return "bon";
+    if(s==="2"||s.includes("mauvais")||s.includes("mediocre"))return "mauvais";
+  }
+  return null;
+}
+async function loadGroundwaterOfficialState(){
+  if(state.groundwaterOfficialAgg!==undefined)return state.groundwaterOfficialAgg;
+  try{
+    const capRes=await fetch(`${GROUNDWATER_STATE_WFS_BASE}&SERVICE=WFS&REQUEST=GetCapabilities`,{cache:"no-store"});
+    if(!capRes.ok)throw new Error(`WFS GetCapabilities ${capRes.status}`);
+    const xml=await capRes.text();
+    const doc=new DOMParser().parseFromString(xml,"application/xml");
+    if(doc.querySelector("parsererror"))throw new Error("XML GetCapabilities illisible");
+    const names=[...doc.getElementsByTagName("Name")].map(n=>n.textContent).filter(n=>n&&n.includes(":"));
+    const typeName=names.find(n=>/meso|masse|sout|etat/i.test(n))||names[0];
+    if(!typeName)throw new Error("Aucune couche WFS trouvée dans le GetCapabilities");
+    const getFeatureUrl=`${GROUNDWATER_STATE_WFS_BASE}&SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=${encodeURIComponent(typeName)}&OUTPUTFORMAT=application/json&SRSNAME=EPSG:4326`;
+    const r=await fetch(getFeatureUrl,{cache:"no-store"});if(!r.ok)throw new Error(`WFS GetFeature ${r.status}`);
+    const d=await r.json();
+    const agg={};
+    (d.features||[]).forEach(f=>{
+      const props=f.properties||{};const code=normalizeGroundwaterCode(props);if(!code)return;
+      agg[code]={chimique:detectOfficialStatus(props,"chimi")||"nodata",quantitatif:detectOfficialStatus(props,"quant")||"nodata"};
+    });
+    state.groundwaterOfficialAgg=Object.keys(agg).length?agg:null;
+  }catch(e){state.groundwaterOfficialAgg=null;console.error("État chimique DCE officiel indisponible :",e)}
+  return state.groundwaterOfficialAgg;
+}
 // Le jeu local (groundwater-bodies.geojson) est pré-découpé aux contours du
 // Val-d'Oise. Pour montrer l'emprise réelle des nappes au-delà du
 // département, on va chercher en direct le référentiel national Sandre
@@ -269,14 +324,18 @@ async function loadSource(source){
   }
   return state.layers[source.id];
 }
+async function ensureGroundwaterModeData(mode){
+  if(mode==="official"&&state.groundwaterOfficialAgg===undefined)await loadGroundwaterOfficialState();
+  if(mode==="nitrate"&&!state.groundwaterBodyAgg)await loadGroundwaterBodyQuality();
+}
 function makeGeoLayer(source,data){return L.geoJSON(data,{style:f=>layerStyle(source,f),pointToLayer:(f,ll)=>{const st=layerStyle(source,f);return L.circleMarker(ll,{radius:7,color:"#fff",weight:2,fillColor:st.fillColor||source.color,fillOpacity:1})},onEachFeature:(f,l)=>{l.on("click",e=>openFeature(source,f,e.latlng));l.bindTooltip(displayTitle(source,f.properties||{}),{sticky:true})}})}
-async function setGroundwaterHorizon(horizon){state.groundwaterHorizon=Number(horizon);document.querySelectorAll("[data-horizon]").forEach(b=>{const active=Number(b.dataset.horizon)===state.groundwaterHorizon;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});const source=sources.find(s=>s.id==="groundwater-bodies"),control=document.getElementById("layer-groundwater-bodies");if(!state.data[source.id])await loadSource(source);if(state.groundwaterColorMode==="nitrate"&&!state.groundwaterBodyAgg)await loadGroundwaterBodyQuality();const wasVisible=state.layers[source.id]&&map.hasLayer(state.layers[source.id]);if(state.layers[source.id])map.removeLayer(state.layers[source.id]);const data={type:"FeatureCollection",features:(state.data[source.id]?.features||[]).filter(f=>Number(f.properties.horizon)===state.groundwaterHorizon)};state.layers[source.id]=makeGeoLayer(source,data);if(wasVisible)state.layers[source.id].addTo(map);if(control?.checked)renderLegend(source);document.getElementById("mapStatus").textContent=`Masses d’eau souterraines · horizon ${state.groundwaterHorizon} affiché · ${data.features.length} emprise(s)`}
+async function setGroundwaterHorizon(horizon){state.groundwaterHorizon=Number(horizon);document.querySelectorAll("[data-horizon]").forEach(b=>{const active=Number(b.dataset.horizon)===state.groundwaterHorizon;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});const source=sources.find(s=>s.id==="groundwater-bodies"),control=document.getElementById("layer-groundwater-bodies");if(!state.data[source.id])await loadSource(source);await ensureGroundwaterModeData(state.groundwaterColorMode);const wasVisible=state.layers[source.id]&&map.hasLayer(state.layers[source.id]);if(state.layers[source.id])map.removeLayer(state.layers[source.id]);const data={type:"FeatureCollection",features:(state.data[source.id]?.features||[]).filter(f=>Number(f.properties.horizon)===state.groundwaterHorizon)};state.layers[source.id]=makeGeoLayer(source,data);if(wasVisible)state.layers[source.id].addTo(map);if(control?.checked)renderLegend(source);document.getElementById("mapStatus").textContent=`Masses d’eau souterraines · horizon ${state.groundwaterHorizon} affiché · ${data.features.length} emprise(s)`}
 async function setGroundwaterColorMode(mode){
   state.groundwaterColorMode=mode;
   document.querySelectorAll("[data-groundwater-mode]").forEach(b=>{const active=b.dataset.groundwaterMode===mode;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});
   const source=sources.find(s=>s.id==="groundwater-bodies"),control=document.getElementById("layer-groundwater-bodies");
   if(!state.data[source.id])await loadSource(source);
-  if(mode==="nitrate"&&!state.groundwaterBodyAgg)await loadGroundwaterBodyQuality();
+  await ensureGroundwaterModeData(mode);
   const wasVisible=state.layers[source.id]&&map.hasLayer(state.layers[source.id]);
   if(state.layers[source.id])map.removeLayer(state.layers[source.id]);
   const data={type:"FeatureCollection",features:(state.data[source.id]?.features||[]).filter(f=>Number(f.properties.horizon)===state.groundwaterHorizon)};
@@ -289,7 +348,11 @@ async function setLayer(source,on){
   const control=document.getElementById(`layer-${source.id}`);
   if(source.kind==="unavailable"){control.checked=false;openFeature(source,{properties:{État:"La source officielle est référencée, mais aucune géométrie directement exploitable n’est actuellement publiée pour cette carte. Elle reste visible pour garantir la traçabilité du thème."}});return}
   control.disabled=true;if(on)document.getElementById("mapStatus").textContent=`Chargement : ${source.title}…`;if(on&&source.kind==="groundwater-body")["cours","qualite","stations"].forEach(id=>{const c=document.getElementById(`layer-${id}`),layer=state.layers[id];if(c?.checked){c.checked=false;if(layer)map.removeLayer(layer)}});
-  try{if(on&&source.kind==="groundwater-body"&&state.groundwaterColorMode==="nitrate"&&!state.groundwaterBodyAgg){await loadGroundwaterBodyQuality();delete state.layers[source.id]}const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);const nitrateNote=on&&(source.kind==="api-point-quality"||source.kind==="groundwater-body")&&state.groundwaterColorMode!=="identity"?` · ${Object.keys(state.groundwaterAgg||{}).length} point(s) avec mesure nitrates récente`:"";document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}${nitrateNote}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend();if(source.kind==="groundwater-body")refreshGroundwaterContext()}catch(e){if(state.layers[source.id])map.removeLayer(state.layers[source.id]);control.checked=false;refreshLegend();document.getElementById("mapStatus").textContent=`Impossible d’afficher cette couche : ${source.title}. Réessayez dans un instant.`;console.error(e)}finally{control.disabled=false}
+  try{if(on&&source.kind==="groundwater-body"){await ensureGroundwaterModeData(state.groundwaterColorMode);delete state.layers[source.id]}const layer=await loadSource(source);if(on)layer.addTo(map);else map.removeLayer(layer);let statusNote="";
+if(on&&source.kind==="api-point-quality")statusNote=` · ${Object.keys(state.groundwaterAgg||{}).length} point(s) avec mesure nitrates récente`;
+else if(on&&source.kind==="groundwater-body"&&state.groundwaterColorMode==="official")statusNote=state.groundwaterOfficialAgg?` · ${Object.keys(state.groundwaterOfficialAgg).length} masse(s) avec état DCE officiel`:" · état DCE officiel indisponible pour le moment, voir le mode « Nitrates »";
+else if(on&&source.kind==="groundwater-body"&&state.groundwaterColorMode==="nitrate")statusNote=` · ${Object.keys(state.groundwaterAgg||{}).length} point(s) avec mesure nitrates récente`;
+document.getElementById("mapStatus").textContent=on?`${source.title} affiché · ${source.count}${statusNote}`:"Couche retirée de la carte";if(on)renderLegend(source);else if(state.legendId===source.id)refreshLegend();if(source.kind==="groundwater-body")refreshGroundwaterContext()}catch(e){if(state.layers[source.id])map.removeLayer(state.layers[source.id]);control.checked=false;refreshLegend();document.getElementById("mapStatus").textContent=`Impossible d’afficher cette couche : ${source.title}. Réessayez dans un instant.`;console.error(e)}finally{control.disabled=false}
 }
 function legendControls(currentId=""){
   const usable=sources.filter(s=>s.kind!=="unavailable"),groups=[...new Set(usable.map(s=>s.group))];
@@ -306,6 +369,7 @@ function refreshLegend(){const active=[...sources].reverse().find(s=>document.ge
 function legendRows(source){
   if(source.kind==="quality")return Object.entries(qualityLabels).map(([k,v])=>[qualityColors[k],v]);
   if(source.kind==="groundwater-body"){
+    if(state.groundwaterColorMode==="official")return Object.entries(officialStateLabels).map(([k,v])=>[officialStateColors[k],v]);
     if(state.groundwaterColorMode==="nitrate")return Object.entries(nitrateLabels).map(([k,v])=>[nitrateColors[k],v]);
     const features=(state.data[source.id]?.features||[]).filter(f=>Number(f.properties.horizon)===state.groundwaterHorizon),seen=new Set();return features.filter(f=>!seen.has(f.properties.code)&&seen.add(f.properties.code)).map(f=>[groundwaterColors[f.properties.code]||source.color,f.properties.nom]);
   }
@@ -317,12 +381,12 @@ function legendRows(source){
 }
 function renderLegend(source){const el=document.getElementById("mapLegend");const rows=legendRows(source);
   const horizons=source.kind==="groundwater-body"?`<div class="legend-horizons"><b>Profondeur</b>${[1,2,3,4].map(h=>`<button type="button" data-legend-horizon="${h}" class="${h===state.groundwaterHorizon?"active":""}" aria-pressed="${h===state.groundwaterHorizon}">H${h}</button>`).join("")}</div>`:"";
-  const colorMode=source.kind==="groundwater-body"?`<div class="legend-horizons"><b>Coloration</b>${[["nitrate","État (nitrates)"],["identity","Identité"]].map(([m,l])=>`<button type="button" data-groundwater-mode="${m}" class="${m===state.groundwaterColorMode?"active":""}" aria-pressed="${m===state.groundwaterColorMode}">${l}</button>`).join("")}</div>`:"";
+  const colorMode=source.kind==="groundwater-body"?`<div class="legend-horizons"><b>Coloration</b>${GROUNDWATER_MODES.map(([m,l])=>`<button type="button" data-groundwater-mode="${m}" class="${m===state.groundwaterColorMode?"active":""}" aria-pressed="${m===state.groundwaterColorMode}">${l}</button>`).join("")}</div>`:"";
   state.legendId=source.id;el.innerHTML=`${legendControls(source.id)}<div class="legend-content"><strong>${source.title}</strong>${colorMode}${horizons}${rows.map(([c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join("")}</div>`;bindLegendControls();
 }
 function renderLayers(){
   const groups=[...new Set(sources.map(s=>s.group))]; const root=document.getElementById("layerList");
-  root.innerHTML=groups.map(g=>`<section class="layer-group"><div class="group-title">${g}</div>${sources.filter(s=>s.group===g).map(s=>`<label class="layer-row ${s.kind==="unavailable"?"source-only":""}" style="--layer-color:${s.color}">${s.kind==="unavailable"?`<button id="layer-${s.id}" class="source-control" type="button">Voir</button>`:`<input id="layer-${s.id}" type="checkbox" autocomplete="off" ${s.active?"checked":""}>`}<span class="layer-label"><strong>${s.title}</strong><small>${s.count} · ${s.date}</small><span class="layer-help">${themeGuide[s.id]?.short||"Donnée cartographique"}</span></span><span class="legend-swatch ${s.kind.includes("point")?"point":""}" style="background:${swatchBackground(s)}"></span></label>${s.kind==="groundwater-body"?`<div class="horizon-selector" aria-label="Coloration des masses d’eau"><span>Coloration</span><div>${[["nitrate","État (nitrates)"],["identity","Identité"]].map(([m,l])=>`<button type="button" data-groundwater-mode="${m}" aria-pressed="${m===state.groundwaterColorMode}" class="${m===state.groundwaterColorMode?"active":""}">${l}</button>`).join("")}</div></div><div class="horizon-selector" aria-label="Profondeur de la nappe"><span>Profondeur affichée</span><div>${[1,2,3,4].map(h=>`<button type="button" data-horizon="${h}" aria-pressed="${h===state.groundwaterHorizon}" class="${h===state.groundwaterHorizon?"active":""}">H${h}</button>`).join("")}</div><small>H1 = proche de la surface · H4 = plus profond</small></div>`:""}`).join("")}</section>`).join("");
+  root.innerHTML=groups.map(g=>`<section class="layer-group"><div class="group-title">${g}</div>${sources.filter(s=>s.group===g).map(s=>`<label class="layer-row ${s.kind==="unavailable"?"source-only":""}" style="--layer-color:${s.color}">${s.kind==="unavailable"?`<button id="layer-${s.id}" class="source-control" type="button">Voir</button>`:`<input id="layer-${s.id}" type="checkbox" autocomplete="off" ${s.active?"checked":""}>`}<span class="layer-label"><strong>${s.title}</strong><small>${s.count} · ${s.date}</small><span class="layer-help">${themeGuide[s.id]?.short||"Donnée cartographique"}</span></span><span class="legend-swatch ${s.kind.includes("point")?"point":""}" style="background:${swatchBackground(s)}"></span></label>${s.kind==="groundwater-body"?`<div class="horizon-selector" aria-label="Coloration des masses d’eau"><span>Coloration</span><div>${GROUNDWATER_MODES.map(([m,l])=>`<button type="button" data-groundwater-mode="${m}" aria-pressed="${m===state.groundwaterColorMode}" class="${m===state.groundwaterColorMode?"active":""}">${l}</button>`).join("")}</div></div><div class="horizon-selector" aria-label="Profondeur de la nappe"><span>Profondeur affichée</span><div>${[1,2,3,4].map(h=>`<button type="button" data-horizon="${h}" aria-pressed="${h===state.groundwaterHorizon}" class="${h===state.groundwaterHorizon?"active":""}">H${h}</button>`).join("")}</div><small>H1 = proche de la surface · H4 = plus profond</small></div>`:""}`).join("")}</section>`).join("");
   root.scrollTop=0;
   sources.forEach(s=>{const control=document.getElementById(`layer-${s.id}`);if(s.kind==="unavailable")control.addEventListener("click",()=>setLayer(s,false));else control.addEventListener("change",e=>setLayer(s,e.target.checked))});document.querySelectorAll("[data-horizon]").forEach(b=>b.addEventListener("click",()=>setGroundwaterHorizon(b.dataset.horizon)));document.querySelectorAll("#layerList [data-groundwater-mode]").forEach(b=>b.addEventListener("click",()=>setGroundwaterColorMode(b.dataset.groundwaterMode)));
 }
