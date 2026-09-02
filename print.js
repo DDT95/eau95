@@ -104,7 +104,10 @@
     if (!data) return;
     L.geoJSON(data, {
       style: (f) => layerStyle(s, f),
-      pointToLayer: (f, ll) => L.circleMarker(ll, { radius: 6, color: "#fff", weight: 2, fillColor: s.color, fillOpacity: 1 }),
+      pointToLayer: (f, ll) => {
+        const st = layerStyle(s, f);
+        return L.circleMarker(ll, { radius: 6, color: "#fff", weight: 2, fillColor: st.fillColor || s.color, fillOpacity: 1 });
+      },
     }).addTo(map);
   });
 
