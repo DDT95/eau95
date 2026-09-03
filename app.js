@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902j";
+const BUILD_VERSION="20260902k";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -405,58 +405,61 @@ function makeCharts(){state.charts.forEach(c=>c.destroy());const d=chartData(),f
   state.charts.push(new Chart(document.getElementById("historyChart"),{type:"line",data:{labels:d.decades,datasets:[{label:"Qualité des rivières",data:d.riverHistory,borderColor:"#009081",backgroundColor:"#00908122",fill:true,tension:.25},{label:"Hydrobiologie",data:d.hydrobioHistory,borderColor:"#c43c7a",backgroundColor:"#c43c7a22",fill:true,tension:.25}]},options:{...common,plugins:{legend:{display:true,position:"bottom",labels:{boxWidth:12,font}},tooltip}}}));
   const good=d.quality[0]||0,total=d.quality.reduce((a,b)=>a+b,0),pct=Math.round(good/(total||1)*100),goodKm=d.qualityKm[0]||0,totalKm=d.qualityKm.reduce((a,b)=>a+b,0);document.getElementById("insightValue").textContent=`${pct} %`;document.getElementById("insightText").textContent=`des tronçons évalués sont en bon état, soit ${goodKm.toLocaleString("fr-FR")} km sur ${totalKm.toLocaleString("fr-FR")} km recensés. ${d.quality[1]||0} tronçons sont en état moyen.`
 }
+function pdfCleanText(el){return (el?.textContent||"").replace(/\s+/g," ").trim()}
 async function exportDetailToPdf(btn){
   const content=document.getElementById("detailContent");
   if(!document.getElementById("detailPanel").classList.contains("open")||!content.innerHTML.trim())return;
   const label=btn.textContent;btn.disabled=true;btn.textContent="…";
-  const clone=content.cloneNode(true);
   try{
-    // Laisse le temps aux contenus chargés en direct (analyses, historiques…) de s’afficher avant la capture.
+    // Laisse le temps aux contenus chargés en direct (analyses, historiques…) de s’afficher avant l’export.
     await new Promise(r=>setTimeout(r,300));
-    // Copie hors-écran, sans le pavé explicatif ni les boutons d’action, pour
-    // ne capturer que le contenu utile de la fiche.
-    clone.querySelector(".theme-explainer")?.remove();
-    clone.querySelectorAll(".source-link").forEach(el=>el.remove());
-    const pageWidthMm=210,pageHeightMm=297,marginMm=14,usableWidthMm=pageWidthMm-marginMm*2,usableHeightMm=pageHeightMm-marginMm*2;
-    // Rendre le clone à la largeur physique réelle de la page (mm -> px CSS à
-    // 96dpi) : sans ça, le texte du panneau (calibré pour ses ~340px d’écran)
-    // se retrouvait environ deux fois trop gros une fois étalé sur la largeur
-    // d’une page A4.
-    const cloneWidthPx=Math.round(usableWidthMm*96/25.4);
-    clone.style.cssText=`position:fixed;left:-9999px;top:0;width:${cloneWidthPx}px;background:#fff;padding:0`;
-    document.body.appendChild(clone);
     const {jsPDF}=window.jspdf;
     const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
-    let y=marginMm,pageStarted=false;
-    // Capture chaque bloc de premier niveau séparément : jamais de texte
-    // coupé en deux entre deux pages, seul un bloc plus grand qu’une page
-    // (rare) peut être tronqué sur sa propre hauteur.
-    for(const block of [...clone.children]){
-      if(!(block instanceof HTMLElement))continue;
-      const canvas=await html2canvas(block,{scale:2,useCORS:true,backgroundColor:"#ffffff"});
-      if(canvas.width===0||canvas.height===0)continue;
-      const heightMm=canvas.height*usableWidthMm/canvas.width;
-      if(pageStarted&&y+heightMm>marginMm+usableHeightMm){doc.addPage();y=marginMm}
-      pageStarted=true;
-      const imgData=canvas.toDataURL("image/jpeg",.92);
-      if(heightMm>usableHeightMm){
-        // Bloc plus haut qu’une page entière : découpe verticale en dernier recours.
-        let heightLeft=heightMm,offset=0;
-        while(heightLeft>0){
-          const sliceMm=Math.min(usableHeightMm-(y-marginMm),heightLeft);
-          doc.addImage(imgData,"JPEG",marginMm,y-offset,usableWidthMm,heightMm,undefined,"FAST");
-          heightLeft-=sliceMm;offset+=sliceMm;
-          if(heightLeft>0){doc.addPage();y=marginMm}else{y+=sliceMm}
-        }
-      }else{
-        doc.addImage(imgData,"JPEG",marginMm,y,usableWidthMm,heightMm,undefined,"FAST");
-        y+=heightMm+4;
-      }
+    const marginMm=18,pageHeightMm=297,pageWidthMm=210,contentWidthMm=pageWidthMm-marginMm*2;
+    let y=marginMm;
+    const ensureSpace=h=>{if(y+h>pageHeightMm-marginMm){doc.addPage();y=marginMm}};
+    const tag=pdfCleanText(content.querySelector(".detail-tag"));
+    const title=pdfCleanText(content.querySelector("h2"))||"Fiche";
+    const subtitle=pdfCleanText(content.querySelector(".subtitle"));
+    if(tag){
+      doc.setFont("helvetica","bold");doc.setFontSize(9);doc.setTextColor(0,120,243);
+      doc.text(tag.toUpperCase(),marginMm,y);y+=7;
+    }
+    doc.setFont("helvetica","bold");doc.setFontSize(19);doc.setTextColor(15,23,60);
+    const titleLines=doc.splitTextToSize(title,contentWidthMm);
+    ensureSpace(titleLines.length*8);doc.text(titleLines,marginMm,y);y+=titleLines.length*8+2;
+    if(subtitle){
+      doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(110,116,128);
+      const subLines=doc.splitTextToSize(subtitle,contentWidthMm);
+      ensureSpace(subLines.length*5);doc.text(subLines,marginMm,y);y+=subLines.length*5+3;
+    }
+    y+=3;doc.setDrawColor(230,235,240);doc.line(marginMm,y,pageWidthMm-marginMm,y);y+=7;
+    content.querySelectorAll(".property").forEach(card=>{
+      const lbl=pdfCleanText(card.querySelector("small")),val=pdfCleanText(card.querySelector("strong"));
+      if(!val)return;
+      doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(120,126,138);
+      ensureSpace(11);doc.text(lbl.toUpperCase(),marginMm,y);y+=4.6;
+      doc.setFont("helvetica","bold");doc.setFontSize(11);doc.setTextColor(15,23,60);
+      const valLines=doc.splitTextToSize(val,contentWidthMm);
+      ensureSpace(valLines.length*5);doc.text(valLines,marginMm,y);y+=valLines.length*5+5;
+    });
+    const liveRows=[...content.querySelectorAll("#liveDetail .analysis-row, #liveDetail .property")];
+    if(liveRows.length){
+      y+=2;ensureSpace(9);
+      doc.setFont("helvetica","bold");doc.setFontSize(12);doc.setTextColor(15,23,60);
+      doc.text("Dernières analyses",marginMm,y);y+=7;
+      liveRows.forEach(row=>{
+        const text=[...row.querySelectorAll("span,strong,small")].map(pdfCleanText).filter(Boolean).join(" · ");
+        if(!text)return;
+        doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(50,55,68);
+        const lines=doc.splitTextToSize(text,contentWidthMm);
+        ensureSpace(lines.length*4.6);doc.text(lines,marginMm,y);y+=lines.length*4.6+2;
+      });
     }
     const blobUrl=URL.createObjectURL(doc.output("blob"));
     window.open(blobUrl,"_blank");
   }catch(e){document.getElementById("mapStatus").textContent="Export PDF impossible pour cette fiche.";console.error(e)}
-  finally{clone.remove();btn.disabled=false;btn.textContent=label}
+  finally{btn.disabled=false;btn.textContent=label}
 }
 async function init(){renderLayers();renderSources();const layerList=document.getElementById("layerList");layerList.scrollTop=0;await loadCommunes();await Promise.allSettled(sources.filter(s=>s.file).map(loadSource));await Promise.allSettled(sources.filter(s=>s.active).map(s=>setLayer(s,true)));layerList.scrollTop=0;requestAnimationFrame(()=>{layerList.scrollTop=0});document.getElementById("mapStatus").textContent="19 couches cartographiques prêtes · 3 sources documentaires référencées"}
 document.getElementById("searchButton").onclick=search;document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")search()});document.getElementById("resetView").onclick=()=>state.territory?map.fitBounds(state.territory.getBounds(),{padding:[10,10]}):map.fitBounds(BOUNDS_95,{padding:[8,8]});document.getElementById("resetPanel").onclick=()=>document.getElementById("resetView").click();document.getElementById("closeDetail").onclick=()=>document.getElementById("detailPanel").classList.remove("open");document.getElementById("detailContent").addEventListener("click",e=>{const btn=e.target.closest("[data-pdf-export]");if(btn)exportDetailToPdf(btn)});document.getElementById("clearLayers").onclick=()=>sources.forEach(s=>{const e=document.getElementById(`layer-${s.id}`);if(e.checked){e.checked=false;setLayer(s,false)}});document.getElementById("openSources").onclick=()=>document.getElementById("sourcesDialog").showModal();document.getElementById("openDashboard").onclick=async()=>{const button=document.getElementById("openDashboard"),label=button.textContent;button.disabled=true;button.textContent="Préparation…";await Promise.allSettled(["hydro-live","river-live","fish","hydrobio","groundwater","piezometers"].map(id=>loadSource(sources.find(s=>s.id===id))));makeCharts();document.getElementById("dashboardDialog").showModal();button.disabled=false;button.textContent=label};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());document.querySelectorAll(".map-kpis button").forEach(b=>b.onclick=()=>{const s=sources.find(x=>x.id===b.dataset.focus);const e=document.getElementById(`layer-${s.id}`);if(!e.checked){e.checked=true;setLayer(s,true)}});document.querySelectorAll("[data-basemap]").forEach(b=>b.onclick=()=>{const id=b.dataset.basemap;if(id===state.basemap)return;map.removeLayer(baseLayers[state.basemap]);baseLayers[id].addTo(map);baseLayers[id].bringToBack();state.basemap=id;document.querySelectorAll("[data-basemap]").forEach(x=>x.classList.toggle("active",x===b))});
