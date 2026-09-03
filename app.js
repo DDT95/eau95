@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902k";
+const BUILD_VERSION="20260902l";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -109,7 +109,7 @@ function openFeature(source,feature,clickedLatLng){
   const p=feature.properties||{}; const title=displayTitle(source,p);
   const bodyStateCard=source.kind==="groundwater-body"?`<div class="property"><small>État chimique DCE officiel</small><strong>${officialStateLabel(state.groundwaterOfficialAgg?.[p.code]?.chimique||"nodata","chimique")}</strong></div><div class="property"><small>État quantitatif DCE officiel</small><strong>${officialStateLabel(state.groundwaterOfficialAgg?.[p.code]?.quantitatif||"nodata","quantitatif")}</strong></div><div class="property"><small>État (nitrates, indicatif)</small><strong>${nitrateLabels[state.groundwaterBodyAgg?.[p.code]||"nodata"]}</strong></div>`:"";
   const cards=bodyStateCard+relevantProps(source,p).map(([k,v])=>`<div class="property"><small>${niceKey(k)}</small><strong>${k==="etateco"?(qualityLabels[String(v)]||v):k==="nitrate_status"?(nitrateLabels[String(v)]||v):safe(v)}${k==="TARIF_AEP"?" €/m³":""}${k==="nitrate_resultat"?" mg/L (NO₃)":""}</strong></div>`).join("");
-  const guide=themeGuide[source.id];document.getElementById("detailContent").innerHTML=`<span class="detail-tag">${source.group} · ${source.producer||"DDT 95"}</span><h2>${safe(title)}</h2><p class="subtitle">${source.title} · ${source.date}</p>${guide?`<section class="theme-explainer"><strong>Ce que montre cette donnée</strong><p>${guide.what}</p><small>${guide.read}</small></section>`:""}<div id="liveDetail"></div><div class="property-grid">${cards}</div><a class="source-link" target="_blank" rel="noopener" href="${externalSourceUrl(source)}">Consulter la source officielle ↗</a><button type="button" class="source-link pdf-export-link" data-pdf-export>Exporter cette fiche en PDF ↓</button>`;
+  const guide=themeGuide[source.id];document.getElementById("detailContent").innerHTML=`<span class="detail-tag">${source.group} · ${source.producer||"DDT 95"}</span><h2>${safe(title)}</h2><p class="subtitle">${source.title} · ${source.date}</p>${guide?.short?`<p class="theme-short">${guide.short}</p>`:""}<div id="liveDetail"></div><div class="property-grid">${cards}</div><a class="source-link" target="_blank" rel="noopener" href="${externalSourceUrl(source)}">Consulter la source officielle ↗</a><button type="button" class="source-link pdf-export-link" data-pdf-export>Exporter cette fiche en PDF ↓</button>`;
   document.getElementById("detailPanel").classList.add("open");
   if(source.id==="hydro-live"&&p.code_station)loadLatestHydro(p.code_station,p);
   if(source.id==="etiage"&&p.code_station)loadLatestEtiage(p.code_station);
