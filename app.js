@@ -1,4 +1,4 @@
-const BUILD_VERSION="20260902i";
+const BUILD_VERSION="20260902j";
 fetch(`version.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json()).then(v=>{if(v.version!==BUILD_VERSION){const u=new URL(location.href);u.searchParams.set("v",v.version);location.replace(u)}}).catch(()=>{});
 const DATA_ROOT = "data/processed/";
 const BOUNDS_95 = [[48.89,1.60],[49.25,2.60]];
@@ -417,10 +417,15 @@ async function exportDetailToPdf(btn){
     // ne capturer que le contenu utile de la fiche.
     clone.querySelector(".theme-explainer")?.remove();
     clone.querySelectorAll(".source-link").forEach(el=>el.remove());
-    clone.style.cssText="position:fixed;left:-9999px;top:0;width:340px;background:#fff;padding:0";
+    const pageWidthMm=210,pageHeightMm=297,marginMm=14,usableWidthMm=pageWidthMm-marginMm*2,usableHeightMm=pageHeightMm-marginMm*2;
+    // Rendre le clone à la largeur physique réelle de la page (mm -> px CSS à
+    // 96dpi) : sans ça, le texte du panneau (calibré pour ses ~340px d’écran)
+    // se retrouvait environ deux fois trop gros une fois étalé sur la largeur
+    // d’une page A4.
+    const cloneWidthPx=Math.round(usableWidthMm*96/25.4);
+    clone.style.cssText=`position:fixed;left:-9999px;top:0;width:${cloneWidthPx}px;background:#fff;padding:0`;
     document.body.appendChild(clone);
     const {jsPDF}=window.jspdf;
-    const pageWidthMm=210,pageHeightMm=297,marginMm=14,usableWidthMm=pageWidthMm-marginMm*2,usableHeightMm=pageHeightMm-marginMm*2;
     const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
     let y=marginMm,pageStarted=false;
     // Capture chaque bloc de premier niveau séparément : jamais de texte
